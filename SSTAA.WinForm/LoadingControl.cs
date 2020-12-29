@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace SSTAA.WinForm
 {
-    public partial class MainForm : XtraForm
+    public partial class LoadingControl : XtraUserControl
     {
-        public MainForm()
+        public LoadingControl()
         {
             InitializeComponent();
         }
