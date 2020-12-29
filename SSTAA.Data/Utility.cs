@@ -1,7 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using System.Windows.Forms;
 
-namespace GothamSubway.Data
+namespace SSTAA.Data
 {
     public class Utility
     {

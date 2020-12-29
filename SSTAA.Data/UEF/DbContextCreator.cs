@@ -1,4 +1,4 @@
-﻿namespace GothamSubway.Data
+﻿namespace SSTAA.Data
 {
     public class DbContextCreator
     {

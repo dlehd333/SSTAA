@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace GothamSubway.Data
+namespace SSTAA.Data
 {
     public class BaseDao<T> where T : class
     {

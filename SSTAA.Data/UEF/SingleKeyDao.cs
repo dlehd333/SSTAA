@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace GothamSubway.Data
+namespace SSTAA.Data
 {
     public abstract class SingleKeyDao<T, K> : BaseDao<T> where T : class
     {
