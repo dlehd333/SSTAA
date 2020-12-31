@@ -35,7 +35,7 @@ namespace SSTAA.Import
             if (DesignMode)
                 return;
 
-            _checkRadioButton = 1;
+            _checkRadioButton = 0;
 
             bgwFileLoad.WorkerSupportsCancellation = true;
             bgwServerSave.WorkerSupportsCancellation = true;
@@ -131,6 +131,7 @@ namespace SSTAA.Import
                     string array = csv.ReadLine();
                     if (string.IsNullOrEmpty(array)) return;
 
+                    array.Replace("\"", "");
                     string[] values = array.Split(',');
                     rows.Add(new List<string>(values.ToList()));
                 }
