@@ -96,6 +96,8 @@ namespace SSTAA.Import
 
             _pause.Set();
 
+            dataGridView1.Rows.Clear();
+
             bgwServerSave.RunWorkerAsync(_checkRadioButton);
         }
 
@@ -182,7 +184,23 @@ namespace SSTAA.Import
             {
                 Location location = CheckLocation(locations, rows[i][2], rows[i][3]);
 
-                Station station = new Station() { Location = location };
+                Station station = new Station();
+
+                if (location == null)
+                {
+                    int upperId = locations.Find(x => x.Name == rows[i][2]).LocationId;
+                    location = new Location();
+                    location.Name = rows[i][3];
+                    location.UpperId = upperId;
+                    location.LocationId = locations.Find(x => x.UpperId == upperId) == null ?
+                        upperId + 1 : locations.Where(x => x.UpperId == upperId).Max(x => x.LocationId) + 1;
+                    location.Location2 = locations.Find(x => x.LocationId == location.UpperId);
+                    locations.Add(location);
+                    station.Location = location;
+                }
+                else
+                    station.LocationId = location.LocationId;
+                
                 station.StationId = int.Parse(rows[i][0]);
                 station.Name = rows[i][1];
                 stations.Add(station);
@@ -215,12 +233,14 @@ namespace SSTAA.Import
             if (locations.Find(x => x.Name == second) == null ||
                 (locations.Find(x => x.Name == second) != null && locations.Find(x => x.Name == second).UpperId != upperId))
             {
-                secondLocation.Name = second;
-                secondLocation.UpperId = upperId;
-                secondLocation.LocationId = locations.Find(x => x.UpperId == upperId) == null ?
-                    upperId + 1 : locations.Where(x => x.UpperId == upperId).Max(x => x.LocationId) + 1;
-                secondLocation.Location2 = locations.Find(x => x.LocationId == secondLocation.UpperId);
-                locations.Add(secondLocation);
+                //secondLocation.Name = second;
+                //secondLocation.UpperId = upperId;
+                //secondLocation.LocationId = locations.Find(x => x.UpperId == upperId) == null ?
+                //    upperId + 1 : locations.Where(x => x.UpperId == upperId).Max(x => x.LocationId) + 1;
+                //secondLocation.Location2 = locations.Find(x => x.LocationId == secondLocation.UpperId);
+                //locations.Add(secondLocation);
+
+                return null;
             }
             else
                 secondLocation = locations.Find(x => x.Name == second && x.UpperId == upperId);
@@ -327,6 +347,10 @@ namespace SSTAA.Import
 
             using (var context = DbContextCreator.Create())
             {
+                //context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+                //context.SaveChanges();
+                //context.Entry()
+
                 for (int i = beforeLocationCount; i < locations.Count; ++i)
                     context.Locations.Add(locations[i]);
                 for (int i = beforeFieldCount; i < fields.Count; ++i)
@@ -382,6 +406,16 @@ namespace SSTAA.Import
                 default:
                     return null;
             }
+        }
+
+        private void bgwServerSave_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            List<string> line = e.UserState as List<string>;
+
+            if (line == null)
+                return;
+
+            dataGridView1.Rows.Add(line.ToArray());
         }
     }
 }

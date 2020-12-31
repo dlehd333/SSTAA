@@ -84,7 +84,9 @@ namespace SSTAA.Import
             // 
             // bgwServerSave
             // 
+            this.bgwServerSave.WorkerReportsProgress = true;
             this.bgwServerSave.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwServerSave_DoWork);
+            this.bgwServerSave.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwServerSave_ProgressChanged);
             this.bgwServerSave.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwServerSave_RunWorkerCompleted);
             // 
             // radioButton1
