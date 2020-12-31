@@ -16,6 +16,7 @@ namespace SSTAA.Import
     public partial class MainForm : Form
     {
         private int _timeTableCount;
+        private int _landPriceIndexMonthCount;
         List<List<string>> rows = new List<List<string>>();
         private int _checkRadioButton;
 
@@ -25,7 +26,8 @@ namespace SSTAA.Import
         {
             InitializeComponent();
 
-            _timeTableCount = Dao.Timetable.GetCount();
+            _timeTableCount = 20;
+            _landPriceIndexMonthCount = 70;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -197,14 +199,13 @@ namespace SSTAA.Import
 
         private Location CheckLocation(List<Location> locations, string first, string second)
         {
-            int maxFirstId = locations.Count != 0 ? locations.Max(x => x.LocationId) / 100 : 1;
+            int maxFirstId = locations.Count != 0 ? (locations.Max(x => x.LocationId) / 100) + 1 : 1;
 
             Location firstLocation = new Location();
             if (locations.Find(x => x.Name == first) == null)
             {
                 firstLocation.Name = first;
                 firstLocation.LocationId = maxFirstId * 100;
-                maxFirstId += 1;
                 locations.Add(firstLocation);
             }
 
@@ -279,7 +280,29 @@ namespace SSTAA.Import
 
             for(int i =0; i < rows.Count; ++i)
             {
+                string locationName = rows[i][0].Replace("서울 ", "");
 
+                Location location = locations.Find(x => x.Name == locationName);
+
+                if (location == null)
+                    continue;
+
+                DateTime month = new DateTime(2014, 11, 1);
+
+                for (int j = 0; j < _landPriceIndexMonthCount; ++j)
+                {
+                    LandPriceIndex landPriceIndex = new LandPriceIndex();
+                    landPriceIndex.Month = new DateTime(month.Year + (j + 10) / 12, (month.Month + j) % 12 == 0 ? 12 : (month.Month + j) % 12, 1);
+                    landPriceIndex.LocationId = location.LocationId;
+                    landPriceIndex.Index = decimal.Parse(rows[i][j + 1]);
+                    landPriceIndices.Add(landPriceIndex);
+                }
+            }
+
+            using (var context = DbContextCreator.Create())
+            {
+                context.LandPriceIndexes.AddRange(landPriceIndices);
+                context.SaveChanges();
             }
         }
 
