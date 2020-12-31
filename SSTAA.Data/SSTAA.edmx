@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SSTAAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Competitor">
+          <Key>
+            <PropertyRef Name="CompetitorId" />
+          </Key>
+          <Property Name="CompetitorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="FieldId" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="FieldId" />
+          </Key>
+          <Property Name="FieldId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FootTraffic">
+          <Key>
+            <PropertyRef Name="FootTrafficId" />
+          </Key>
+          <Property Name="FootTrafficId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="IsWeekend" Type="bit" Nullable="false" />
+          <Property Name="StationId" Type="int" Nullable="false" />
+          <Property Name="IsOnBoard" Type="bit" Nullable="false" />
+          <Property Name="TimetableId" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LandPriceIndex">
+          <Key>
+            <PropertyRef Name="LandPriceIndexId" />
+          </Key>
+          <Property Name="LandPriceIndexId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Month" Type="datetime" Nullable="false" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="Index" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="UpperId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="StationId" />
+          </Key>
+          <Property Name="StationId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="TimetableId" />
+          </Key>
+          <Property Name="TimetableId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Period" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Competitor_Field">
+          <End Role="Field" Type="Self.Field" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Competitor" Type="Self.Competitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="FieldId" />
+            </Principal>
+            <Dependent Role="Competitor">
+              <PropertyRef Name="FieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competitor_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Competitor" Type="Self.Competitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Competitor">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FootTraffic_Station">
+          <End Role="Station" Type="Self.Station" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FootTraffic" Type="Self.FootTraffic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="StationId" />
+            </Principal>
+            <Dependent Role="FootTraffic">
+              <PropertyRef Name="StationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FootTraffic_Timetable">
+          <End Role="Timetable" Type="Self.Timetable" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FootTraffic" Type="Self.FootTraffic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timetable">
+              <PropertyRef Name="TimetableId" />
+            </Principal>
+            <Dependent Role="FootTraffic">
+              <PropertyRef Name="TimetableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LandPriceIndex_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LandPriceIndex" Type="Self.LandPriceIndex" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="LandPriceIndex">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Location1" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Location1">
+              <PropertyRef Name="UpperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Station_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Station" Type="Self.Station" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Station">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SSTAAModelStoreContainer">
+          <EntitySet Name="Competitor" EntityType="Self.Competitor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Field" EntityType="Self.Field" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FootTraffic" EntityType="Self.FootTraffic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LandPriceIndex" EntityType="Self.LandPriceIndex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Station" EntityType="Self.Station" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Competitor_Field" Association="Self.FK_Competitor_Field">
+            <End Role="Field" EntitySet="Field" />
+            <End Role="Competitor" EntitySet="Competitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competitor_Location" Association="Self.FK_Competitor_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Competitor" EntitySet="Competitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FootTraffic_Station" Association="Self.FK_FootTraffic_Station">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="FootTraffic" EntitySet="FootTraffic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FootTraffic_Timetable" Association="Self.FK_FootTraffic_Timetable">
+            <End Role="Timetable" EntitySet="Timetable" />
+            <End Role="FootTraffic" EntitySet="FootTraffic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LandPriceIndex_Location" Association="Self.FK_LandPriceIndex_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="LandPriceIndex" EntitySet="LandPriceIndex" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Location" Association="Self.FK_Location_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Location1" EntitySet="Location" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Station_Location" Association="Self.FK_Station_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Station" EntitySet="Station" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SSTAAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Competitor">
+          <Key>
+            <PropertyRef Name="CompetitorId" />
+          </Key>
+          <Property Name="CompetitorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="FieldId" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Field" Relationship="Self.FK_Competitor_Field" FromRole="Competitor" ToRole="Field" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Competitor_Location" FromRole="Competitor" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="FieldId" />
+          </Key>
+          <Property Name="FieldId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Competitors" Relationship="Self.FK_Competitor_Field" FromRole="Field" ToRole="Competitor" />
+        </EntityType>
+        <EntityType Name="FootTraffic">
+          <Key>
+            <PropertyRef Name="FootTrafficId" />
+          </Key>
+          <Property Name="FootTrafficId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsWeekend" Type="Boolean" Nullable="false" />
+          <Property Name="StationId" Type="Int32" Nullable="false" />
+          <Property Name="IsOnBoard" Type="Boolean" Nullable="false" />
+          <Property Name="TimetableId" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Station" Relationship="Self.FK_FootTraffic_Station" FromRole="FootTraffic" ToRole="Station" />
+          <NavigationProperty Name="Timetable" Relationship="Self.FK_FootTraffic_Timetable" FromRole="FootTraffic" ToRole="Timetable" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="UpperId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Competitors" Relationship="Self.FK_Competitor_Location" FromRole="Location" ToRole="Competitor" />
+          <NavigationProperty Name="Location1" Relationship="Self.FK_Location_Location" FromRole="Location" ToRole="Location1" />
+          <NavigationProperty Name="Location2" Relationship="Self.FK_Location_Location" FromRole="Location1" ToRole="Location" />
+          <NavigationProperty Name="Stations" Relationship="Self.FK_Station_Location" FromRole="Location" ToRole="Station" />
+          <NavigationProperty Name="LandPriceIndexes" Relationship="SSTAAModel.FK_LandPriceIndex_Location" FromRole="Location" ToRole="LandPriceIndex" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="StationId" />
+          </Key>
+          <Property Name="StationId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FootTraffics" Relationship="Self.FK_FootTraffic_Station" FromRole="Station" ToRole="FootTraffic" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Station_Location" FromRole="Station" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="TimetableId" />
+          </Key>
+          <Property Name="TimetableId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Period" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FootTraffics" Relationship="Self.FK_FootTraffic_Timetable" FromRole="Timetable" ToRole="FootTraffic" />
+        </EntityType>
+        <Association Name="FK_Competitor_Field">
+          <End Role="Field" Type="Self.Field" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Competitor" Type="Self.Competitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Field">
+              <PropertyRef Name="FieldId" />
+            </Principal>
+            <Dependent Role="Competitor">
+              <PropertyRef Name="FieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Competitor_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Competitor" Type="Self.Competitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Competitor">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FootTraffic_Station">
+          <End Role="Station" Type="Self.Station" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FootTraffic" Type="Self.FootTraffic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="StationId" />
+            </Principal>
+            <Dependent Role="FootTraffic">
+              <PropertyRef Name="StationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FootTraffic_Timetable">
+          <End Role="Timetable" Type="Self.Timetable" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FootTraffic" Type="Self.FootTraffic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timetable">
+              <PropertyRef Name="TimetableId" />
+            </Principal>
+            <Dependent Role="FootTraffic">
+              <PropertyRef Name="TimetableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Location1" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Location1">
+              <PropertyRef Name="UpperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Station_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Station" Type="Self.Station" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Station">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SSTAAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Competitors" EntityType="Self.Competitor" />
+          <EntitySet Name="Fields" EntityType="Self.Field" />
+          <EntitySet Name="FootTraffics" EntityType="Self.FootTraffic" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Stations" EntityType="Self.Station" />
+          <EntitySet Name="Timetables" EntityType="Self.Timetable" />
+          <AssociationSet Name="FK_Competitor_Field" Association="Self.FK_Competitor_Field">
+            <End Role="Field" EntitySet="Fields" />
+            <End Role="Competitor" EntitySet="Competitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Competitor_Location" Association="Self.FK_Competitor_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Competitor" EntitySet="Competitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FootTraffic_Station" Association="Self.FK_FootTraffic_Station">
+            <End Role="Station" EntitySet="Stations" />
+            <End Role="FootTraffic" EntitySet="FootTraffics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FootTraffic_Timetable" Association="Self.FK_FootTraffic_Timetable">
+            <End Role="Timetable" EntitySet="Timetables" />
+            <End Role="FootTraffic" EntitySet="FootTraffics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Location" Association="Self.FK_Location_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Location1" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Station_Location" Association="Self.FK_Station_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Station" EntitySet="Stations" />
+          </AssociationSet>
+          <EntitySet Name="LandPriceIndexes" EntityType="SSTAAModel.LandPriceIndex" />
+          <AssociationSet Name="FK_LandPriceIndex_Location" Association="SSTAAModel.FK_LandPriceIndex_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="LandPriceIndex" EntitySet="LandPriceIndexes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="LandPriceIndex">
+          <Key>
+            <PropertyRef Name="LandPriceIndexId" />
+          </Key>
+          <Property Name="LandPriceIndexId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="Index" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="Location" Relationship="SSTAAModel.FK_LandPriceIndex_Location" FromRole="LandPriceIndex" ToRole="Location" />
+        </EntityType>
+        <Association Name="FK_LandPriceIndex_Location">
+          <End Type="SSTAAModel.Location" Role="Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SSTAAModel.LandPriceIndex" Role="LandPriceIndex" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="LandPriceIndex">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SSTAAModelStoreContainer" CdmEntityContainer="SSTAAEntities">
+          <EntitySetMapping Name="Competitors">
+            <EntityTypeMapping TypeName="SSTAAModel.Competitor">
+              <MappingFragment StoreEntitySet="Competitor">
+                <ScalarProperty Name="CompetitorId" ColumnName="CompetitorId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fields">
+            <EntityTypeMapping TypeName="SSTAAModel.Field">
+              <MappingFragment StoreEntitySet="Field">
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FootTraffics">
+            <EntityTypeMapping TypeName="SSTAAModel.FootTraffic">
+              <MappingFragment StoreEntitySet="FootTraffic">
+                <ScalarProperty Name="FootTrafficId" ColumnName="FootTrafficId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsWeekend" ColumnName="IsWeekend" />
+                <ScalarProperty Name="StationId" ColumnName="StationId" />
+                <ScalarProperty Name="IsOnBoard" ColumnName="IsOnBoard" />
+                <ScalarProperty Name="TimetableId" ColumnName="TimetableId" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="SSTAAModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="UpperId" ColumnName="UpperId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stations">
+            <EntityTypeMapping TypeName="SSTAAModel.Station">
+              <MappingFragment StoreEntitySet="Station">
+                <ScalarProperty Name="StationId" ColumnName="StationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timetables">
+            <EntityTypeMapping TypeName="SSTAAModel.Timetable">
+              <MappingFragment StoreEntitySet="Timetable">
+                <ScalarProperty Name="TimetableId" ColumnName="TimetableId" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LandPriceIndexes">
+            <EntityTypeMapping TypeName="SSTAAModel.LandPriceIndex">
+              <MappingFragment StoreEntitySet="LandPriceIndex">
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="LandPriceIndexId" ColumnName="LandPriceIndexId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="없음" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
