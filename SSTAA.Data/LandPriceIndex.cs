@@ -17,7 +17,7 @@ namespace SSTAA.Data
         public int LandPriceIndexId { get; set; }
         public System.DateTime Month { get; set; }
         public int LocationId { get; set; }
-        public int Index { get; set; }
+        public decimal Index { get; set; }
     
         public virtual Location Location { get; set; }
     }

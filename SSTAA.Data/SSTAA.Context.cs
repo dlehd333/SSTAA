@@ -28,9 +28,9 @@ namespace SSTAA.Data
         public virtual DbSet<Competitor> Competitors { get; set; }
         public virtual DbSet<Field> Fields { get; set; }
         public virtual DbSet<FootTraffic> FootTraffics { get; set; }
-        public virtual DbSet<LandPriceIndex> LandPriceIndexes { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Station> Stations { get; set; }
         public virtual DbSet<Timetable> Timetables { get; set; }
+        public virtual DbSet<LandPriceIndex> LandPriceIndexes { get; set; }
     }
 }

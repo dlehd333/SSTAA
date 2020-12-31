@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SSTAAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SSTAAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Competitor">
           <Key>
             <PropertyRef Name="CompetitorId" />
@@ -40,7 +40,7 @@
           <Property Name="LandPriceIndexId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Month" Type="datetime" Nullable="false" />
           <Property Name="LocationId" Type="int" Nullable="false" />
-          <Property Name="Index" Type="int" Nullable="false" />
+          <Property Name="Index" Type="decimal" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -198,8 +198,7 @@
             <End Role="Station" EntitySet="Station" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SSTAAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -236,16 +235,6 @@
           <NavigationProperty Name="Station" Relationship="Self.FK_FootTraffic_Station" FromRole="FootTraffic" ToRole="Station" />
           <NavigationProperty Name="Timetable" Relationship="Self.FK_FootTraffic_Timetable" FromRole="FootTraffic" ToRole="Timetable" />
         </EntityType>
-        <EntityType Name="LandPriceIndex">
-          <Key>
-            <PropertyRef Name="LandPriceIndexId" />
-          </Key>
-          <Property Name="LandPriceIndexId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LocationId" Type="Int32" Nullable="false" />
-          <Property Name="Index" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Location" Relationship="Self.FK_LandPriceIndex_Location" FromRole="LandPriceIndex" ToRole="Location" />
-        </EntityType>
         <EntityType Name="Location">
           <Key>
             <PropertyRef Name="LocationId" />
@@ -254,10 +243,10 @@
           <Property Name="UpperId" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Competitors" Relationship="Self.FK_Competitor_Location" FromRole="Location" ToRole="Competitor" />
-          <NavigationProperty Name="LandPriceIndexes" Relationship="Self.FK_LandPriceIndex_Location" FromRole="Location" ToRole="LandPriceIndex" />
           <NavigationProperty Name="Location1" Relationship="Self.FK_Location_Location" FromRole="Location" ToRole="Location1" />
           <NavigationProperty Name="Location2" Relationship="Self.FK_Location_Location" FromRole="Location1" ToRole="Location" />
           <NavigationProperty Name="Stations" Relationship="Self.FK_Station_Location" FromRole="Location" ToRole="Station" />
+          <NavigationProperty Name="LandPriceIndexes" Relationship="SSTAAModel.FK_LandPriceIndex_Location" FromRole="Location" ToRole="LandPriceIndex" />
         </EntityType>
         <EntityType Name="Station">
           <Key>
@@ -333,20 +322,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LandPriceIndex_Location">
-          <End Role="Location" Type="Self.Location" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="LandPriceIndex" Type="Self.LandPriceIndex" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocationId" />
-            </Principal>
-            <Dependent Role="LandPriceIndex">
-              <PropertyRef Name="LocationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Location_Location">
           <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
           <End Role="Location1" Type="Self.Location" Multiplicity="*" />
@@ -377,7 +352,6 @@
           <EntitySet Name="Competitors" EntityType="Self.Competitor" />
           <EntitySet Name="Fields" EntityType="Self.Field" />
           <EntitySet Name="FootTraffics" EntityType="Self.FootTraffic" />
-          <EntitySet Name="LandPriceIndexes" EntityType="Self.LandPriceIndex" />
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="Stations" EntityType="Self.Station" />
           <EntitySet Name="Timetables" EntityType="Self.Timetable" />
@@ -397,10 +371,6 @@
             <End Role="Timetable" EntitySet="Timetables" />
             <End Role="FootTraffic" EntitySet="FootTraffics" />
           </AssociationSet>
-          <AssociationSet Name="FK_LandPriceIndex_Location" Association="Self.FK_LandPriceIndex_Location">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="LandPriceIndex" EntitySet="LandPriceIndexes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Location_Location" Association="Self.FK_Location_Location">
             <End Role="Location" EntitySet="Locations" />
             <End Role="Location1" EntitySet="Locations" />
@@ -409,7 +379,36 @@
             <End Role="Location" EntitySet="Locations" />
             <End Role="Station" EntitySet="Stations" />
           </AssociationSet>
+          <EntitySet Name="LandPriceIndexes" EntityType="SSTAAModel.LandPriceIndex" />
+          <AssociationSet Name="FK_LandPriceIndex_Location" Association="SSTAAModel.FK_LandPriceIndex_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="LandPriceIndex" EntitySet="LandPriceIndexes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="LandPriceIndex">
+          <Key>
+            <PropertyRef Name="LandPriceIndexId" />
+          </Key>
+          <Property Name="LandPriceIndexId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Month" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="Index" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="Location" Relationship="SSTAAModel.FK_LandPriceIndex_Location" FromRole="LandPriceIndex" ToRole="Location" />
+        </EntityType>
+        <Association Name="FK_LandPriceIndex_Location">
+          <End Type="SSTAAModel.Location" Role="Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SSTAAModel.LandPriceIndex" Role="LandPriceIndex" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="LandPriceIndex">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -447,16 +446,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LandPriceIndexes">
-            <EntityTypeMapping TypeName="SSTAAModel.LandPriceIndex">
-              <MappingFragment StoreEntitySet="LandPriceIndex">
-                <ScalarProperty Name="LandPriceIndexId" ColumnName="LandPriceIndexId" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-                <ScalarProperty Name="Index" ColumnName="Index" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="SSTAAModel.Location">
               <MappingFragment StoreEntitySet="Location">
@@ -480,6 +469,16 @@
               <MappingFragment StoreEntitySet="Timetable">
                 <ScalarProperty Name="TimetableId" ColumnName="TimetableId" />
                 <ScalarProperty Name="Period" ColumnName="Period" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LandPriceIndexes">
+            <EntityTypeMapping TypeName="SSTAAModel.LandPriceIndex">
+              <MappingFragment StoreEntitySet="LandPriceIndex">
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="LandPriceIndexId" ColumnName="LandPriceIndexId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

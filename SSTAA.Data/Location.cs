@@ -18,9 +18,9 @@ namespace SSTAA.Data
         public Location()
         {
             this.Competitors = new HashSet<Competitor>();
-            this.LandPriceIndexes = new HashSet<LandPriceIndex>();
             this.Location1 = new HashSet<Location>();
             this.Stations = new HashSet<Station>();
+            this.LandPriceIndexes = new HashSet<LandPriceIndex>();
         }
     
         public int LocationId { get; set; }
@@ -30,11 +30,11 @@ namespace SSTAA.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Competitor> Competitors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LandPriceIndex> LandPriceIndexes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Location> Location1 { get; set; }
         public virtual Location Location2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Station> Stations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LandPriceIndex> LandPriceIndexes { get; set; }
     }
 }
