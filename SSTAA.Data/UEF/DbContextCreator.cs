@@ -2,19 +2,19 @@
 {
     public class DbContextCreator
     {
-        private const string ConnectionString = "metadata=res://*/GothamSubway.csdl|res://*/GothamSubway.ssdl|res://*/GothamSubway.msl;provider=System.Data.SqlClient;provider connection string=\"data source=cn76.ipdisk.co.kr,3423;initial catalog=GothamSubway;user id=8F;password=1;MultipleActiveResultSets=True;App=EntityFramework&\"";
+        private const string ConnectionString = "metadata=res://*/SSTAA.csdl|res://*/SSTAA.ssdl|res://*/SSTAA.msl;provider=System.Data.SqlClient;provider connection string=\"data source=cn76.ipdisk.co.kr,3423;initial catalog=SSTAA;user id=8F;password=1;MultipleActiveResultSets=True;App=EntityFramework\"";
 
-        public static GothamSubwayEntities Create()
+        public static SSTAAEntities Create()
         {
-            GothamSubwayEntities context = new GothamSubwayEntities(ConnectionString);
+            SSTAAEntities context = new SSTAAEntities(ConnectionString);
 
             return context;
         }
     }
 
-    public partial class GothamSubwayEntities
+    public partial class SSTAAEntities
     {
-        public GothamSubwayEntities(string connectionString) : base(connectionString)
+        public SSTAAEntities(string connectionString) : base(connectionString)
         {
         }
     }
