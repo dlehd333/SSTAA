@@ -30,12 +30,30 @@ namespace SSTAA.WinForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.xtraTabbedMdiManager1 = new XtraTabbedMdiManagerExtend(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // xtraTabbedMdiManager1
+            // 
+            this.xtraTabbedMdiManager1.MdiParent = this;
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.IsMdiContainer = true;
+            this.Name = "MainForm";
+            this.Text = "Subway Station Trade Area Analysis";
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private XtraTabbedMdiManagerExtend xtraTabbedMdiManager1;
     }
 }
 

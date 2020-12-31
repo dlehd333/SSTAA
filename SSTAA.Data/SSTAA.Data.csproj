@@ -31,8 +31,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.Desktop.v20.2, Version=20.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v20.2, Version=20.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v20.2.Core, Version=20.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v20.2.Core, Version=20.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v20.2, Version=20.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v20.2, Version=20.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,7 +59,84 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Competitor.cs">
+      <DependentUpon>SSTAA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Field.cs">
+      <DependentUpon>SSTAA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FootTraffic.cs">
+      <DependentUpon>SSTAA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LandPriceIndex.cs">
+      <DependentUpon>SSTAA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>SSTAA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SSTAA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SSTAA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSTAA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SSTAA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSTAA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SSTAA.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Station.cs">
+      <DependentUpon>SSTAA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Timetable.cs">
+      <DependentUpon>SSTAA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UEF\BaseDao.cs" />
+    <Compile Include="UEF\Dao\CompetitorDao.cs" />
+    <Compile Include="UEF\Dao\Dao.cs" />
+    <Compile Include="UEF\Dao\FieldDao.cs" />
+    <Compile Include="UEF\Dao\FootTrafficDao.cs" />
+    <Compile Include="UEF\Dao\LandPriceIndexDao.cs" />
+    <Compile Include="UEF\Dao\Location.cs" />
+    <Compile Include="UEF\Dao\StationDao.cs" />
+    <Compile Include="UEF\Dao\TimetableDao.cs" />
+    <Compile Include="UEF\DbContextCreator.cs" />
+    <Compile Include="UEF\SingleKeyDao.cs" />
+    <Compile Include="Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UEF\Entities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="SSTAA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SSTAA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SSTAA.edmx.diagram">
+      <DependentUpon>SSTAA.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SSTAA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SSTAA.edmx</DependentUpon>
+      <LastGenOutput>SSTAA.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SSTAA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SSTAA.edmx</DependentUpon>
+      <LastGenOutput>SSTAA.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
