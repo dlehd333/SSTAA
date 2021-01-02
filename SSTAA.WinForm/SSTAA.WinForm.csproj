@@ -64,6 +64,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnnualScoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnnualScoreForm.Designer.cs">
+      <DependentUpon>AnnualScoreForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FomulaInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FomulaInformationForm.Designer.cs">
+      <DependentUpon>FomulaInformationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoadingControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -83,6 +95,18 @@
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectTownForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectTownForm.Designer.cs">
+      <DependentUpon>SelectTownForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StationScoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StationScoreForm.Designer.cs">
+      <DependentUpon>StationScoreForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TitleForm.cs">
       <SubType>Form</SubType>
