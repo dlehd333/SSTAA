@@ -96,8 +96,6 @@ namespace SSTAA.Import
 
             _pause.Set();
 
-            dataGridView1.Rows.Clear();
-
             bgwServerSave.RunWorkerAsync(_checkRadioButton);
         }
 
@@ -188,6 +186,7 @@ namespace SSTAA.Import
 
                 if (location == null)
                 {
+                    //bgwServerSave.ReportProgress(0, rows[i]);
                     int upperId = locations.Find(x => x.Name == rows[i][2]).LocationId;
                     location = new Location();
                     location.Name = rows[i][3];
@@ -233,14 +232,12 @@ namespace SSTAA.Import
             if (locations.Find(x => x.Name == second) == null ||
                 (locations.Find(x => x.Name == second) != null && locations.Find(x => x.Name == second).UpperId != upperId))
             {
-                //secondLocation.Name = second;
-                //secondLocation.UpperId = upperId;
-                //secondLocation.LocationId = locations.Find(x => x.UpperId == upperId) == null ?
-                //    upperId + 1 : locations.Where(x => x.UpperId == upperId).Max(x => x.LocationId) + 1;
-                //secondLocation.Location2 = locations.Find(x => x.LocationId == secondLocation.UpperId);
-                //locations.Add(secondLocation);
-
-                return null;
+                secondLocation.Name = second;
+                secondLocation.UpperId = upperId;
+                secondLocation.LocationId = locations.Find(x => x.UpperId == upperId) == null ?
+                    upperId + 1 : locations.Where(x => x.UpperId == upperId).Max(x => x.LocationId) + 1;
+                secondLocation.Location2 = locations.Find(x => x.LocationId == secondLocation.UpperId);
+                locations.Add(secondLocation);
             }
             else
                 secondLocation = locations.Find(x => x.Name == second && x.UpperId == upperId);
@@ -259,7 +256,11 @@ namespace SSTAA.Import
             // Date, IsWeekend(true-주말), StationId, IsOnBoard(true-승차), TimetableId, Count
             for (int i =0; i < rows.Count; i++)
             {
-                Station station = stations.Find(x => x.Name == rows[i][2]);
+                if (rows[i][0] == "")
+                    continue;
+
+                int stationId = int.Parse(rows[i][2]);
+                Station station = stations.Find(x => x.StationId == stationId);
 
                 if (station == null)
                     continue;
@@ -410,12 +411,12 @@ namespace SSTAA.Import
 
         private void bgwServerSave_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            List<string> line = e.UserState as List<string>;
+            //List<string> line = e.UserState as List<string>;
 
-            if (line == null)
-                return;
+            //if (line == null)
+            //    return;
 
-            dataGridView1.Rows.Add(line.ToArray());
+            //dataGridView1.Rows.Add(line.ToArray());
         }
     }
 }
