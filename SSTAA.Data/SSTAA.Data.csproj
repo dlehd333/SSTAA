@@ -102,7 +102,7 @@
     <Compile Include="UEF\Dao\FieldDao.cs" />
     <Compile Include="UEF\Dao\FootTrafficDao.cs" />
     <Compile Include="UEF\Dao\LandPriceIndexDao.cs" />
-    <Compile Include="UEF\Dao\Location.cs" />
+    <Compile Include="UEF\Dao\LocationDao.cs" />
     <Compile Include="UEF\Dao\StationDao.cs" />
     <Compile Include="UEF\Dao\TimetableDao.cs" />
     <Compile Include="UEF\DbContextCreator.cs" />

@@ -29,7 +29,7 @@ namespace SSTAA.WinForm
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraMap.GeoMapCoordinateSystem geoMapCoordinateSystem1 = new DevExpress.XtraMap.GeoMapCoordinateSystem();
+            DevExpress.XtraMap.GeoMapCoordinateSystem geoMapCoordinateSystem3 = new DevExpress.XtraMap.GeoMapCoordinateSystem();
             this.lblDisplayStation = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -112,6 +112,7 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetRow(this.cbxGu, 1);
             this.cbxGu.Size = new System.Drawing.Size(80, 20);
             this.cbxGu.TabIndex = 5;
+            this.cbxGu.SelectedIndexChanged += new System.EventHandler(this.cbxGu_SelectedIndexChanged);
             // 
             // cbxField
             // 
@@ -125,6 +126,7 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetRow(this.cbxField, 9);
             this.cbxField.Size = new System.Drawing.Size(80, 20);
             this.cbxField.TabIndex = 6;
+            this.cbxField.SelectedIndexChanged += new System.EventHandler(this.cbxField_SelectedIndexChanged);
             // 
             // btnResult
             // 
@@ -188,8 +190,8 @@ namespace SSTAA.WinForm
             this.TempMapControl.CenterPoint = new DevExpress.XtraMap.GeoPoint(37.5D, 127D);
             this.tablePanel1.SetColumn(this.TempMapControl, 1);
             this.tablePanel1.SetColumnSpan(this.TempMapControl, 7);
-            geoMapCoordinateSystem1.CircularScrollingMode = DevExpress.XtraMap.CircularScrollingMode.TilesAndVectorItems;
-            this.TempMapControl.CoordinateSystem = geoMapCoordinateSystem1;
+            geoMapCoordinateSystem3.CircularScrollingMode = DevExpress.XtraMap.CircularScrollingMode.TilesAndVectorItems;
+            this.TempMapControl.CoordinateSystem = geoMapCoordinateSystem3;
             this.TempMapControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TempMapControl.Layers.Add(this.imageLayer1);
             this.TempMapControl.Location = new System.Drawing.Point(20, 67);
