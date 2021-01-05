@@ -69,6 +69,7 @@ namespace SSTAA.WinForm
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TitleForm";
             this.Text = "TitleForm";
+            this.Click += new System.EventHandler(this.TitleForm_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
