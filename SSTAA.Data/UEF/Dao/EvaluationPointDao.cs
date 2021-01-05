@@ -10,8 +10,8 @@ namespace SSTAA.Data.UEF.Dao
     class EvaluationPointDao
     {
 
-        public List<EvaluationPointCalculatingModel> GetEvaluationPoint(int UpperId, int FieldId)
-        {
+        //public List<EvaluationPointCalculatingModel> GetEvaluationPoint(int UpperId, int FieldId)
+        //{
             #region EvaluationPoint 내용 작성중
             //    EvaluationPoint = (LocationPoint*IndustryPoint*(MonthlyLendPriceIndex/100)*MonthlyTransfer)/10000
 
@@ -60,6 +60,6 @@ namespace SSTAA.Data.UEF.Dao
             //    -----------------------------------------------------------------------------------------------------------------------------------------
             #endregion
 
-        }
+        //}
     }
 }
