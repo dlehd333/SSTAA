@@ -22,8 +22,8 @@ namespace SSTAA.WinForm
         {
             base.OnLoad(e);
 
-            ShowChildForm(new TitleForm());
-
+            //ShowChildForm(new TitleForm());
+            ShowChildForm(new SelectTownForm());
             // 클릭 이벤트 받으면 다음 폼으로 넘어가도록 기능 구현
         }
 
