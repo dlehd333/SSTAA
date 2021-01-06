@@ -49,6 +49,8 @@ namespace SSTAA.WinForm
             //cbx.Text 읽음(string SelectedGu)
 
             //AnnualScoreForm(SelectedGu) 오픈
+
+            OnClickResultButton();
         }
 
         private void cbxField_SelectedIndexChanged(object sender, EventArgs e)
@@ -60,5 +62,27 @@ namespace SSTAA.WinForm
         {
             Utility.Mbox("알림", $"바뀐 번호는{(cbxGu.SelectedIndex + 1) * 100}이다");
         }
+
+        #region ClickResultButton event things for C# 3.0
+        public event EventHandler<ClickResultButtonEventArgs> ClickResultButton;
+
+        protected virtual void OnClickResultButton(ClickResultButtonEventArgs e)
+        {
+            if (ClickResultButton != null)
+                ClickResultButton(this, e);
+        }
+
+        private ClickResultButtonEventArgs OnClickResultButton()
+        {
+            ClickResultButtonEventArgs args = new ClickResultButtonEventArgs();
+            OnClickResultButton(args);
+
+            return args;
+        }
+
+        public class ClickResultButtonEventArgs : EventArgs
+        {
+        }
+        #endregion
     }
 }

@@ -31,8 +31,15 @@ namespace SSTAA.WinForm
         private void TitleForm_ClickTitleForm(object sender, TitleForm.ClickTitleFormEventArgs e)
         {
             SelectTownForm selectTownForm = new SelectTownForm();
-            // 이벤트 추가
+            selectTownForm.ClickResultButton += SelectTownForm_ClickResultButton;
             ShowChildForm(selectTownForm);
+        }
+
+        private void SelectTownForm_ClickResultButton(object sender, SelectTownForm.ClickResultButtonEventArgs e)
+        {
+            AnnualScoreForm annualScoreForm = new AnnualScoreForm();
+            // 이벤트 추가
+            ShowChildForm(annualScoreForm);
         }
 
         private void ShowChildForm(Form form)
