@@ -5,10 +5,84 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SSTAA.Data.UEF.Dao
+namespace SSTAA.Data
 {
+    public class StationScore
+    {
+        public string 역이름;
+        public DateTime 평가월;
+        public int 유동인구;
+        public decimal 지가지수;
+        public double 평가점수;
+    }
+
     class EvaluationPointDao
     {
+        public void GetStationScore(int stationId, int locationId, int fieldId)
+        {
+            using(SSTAAEntities context = DbContextCreator.Create())
+            {
+                StationScore stationScore = new StationScore();
+
+                stationScore.역이름 = context.Stations.Where(x => x.StationId == stationId).Select(x => x.Name).FirstOrDefault();
+                stationScore.평가월 = new DateTime(2017, 1, 1);
+                stationScore.유동인구 = context.FootTraffics.Where(x => x.StationId == stationId && x.Date.Year == 2017 && x.Date.Month == 1).Sum(x => x.Count);
+                stationScore.지가지수 = context.LandPriceIndexes.Where(x => x.LocationId == locationId && x.Month.Year == 2017 && x.Month.Month == 1).Select(x => x.Index).FirstOrDefault();
+                stationScore.평가점수 = (GetLocationPoint(stationId, stationScore.평가월) * GetIndustryPoint(fieldId, locationId) * ((double)stationScore.지가지수 / 100.0d) * (stationScore.유동인구 * 1.0 / DateTime.DaysInMonth(stationScore.평가월.Year, stationScore.평가월.Month))) / 10000.0d;
+            }
+
+        }
+
+        private double GetIndustryPoint(int fieldId, int locationId)
+        {
+            using(SSTAAEntities context = DbContextCreator.Create())
+            {
+                int competitorCount = context.Competitors.Where(x => x.FieldId == fieldId && x.LocationId == locationId).Select(x => x.Count).FirstOrDefault();
+                int upperCompetitorCount = context.Competitors.Where(x => x.FieldId == fieldId && (x.LocationId / 100) == (locationId / 100)).Sum(x => x.Count);
+
+                double industryRatio = (competitorCount / (double)upperCompetitorCount) * 100.0d;
+
+                if (industryRatio < 8 && industryRatio >= 6)
+                    return 1.1d;
+                else if (industryRatio < 6 && industryRatio >= 4)
+                    return 1.2d;
+                else if (industryRatio < 4 && industryRatio >= 2)
+                    return 1.3d;
+                else if (industryRatio < 2 && industryRatio >= 0)
+                    return 1.4d;
+                else
+                    return 1.0d;
+            }
+        }
+
+        public double GetLocationPoint(int stationId, DateTime month)
+        {
+            List<FootTraffic> footTraffics = Dao.FootTraffic.GetByStationAndMonth(stationId, month);
+            
+            double WeekendBeforeSixGetOnCountMonthlyAvg = footTraffics.FindAll(x => x.IsWeekend && x.TimetableId == 1 && x.IsOnBoard).Average(x => x.Count);
+            double WeekendBeforeSixGetOffCountMonthlyAvg = footTraffics.FindAll(x => x.IsWeekend && x.TimetableId == 1 && !x.IsOnBoard).Average(x => x.Count);
+            double WeekendThirteenToFourteenGetOnCountMonthlyAvg = footTraffics.FindAll(x => x.IsWeekend && x.TimetableId == 9 && x.IsOnBoard).Average(x => x.Count);
+            double WeekendThirteenToFourteenGetOffCountMonthlyAvg = footTraffics.FindAll(x => x.IsWeekend && x.TimetableId == 9 && !x.IsOnBoard).Average(x => x.Count);
+            double WeekendSixteenToNineteenGetOnCountMonthlyAvg = footTraffics.FindAll(x => x.IsWeekend && x.TimetableId == 14 && x.IsOnBoard).Average(x => x.Count);
+            double WeekendSixteenToNineteenGetOffCountMonthlyAvg = footTraffics.FindAll(x => x.IsWeekend && x.TimetableId == 14 && !x.IsOnBoard).Average(x => x.Count);
+            double WeekdaySevenToEightGetOnCountMonthlyAvg = footTraffics.FindAll(x => !x.IsWeekend && x.TimetableId == 3 && x.IsOnBoard).Average(x => x.Count);
+            double WeekdaySevenToEightGetOffCountMonthlyAvg = footTraffics.FindAll(x => !x.IsWeekend && x.TimetableId == 3 && !x.IsOnBoard).Average(x => x.Count);
+            double WeekdayNineteenToTwentyGetOnCountMonthlyAvg = footTraffics.FindAll(x => !x.IsWeekend && x.TimetableId == 15 && x.IsOnBoard).Average(x => x.Count);
+            double WeekdayNineteenToTwentyGetOffCountMonthlyAvg = footTraffics.FindAll(x => !x.IsWeekend && x.TimetableId == 15 && !x.IsOnBoard).Average(x => x.Count);
+            double WeekdayEightToNineGetOnCountMonthlyAvg = footTraffics.FindAll(x => !x.IsWeekend && x.TimetableId == 4 && x.IsOnBoard).Average(x => x.Count);
+            double WeekdayEightToNineGetOffCountMonthlyAvg = footTraffics.FindAll(x => !x.IsWeekend && x.TimetableId == 4 && !x.IsOnBoard).Average(x => x.Count);
+            double WeekdayEighteenToTwentyGetOnCountMonthlyAvg = footTraffics.FindAll(x => !x.IsWeekend && x.TimetableId == 14 && x.IsOnBoard).Average(x => x.Count);
+            double WeekdayEighteenToTwentyGetOffCountMonthlyAvg = footTraffics.FindAll(x => !x.IsWeekend && x.TimetableId == 14 && !x.IsOnBoard).Average(x => x.Count);
+
+            if ((WeekendBeforeSixGetOnCountMonthlyAvg - WeekendBeforeSixGetOffCountMonthlyAvg) > 2000 || ((WeekendThirteenToFourteenGetOnCountMonthlyAvg - WeekendThirteenToFourteenGetOffCountMonthlyAvg) < -2000 && (WeekendSixteenToNineteenGetOnCountMonthlyAvg - WeekendSixteenToNineteenGetOffCountMonthlyAvg) < -2000))
+                return 3.0d;
+            else if ((WeekdaySevenToEightGetOnCountMonthlyAvg - WeekdaySevenToEightGetOffCountMonthlyAvg) > 2000 && (WeekdayNineteenToTwentyGetOnCountMonthlyAvg - WeekdayNineteenToTwentyGetOffCountMonthlyAvg) < -2000)
+                return 1.6d;
+            else if ((WeekdayEightToNineGetOnCountMonthlyAvg - WeekdayEightToNineGetOffCountMonthlyAvg) < -2000 && (WeekdayEighteenToTwentyGetOnCountMonthlyAvg - WeekdayNineteenToTwentyGetOffCountMonthlyAvg) < -2000)
+                return 1.4d;
+            else
+                return 1.0d;
+        }
 
         public List<EvaluationPointCalculatingModel> GetEvaluationPoint(int UpperId, int FieldId)
         {
