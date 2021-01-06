@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace SSTAA.Data.UEF.Dao
 {
-    class EvaluationPointDao
+    class EvaluationScoreDao
     {
 
-        public List<EvaluationPointCalculatingModel> GetEvaluationPoint(int UpperId, int FieldId)
+        public List<EvaluationScoreCalculatingModel> GetMonthlyEvaluationScore(int UpperId, int FieldId)
         {
-            #region EvaluationPoint 내용 작성중
-            //    EvaluationPoint = (LocationPoint*IndustryPoint*(MonthlyLandPriceIndex/100)*MonthlyTransfer)/10000
+            #region EvaluationScore 내용 작성중
+            //    EvaluationScore = (LocationScore*IndustryScore*(MonthlyLandPriceIndex/100)*MonthlyTransfer)/10000
             //    -----------------------------------------------------------------------------------------------------------------------------------------
-            //    1. LocationPoint 계산
+            //    1. LocationScore 계산
             //      ㄱ. Station 테이블에서 (LocationId % UpperId < 100 && LocationId % UpperId > 0) 을 만족하는 Station.StationId 가져오기
             //      ㄴ. Station.StaionId == FootTraffic.StationId인 Date, IsWeekend, IsOnBoard, TimetableId, Count 값을 가져오기
             //      ㄷ. ㄴ에서 가져온 값을 정렬하고 월평균 Count값 구하기 (LINQ Average함수 참고)
@@ -47,31 +47,31 @@ namespace SSTAA.Data.UEF.Dao
             //              (IsWeekend == 0 && TimetableId == 14 && IsOnBoard == 1)
             //        n. WeekdayEighteenToTwentyGetOffCountMonthlyAvg 의 조건
             //              (IsWeekend == 0 && TimetableId == 14 && IsOnBoard == 0)
-            //      ㄹ. 조건에 맞추어 LocationPoint 값 부여하기
+            //      ㄹ. 조건에 맞추어 LocationScore 값 부여하기
             //        a. if((WeekendBeforeSixGetOnCountMonthlyAvg - WeekendBeforeSixGetOffCountMonthlyAvg) > 2000 || (WeekendThirteenToFourteenGetOnCountMonthlyAvg - WeekendThirteenToFourteenGetOffCountMonthlyAvg) < -2000 && (WeekendSixteenToNineteenGetOnCountMonthlyAvg - WeekendSixteenToNineteenGetOffCountMonthlyAvg) < -2000)
-            //                  LocationPoint = 3;
+            //                  LocationScore = 3;
             //          else if((WeekdaySevenToEightGetOnCountMonthlyAvg - WeekdaySevenToEightGetOffCountMonthlyAvg) > 2000 && (WeekdayNineteenToTwentyGetOnCountMonthlyAvg - WeekdayNineteenToTwentyGetOffCountMonthlyAvg) < -2000)
-            //                  LocationPoint = 1.6;
+            //                  LocationScore = 1.6;
             //          else if((WeekdayEightToNineGetOnCountMonthlyAvg - WeekdayEightToNineGetOffCountMonthlyAvg) < -2000 && (WeekdayEighteenToTwentyGetOnCountMonthlyAvg - WeekdayNineteenToTwentyGetOffCountMonthlyAvg) < -2000)
-            //                  LocationPoint = 1.4;
+            //                  LocationScore = 1.4;
             //          else 
-            //                  LocationPoint = 1;
+            //                  LocationScore = 1;
             //    -----------------------------------------------------------------------------------------------------------------------------------------
-            //    2. IndurstryPoint 계산
+            //    2. IndurstryScore 계산
             //      ㄱ. Competitor 테이블에서 (Competitor.FieldId == FieldId && (LocationId % UpperId < 100 && LocationId % UpperId > 0))를 만족하는 LocationId, Count값 가져오기
             //      ㄴ. ㄱ.에서 가져온 Count의 합계를 구한다. 합계 = UpperLocationCount(해당구 동종업 점포수) (LINQ Sum 참고)
             //      ㄹ. IndustryRatio = ((ㄱ. 에서 가져온 Count값) / UpperLocationCount)*100
-            //      ㅁ. IndustryRatio를 기준으로 아래 조건에 따라 IndustryPoint 값 부여
+            //      ㅁ. IndustryRatio를 기준으로 아래 조건에 따라 IndustryScore 값 부여
             //        a. if(IndustryRatio < 8 && IndustryRatio >= 6)
-            //                  IndustryPoint = 1.1
+            //                  IndustryScore = 1.1
             //          else if(IndustryRatio < 6 && IndustryRatio >= 4)
-            //                  IndustryPoint = 1.2
+            //                  IndustryScore = 1.2
             //          else if(IndustryRatio < 4 && IndustryRatio >= 2)
-            //                  IndustryPoint = 1.3
+            //                  IndustryScore = 1.3
             //          else if(IndustryRatio < 2 && IndustryRatio >= 0)
-            //                  IndustryPoint = 1.4
+            //                  IndustryScore = 1.4
             //          else
-            //                  IndustryPoint = 1
+            //                  IndustryScore = 1
             //    -----------------------------------------------------------------------------------------------------------------------------------------
             #endregion
 

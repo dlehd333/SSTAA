@@ -99,7 +99,7 @@
     <Compile Include="UEF\BaseDao.cs" />
     <Compile Include="UEF\Dao\CompetitorDao.cs" />
     <Compile Include="UEF\Dao\Dao.cs" />
-    <Compile Include="UEF\Dao\EvaluationPointDao.cs" />
+    <Compile Include="UEF\Dao\EvaluationScoreDao.cs" />
     <Compile Include="UEF\Dao\FieldDao.cs" />
     <Compile Include="UEF\Dao\FootTrafficDao.cs" />
     <Compile Include="UEF\Dao\LandPriceIndexDao.cs" />
@@ -107,7 +107,7 @@
     <Compile Include="UEF\Dao\StationDao.cs" />
     <Compile Include="UEF\Dao\TimetableDao.cs" />
     <Compile Include="UEF\DbContextCreator.cs" />
-    <Compile Include="UEF\Entities\EvaluationPoint.cs" />
+    <Compile Include="UEF\Entities\EvaluationScore.cs" />
     <Compile Include="UEF\SingleKeyDao.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
