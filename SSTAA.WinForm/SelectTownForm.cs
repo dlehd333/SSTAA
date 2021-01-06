@@ -45,6 +45,10 @@ namespace SSTAA.WinForm
             {
                 lblDisplayStation.Text += x + Environment.NewLine;
             }
+
+            //AnnualScoreForm(SelectedGu) 오픈
+
+            OnClickResultButton();
         }
 
         private void cbxField_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,5 +68,27 @@ namespace SSTAA.WinForm
 
             //AnnualScoreForm(SelectedGu) 오픈
         }
+
+        #region ClickResultButton event things for C# 3.0
+        public event EventHandler<ClickResultButtonEventArgs> ClickResultButton;
+
+        protected virtual void OnClickResultButton(ClickResultButtonEventArgs e)
+        {
+            if (ClickResultButton != null)
+                ClickResultButton(this, e);
+        }
+
+        private ClickResultButtonEventArgs OnClickResultButton()
+        {
+            ClickResultButtonEventArgs args = new ClickResultButtonEventArgs();
+            OnClickResultButton(args);
+
+            return args;
+        }
+
+        public class ClickResultButtonEventArgs : EventArgs
+        {
+        }
+        #endregion
     }
 }
