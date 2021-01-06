@@ -94,6 +94,8 @@ namespace SSTAA.Import
             if(rows.Count == 0 || dataGridView1.Rows.Count == 0)
                 return;
 
+            progressBar1.Style = ProgressBarStyle.Marquee;
+
             _pause.Set();
 
             bgwServerSave.RunWorkerAsync(_checkRadioButton);
@@ -164,11 +166,59 @@ namespace SSTAA.Import
             else if ((int)e.Argument == 2)
                 SaveStation();
             else if ((int)e.Argument == 3)
-                SaveFootTraffic();
+                SaveFootTraffic2();
+            //e.Result = SaveFootTrafficQuery();
+            //SaveFootTraffic();
             else if ((int)e.Argument == 4)
                 SaveLandPriceIndex();
             else if ((int)e.Argument == 5)
                 SaveCompetitor();
+        }
+
+        private List<List<string>> SaveFootTrafficQuery()
+        {
+            List<Station> stations = Dao.Station.GetAll();
+            List<List<string>> queries = new List<List<string>>();
+
+            // "날짜(일)", "평일,주말", "역번호", "승차,하차", "06시이전", "06~07", "07~08", "08~09",
+            // "09~10", "10~11", "11~12", "12~13", "13~14", "14~15", "15~16", "16~17", "18~19", "19~20",
+            // "20~21", "21~22", "22~23", "23~24", "24시이후"
+            // Date, IsWeekend(true-주말), StationId, IsOnBoard(true-승차), TimetableId, Count
+
+            for (int i = 0; i < rows.Count; i++)
+            {
+                if (rows[i][0] == "")
+                    continue;
+
+                //int stationId = ;
+                Station station = stations.Find(x => x.StationId == int.Parse(rows[i][2]));
+
+                if (station == null)
+                    continue;
+
+                List<string> query = new List<string>();
+
+                for (int j = 0; j < _timeTableCount; ++j)
+                {
+                    // INSERT INTO My_Table(no_emp, nm_kor, age) values('dz000', '홍길동', 20)
+                    // insert into FootTraffic(Date, IsWeekend, StationId, IsOnBoard, TimetableId, Count) values()
+                    // 20180101 13:30:50
+
+                    string date = rows[i][0].Replace("-", "");
+                    string isWeekend = rows[i][1] == "휴일" ? "1" : "0";
+                    string stationId = Convert.ToString(station.StationId);
+                    string isOnBoard = rows[i][3] == "승차" ? "1" : "0";
+                    string timetableId = Convert.ToString(j + 1);
+                    string count = rows[i][j + 4];
+
+                    query.Add($"insert into FootTraffic(Date, IsWeekend, StationId, IsOnBoard, TimetableId, Count) " +
+                        $"values('{date} 00:00:00', {isWeekend}, {stationId}, {isOnBoard}, {timetableId}, {count})");
+                }
+
+                queries.Add(query);
+            }
+
+            return queries;
         }
 
         private void SaveStation()
@@ -269,7 +319,7 @@ namespace SSTAA.Import
                 {
                     FootTraffic footTraffic = new FootTraffic();
                     footTraffic.Date = DateTime.Parse(rows[i][0]);
-                    footTraffic.IsWeekend = rows[i][1] == "주말" ? true : false;
+                    footTraffic.IsWeekend = rows[i][1] == "휴일" ? true : false;
                     footTraffic.StationId = station.StationId;
                     footTraffic.IsOnBoard = rows[i][3] == "승차" ? true : false;
                     footTraffic.TimetableId = i + 1;
@@ -282,6 +332,47 @@ namespace SSTAA.Import
             {
                 context.FootTraffics.AddRange(footTraffics);
                 context.SaveChanges();
+            }
+        }
+
+        private void SaveFootTraffic2()
+        {
+            List<FootTraffic> footTraffics = new List<FootTraffic>();
+            List<Station> stations = Dao.Station.GetAll();
+
+            // "날짜(일)", "평일,주말", "역번호", "승차,하차", "06시이전", "06~07", "07~08", "08~09",
+            // "09~10", "10~11", "11~12", "12~13", "13~14", "14~15", "15~16", "16~17", "18~19", "19~20",
+            // "20~21", "21~22", "22~23", "23~24", "24시이후"
+            // Date, IsWeekend(true-주말), StationId, IsOnBoard(true-승차), TimetableId, Count
+            for (int i = 0; i < rows.Count; i++)
+            {
+                if (rows[i][0] == "")
+                    continue;
+
+                Station station = stations.Find(x => x.StationId == int.Parse(rows[i][2]));
+
+                if (station == null)
+                    continue;
+
+                footTraffics.Clear();
+
+                for (int j = 0; j < _timeTableCount; ++j)
+                {
+                    FootTraffic footTraffic = new FootTraffic();
+                    footTraffic.Date = DateTime.Parse(rows[i][0]);
+                    footTraffic.IsWeekend = rows[i][1] == "휴일" ? true : false;
+                    footTraffic.StationId = station.StationId;
+                    footTraffic.IsOnBoard = rows[i][3] == "승차" ? true : false;
+                    footTraffic.TimetableId = j + 1;
+                    footTraffic.Count = int.Parse(rows[i][j + 4]);
+                    footTraffics.Add(footTraffic);
+                }
+
+                using (var context = DbContextCreator.Create())
+                {
+                    context.FootTraffics.AddRange(footTraffics);
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -378,6 +469,28 @@ namespace SSTAA.Import
         private void bgwServerSave_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             _pause.Reset();
+
+            progressBar1.Style = ProgressBarStyle.Blocks;
+
+            //if (_checkRadioButton == 3)
+            //{
+            //    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            //    {
+            //        int count = 0;
+
+            //        foreach (List<string> list in e.Result as List<List<string>>)
+            //        {
+            //            count++;
+            //            using (StreamWriter sr = new StreamWriter($"{saveFileDialog1.FileName}{count}.sql"))
+            //            {
+            //                foreach (string query in list)
+            //                {
+            //                    sr.WriteLine(query);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
 
             Utility.Mbox("알림", "완료");
         }
