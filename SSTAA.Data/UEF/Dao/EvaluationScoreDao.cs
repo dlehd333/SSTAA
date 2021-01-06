@@ -12,8 +12,21 @@ namespace SSTAA.Data.UEF.Dao
 
         public List<EvaluationScoreCalculatingModel> GetMonthlyEvaluationScore(int UpperId, int FieldId)
         {
-            #region EvaluationScore 내용 작성중
-            //    EvaluationScore = (LocationScore*IndustryScore*(MonthlyLandPriceIndex/100)*MonthlyTransfer)/10000
+            using (SSTAAEntities context = DbContextCreator.Create())
+            {
+                var Stationquery = from x in context.Stations
+                            where (x.LocationId % UpperId < 100 && x.LocationId % UpperId > 0)
+                            select new EvaluationPointCalculatingModel
+                            {
+                                StationStationId = x.StationId,
+                                StationName = x.Name,
+                                StationLocationId = x.LocationId
+                            };
+                List<EvaluationPointCalculatingModel> MonthlyEvaluationPointList = new List<EvaluationPointCalculatingModel>();
+                return MonthlyEvaluationPointList;
+            }
+            #region EvaluationPoint 내용 작성중
+            //    EvaluationPoint = (LocationPoint*IndustryPoint*(MonthlyLandPriceIndex/100)*MonthlyTransfer)/10000
             //    -----------------------------------------------------------------------------------------------------------------------------------------
             //    1. LocationScore 계산
             //      ㄱ. Station 테이블에서 (LocationId % UpperId < 100 && LocationId % UpperId > 0) 을 만족하는 Station.StationId 가져오기
@@ -74,7 +87,8 @@ namespace SSTAA.Data.UEF.Dao
             //                  IndustryScore = 1
             //    -----------------------------------------------------------------------------------------------------------------------------------------
             #endregion
-
+            
+            return null;
         }
     }
 }

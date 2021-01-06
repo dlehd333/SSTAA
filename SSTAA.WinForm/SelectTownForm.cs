@@ -30,6 +30,8 @@ namespace SSTAA.WinForm
             cbxGu.Properties.Items.AddRange(Dao.Location.GetGuName());
 
             cbxGu.SelectedIndexChanged += cbxGu_SelectedIndexChanged;
+
+            //OnClickResultButton();
         }
 
         private void ResumeGu()
@@ -39,7 +41,7 @@ namespace SSTAA.WinForm
             
             stations.Sort();
             stations = stations.Distinct().ToList();
-            stations.RemoveAt(0);
+            //stations.RemoveAt(0);
 
             foreach (string x in stations)
             {
@@ -59,14 +61,6 @@ namespace SSTAA.WinForm
         {
             Utility.Mbox("알림", $"바뀐 번호는 {(cbxGu.SelectedIndex + 1) * 100}이다");
             ResumeGu();
-        }
-        private void btnResult_Click(object sender, EventArgs e)
-        {
-            //cbx.Text 읽음(string SelectedGu)
-            
-            //Now Loading
-
-            //AnnualScoreForm(SelectedGu) 오픈
         }
 
         #region ClickResultButton event things for C# 3.0
