@@ -30,21 +30,21 @@ namespace SSTAA.WinForm
         private void InitializeComponent()
         {
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.lblViewRank = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.lblViewCategory = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.lblViewCategory = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.lblViewRank = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // tablePanel1
@@ -77,90 +77,44 @@ namespace SSTAA.WinForm
             this.tablePanel1.Size = new System.Drawing.Size(1020, 688);
             this.tablePanel1.TabIndex = 0;
             // 
-            // gridControl1
+            // simpleButton2
             // 
-            this.tablePanel1.SetColumn(this.gridControl1, 0);
-            this.tablePanel1.SetColumnSpan(this.gridControl1, 2);
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(3, 107);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.tablePanel1.SetRow(this.gridControl1, 2);
-            this.tablePanel1.SetRowSpan(this.gridControl1, 2);
-            this.gridControl1.Size = new System.Drawing.Size(504, 476);
-            this.gridControl1.TabIndex = 0;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.tablePanel1.SetColumn(this.simpleButton2, 3);
+            this.tablePanel1.SetColumnSpan(this.simpleButton2, 2);
+            this.simpleButton2.Location = new System.Drawing.Point(870, 625);
+            this.simpleButton2.Name = "simpleButton2";
+            this.tablePanel1.SetRow(this.simpleButton2, 4);
+            this.simpleButton2.Size = new System.Drawing.Size(96, 23);
+            this.simpleButton2.TabIndex = 8;
+            this.simpleButton2.Text = "돌아가기";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
-            // gridView1
+            // simpleButton1
             // 
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
+            this.tablePanel1.SetColumn(this.simpleButton1, 5);
+            this.simpleButton1.Location = new System.Drawing.Point(972, 14);
+            this.simpleButton1.Name = "simpleButton1";
+            this.tablePanel1.SetRow(this.simpleButton1, 0);
+            this.simpleButton1.Size = new System.Drawing.Size(45, 23);
+            this.simpleButton1.TabIndex = 7;
+            this.simpleButton1.Text = "안내";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
-            // chartControl1
+            // labelControl5
             // 
-            this.chartControl1.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.tablePanel1.SetColumn(this.chartControl1, 2);
-            this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartControl1.Legend.Name = "Default Legend";
-            this.chartControl1.Location = new System.Drawing.Point(513, 107);
-            this.chartControl1.Name = "chartControl1";
-            this.tablePanel1.SetRow(this.chartControl1, 2);
-            this.tablePanel1.SetRowSpan(this.chartControl1, 2);
-            this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartControl1.Size = new System.Drawing.Size(351, 476);
-            this.chartControl1.TabIndex = 1;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Appearance.Options.UseTextOptions = true;
-            this.labelControl1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
-            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.tablePanel1.SetColumn(this.labelControl1, 0);
-            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl1.Location = new System.Drawing.Point(3, 3);
-            this.labelControl1.Name = "labelControl1";
-            this.tablePanel1.SetRow(this.labelControl1, 0);
-            this.labelControl1.Size = new System.Drawing.Size(249, 46);
-            this.labelControl1.TabIndex = 2;
-            this.labelControl1.Text = "연도별 평가점수 기준";
-            // 
-            // lblViewCategory
-            // 
-            this.lblViewCategory.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblViewCategory.Appearance.Options.UseFont = true;
-            this.lblViewCategory.Appearance.Options.UseTextOptions = true;
-            this.lblViewCategory.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.lblViewCategory.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
-            this.lblViewCategory.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.tablePanel1.SetColumn(this.lblViewCategory, 1);
-            this.lblViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblViewCategory.Location = new System.Drawing.Point(258, 55);
-            this.lblViewCategory.Name = "lblViewCategory";
-            this.tablePanel1.SetRow(this.lblViewCategory, 1);
-            this.lblViewCategory.Size = new System.Drawing.Size(249, 46);
-            this.lblViewCategory.TabIndex = 3;
-            this.lblViewCategory.Text = "lblViewCategory";
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Appearance.Options.UseTextOptions = true;
-            this.labelControl3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.labelControl3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.labelControl3.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.tablePanel1.SetColumn(this.labelControl3, 3);
-            this.tablePanel1.SetColumnSpan(this.labelControl3, 3);
-            this.labelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl3.Location = new System.Drawing.Point(870, 107);
-            this.labelControl3.Name = "labelControl3";
-            this.tablePanel1.SetRow(this.labelControl3, 2);
-            this.labelControl3.Size = new System.Drawing.Size(147, 63);
-            this.labelControl3.TabIndex = 4;
-            this.labelControl3.Text = "추천 역세권";
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl5.Appearance.Options.UseFont = true;
+            this.labelControl5.Appearance.Options.UseTextOptions = true;
+            this.labelControl5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+            this.labelControl5.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.tablePanel1.SetColumn(this.labelControl5, 0);
+            this.labelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl5.Location = new System.Drawing.Point(3, 55);
+            this.labelControl5.Name = "labelControl5";
+            this.tablePanel1.SetRow(this.labelControl5, 1);
+            this.labelControl5.Size = new System.Drawing.Size(249, 46);
+            this.labelControl5.TabIndex = 6;
+            this.labelControl5.Text = "추천 역세권";
             // 
             // lblViewRank
             // 
@@ -183,42 +137,90 @@ namespace SSTAA.WinForm
             this.lblViewRank.TabIndex = 5;
             this.lblViewRank.Text = "lblViewRank";
             // 
-            // labelControl5
+            // labelControl3
             // 
-            this.labelControl5.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Appearance.Options.UseTextOptions = true;
-            this.labelControl5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-            this.labelControl5.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.tablePanel1.SetColumn(this.labelControl5, 0);
-            this.labelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl5.Location = new System.Drawing.Point(3, 55);
-            this.labelControl5.Name = "labelControl5";
-            this.tablePanel1.SetRow(this.labelControl5, 1);
-            this.labelControl5.Size = new System.Drawing.Size(249, 46);
-            this.labelControl5.TabIndex = 6;
-            this.labelControl5.Text = "추천 역세권";
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Appearance.Options.UseTextOptions = true;
+            this.labelControl3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelControl3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl3.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.tablePanel1.SetColumn(this.labelControl3, 3);
+            this.tablePanel1.SetColumnSpan(this.labelControl3, 3);
+            this.labelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl3.Location = new System.Drawing.Point(870, 107);
+            this.labelControl3.Name = "labelControl3";
+            this.tablePanel1.SetRow(this.labelControl3, 2);
+            this.labelControl3.Size = new System.Drawing.Size(147, 63);
+            this.labelControl3.TabIndex = 4;
+            this.labelControl3.Text = "추천 역세권";
             // 
-            // simpleButton1
+            // lblViewCategory
             // 
-            this.tablePanel1.SetColumn(this.simpleButton1, 5);
-            this.simpleButton1.Location = new System.Drawing.Point(972, 14);
-            this.simpleButton1.Name = "simpleButton1";
-            this.tablePanel1.SetRow(this.simpleButton1, 0);
-            this.simpleButton1.Size = new System.Drawing.Size(45, 23);
-            this.simpleButton1.TabIndex = 7;
-            this.simpleButton1.Text = "안내";
+            this.lblViewCategory.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblViewCategory.Appearance.Options.UseFont = true;
+            this.lblViewCategory.Appearance.Options.UseTextOptions = true;
+            this.lblViewCategory.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.lblViewCategory.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
+            this.lblViewCategory.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.tablePanel1.SetColumn(this.lblViewCategory, 1);
+            this.lblViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblViewCategory.Location = new System.Drawing.Point(258, 55);
+            this.lblViewCategory.Name = "lblViewCategory";
+            this.tablePanel1.SetRow(this.lblViewCategory, 1);
+            this.lblViewCategory.Size = new System.Drawing.Size(249, 46);
+            this.lblViewCategory.TabIndex = 3;
+            this.lblViewCategory.Text = "lblViewCategory";
             // 
-            // simpleButton2
+            // labelControl1
             // 
-            this.tablePanel1.SetColumn(this.simpleButton2, 3);
-            this.tablePanel1.SetColumnSpan(this.simpleButton2, 2);
-            this.simpleButton2.Location = new System.Drawing.Point(870, 625);
-            this.simpleButton2.Name = "simpleButton2";
-            this.tablePanel1.SetRow(this.simpleButton2, 4);
-            this.simpleButton2.Size = new System.Drawing.Size(96, 23);
-            this.simpleButton2.TabIndex = 8;
-            this.simpleButton2.Text = "돌아가기";
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Appearance.Options.UseTextOptions = true;
+            this.labelControl1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
+            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.tablePanel1.SetColumn(this.labelControl1, 0);
+            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl1.Location = new System.Drawing.Point(3, 3);
+            this.labelControl1.Name = "labelControl1";
+            this.tablePanel1.SetRow(this.labelControl1, 0);
+            this.labelControl1.Size = new System.Drawing.Size(249, 46);
+            this.labelControl1.TabIndex = 2;
+            this.labelControl1.Text = "연도별 평가점수 기준";
+            // 
+            // chartControl1
+            // 
+            this.chartControl1.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            this.tablePanel1.SetColumn(this.chartControl1, 2);
+            this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartControl1.Legend.Name = "Default Legend";
+            this.chartControl1.Location = new System.Drawing.Point(513, 107);
+            this.chartControl1.Name = "chartControl1";
+            this.tablePanel1.SetRow(this.chartControl1, 2);
+            this.tablePanel1.SetRowSpan(this.chartControl1, 2);
+            this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.chartControl1.Size = new System.Drawing.Size(351, 476);
+            this.chartControl1.TabIndex = 1;
+            // 
+            // gridControl1
+            // 
+            this.tablePanel1.SetColumn(this.gridControl1, 0);
+            this.tablePanel1.SetColumnSpan(this.gridControl1, 2);
+            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl1.Location = new System.Drawing.Point(3, 107);
+            this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Name = "gridControl1";
+            this.tablePanel1.SetRow(this.gridControl1, 2);
+            this.tablePanel1.SetRowSpan(this.gridControl1, 2);
+            this.gridControl1.Size = new System.Drawing.Size(504, 476);
+            this.gridControl1.TabIndex = 0;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.Name = "gridView1";
             // 
             // AnnualScoreForm
             // 
@@ -233,9 +235,9 @@ namespace SSTAA.WinForm
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             this.ResumeLayout(false);
 
         }
