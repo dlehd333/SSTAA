@@ -41,7 +41,7 @@ namespace SSTAA.WinForm
             
             stations.Sort();
             stations = stations.Distinct().ToList();
-            //stations.RemoveAt(0);
+            stations.RemoveAt(0);
 
             foreach (string x in stations)
             {

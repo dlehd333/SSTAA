@@ -10,19 +10,17 @@ namespace SSTAA.Data.UEF.Dao
     class EvaluationScoreDao
     {
 
-        public List<EvaluationScoreCalculatingModel> GetMonthlyEvaluationScore(int UpperId, int FieldId)
+        public List<MonthlyEvaluationScoreModel> GetMonthlyEvaluationScore(int UpperId, int FieldId)
         {
             using (SSTAAEntities context = DbContextCreator.Create())
             {
                 var Stationquery = from x in context.Stations
                             where (x.LocationId % UpperId < 100 && x.LocationId % UpperId > 0)
-                            select new EvaluationPointCalculatingModel
+                            select new MonthlyEvaluationScoreModel
                             {
-                                StationStationId = x.StationId,
-                                StationName = x.Name,
-                                StationLocationId = x.LocationId
+                                
                             };
-                List<EvaluationPointCalculatingModel> MonthlyEvaluationPointList = new List<EvaluationPointCalculatingModel>();
+                List<MonthlyEvaluationScoreModel> MonthlyEvaluationPointList = new List<MonthlyEvaluationScoreModel>();
                 return MonthlyEvaluationPointList;
             }
             #region EvaluationPoint 내용 작성중
