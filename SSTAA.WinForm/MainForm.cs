@@ -22,9 +22,17 @@ namespace SSTAA.WinForm
         {
             base.OnLoad(e);
 
-            ShowChildForm(new TitleForm());
 
-            // 클릭 이벤트 받으면 다음 폼으로 넘어가도록 기능 구현
+            TitleForm titleForm = new TitleForm();
+            titleForm.ClickTitleForm += TitleForm_ClickTitleForm;
+            ShowChildForm(titleForm);
+        }
+
+        private void TitleForm_ClickTitleForm(object sender, TitleForm.ClickTitleFormEventArgs e)
+        {
+            SelectTownForm selectTownForm = new SelectTownForm();
+            // 이벤트 추가
+            ShowChildForm(selectTownForm);
         }
 
         private void ShowChildForm(Form form)
@@ -34,15 +42,12 @@ namespace SSTAA.WinForm
 
             var childForm = MdiChildren.FirstOrDefault(x => x.GetType() == form.GetType());
 
-            if(childForm == null)
-            {
-                ShowForm(form);
-            }
-            else
+            if (childForm != null)
             {
                 childForm.Close();
-                ShowForm(form);
             }
+
+            ShowForm(form);
         }
 
         private void ShowForm(Form form)

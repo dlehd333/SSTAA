@@ -30,7 +30,7 @@ namespace SSTAA.WinForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.xtraTabbedMdiManager1 = new XtraTabbedMdiManagerExtend(this.components);
+            this.xtraTabbedMdiManager1 = new SSTAA.WinForm.XtraTabbedMdiManagerExtend(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,10 +40,12 @@ namespace SSTAA.WinForm
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1022, 720);
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.Text = "Subway Station Trade Area Analysis";
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();

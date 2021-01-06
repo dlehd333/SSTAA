@@ -40,9 +40,10 @@ namespace SSTAA.WinForm
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(225, 157);
+            this.labelControl1.Location = new System.Drawing.Point(311, 273);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(349, 97);
+            this.labelControl1.Size = new System.Drawing.Size(433, 120);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "S S T A A";
             // 
@@ -51,9 +52,10 @@ namespace SSTAA.WinForm
             this.labelControl2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Georgia", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(233, 260);
+            this.labelControl2.Location = new System.Drawing.Point(320, 405);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(334, 25);
+            this.labelControl2.Size = new System.Drawing.Size(414, 30);
             this.labelControl2.TabIndex = 1;
             this.labelControl2.Text = "Subway Station Trade Area Analysis";
             // 
@@ -61,14 +63,17 @@ namespace SSTAA.WinForm
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1022, 720);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TitleForm";
             this.Text = "TitleForm";
+            this.Click += new System.EventHandler(this.TitleForm_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
