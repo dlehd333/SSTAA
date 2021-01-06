@@ -60,14 +60,6 @@ namespace SSTAA.WinForm
             Utility.Mbox("알림", $"바뀐 번호는 {(cbxGu.SelectedIndex + 1) * 100}이다");
             ResumeGu();
         }
-        private void btnResult_Click(object sender, EventArgs e)
-        {
-            //cbx.Text 읽음(string SelectedGu)
-            
-            //Now Loading
-
-            //AnnualScoreForm(SelectedGu) 오픈
-        }
 
         #region ClickResultButton event things for C# 3.0
         public event EventHandler<ClickResultButtonEventArgs> ClickResultButton;

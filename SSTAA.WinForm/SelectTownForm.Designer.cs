@@ -133,7 +133,6 @@ namespace SSTAA.WinForm
             this.btnResult.Size = new System.Drawing.Size(92, 30);
             this.btnResult.TabIndex = 7;
             this.btnResult.Text = "결과보기";
-            this.btnResult.Click += new System.EventHandler(this.btnResult_Click);
             // 
             // tablePanel1
             // 
