@@ -7,7 +7,7 @@ namespace SSTAA.Data
     {
         internal LocationDao() { }
 
-        public List<string> GetGu()
+        public List<string> GetGuName()
         {
             using (var context = DbContextCreator.Create())
             {

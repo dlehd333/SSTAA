@@ -33,6 +33,14 @@ namespace SSTAA.WinForm
             SelectTownForm selectTownForm = new SelectTownForm();
             // 이벤트 추가
             ShowChildForm(selectTownForm);
+
+            //StationScoreForm stationScoreForm = new StationScoreForm();
+            //// 이벤트 추가
+            //ShowChildForm(stationScoreForm);
+
+            //AnnualScoreForm annualScoreForm = new AnnualScoreForm();
+            //// 이벤트 추가
+            //ShowChildForm(annualScoreForm);
         }
 
         private void ShowChildForm(Form form)
