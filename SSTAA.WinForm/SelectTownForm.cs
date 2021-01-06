@@ -30,6 +30,8 @@ namespace SSTAA.WinForm
             cbxGu.Properties.Items.AddRange(Dao.Location.GetGuName());
 
             cbxGu.SelectedIndexChanged += cbxGu_SelectedIndexChanged;
+
+            //OnClickResultButton();
         }
 
         private void ResumeGu()
@@ -39,7 +41,7 @@ namespace SSTAA.WinForm
             
             stations.Sort();
             stations = stations.Distinct().ToList();
-            stations.RemoveAt(0);
+            //stations.RemoveAt(0);
 
             foreach (string x in stations)
             {
