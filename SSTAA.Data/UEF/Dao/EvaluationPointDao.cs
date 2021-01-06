@@ -12,12 +12,25 @@ namespace SSTAA.Data.UEF.Dao
 
         public List<EvaluationPointCalculatingModel> GetEvaluationPoint(int UpperId, int FieldId)
         {
+            using (SSTAAEntities context = DbContextCreator.Create())
+            {
+                var Stationquery = from x in context.Stations
+                            where (x.LocationId % UpperId < 100 && x.LocationId % UpperId > 0)
+                            select new EvaluationPointCalculatingModel
+                            {
+                                StationStationId = x.StationId,
+                                StationName = x.Name,
+                                StationLocationId = x.LocationId
+                            };
+                List<EvaluationPointCalculatingModel> MonthlyEvaluationPointList = new List<EvaluationPointCalculatingModel>();
+                return MonthlyEvaluationPointList;
+            }
             #region EvaluationPoint 내용 작성중
             //    EvaluationPoint = (LocationPoint*IndustryPoint*(MonthlyLandPriceIndex/100)*MonthlyTransfer)/10000
             //    -----------------------------------------------------------------------------------------------------------------------------------------
             //    1. LocationPoint 계산
-            //      ㄱ. Station 테이블에서 (LocationId % UpperId < 100 && LocationId % UpperId > 0) 을 만족하는 Station.StationId 가져오기
-            //      ㄴ. Station.StaionId == FootTraffic.StationId인 Date, IsWeekend, IsOnBoard, TimetableId, Count 값을 가져오기
+            //      ㄱ. Stations 테이블에서 (LocationId % UpperId < 100 && LocationId % UpperId > 0) 을 만족하는 Station.StationId 가져오기
+            //      ㄴ. Stations.StaionId == FootTraffic.StationId인 Date, IsWeekend, IsOnBoard, TimetableId, Count 값을 가져오기
             //      ㄷ. ㄴ에서 가져온 값을 정렬하고 월평균 Count값 구하기 (LINQ Average함수 참고)
             //        a. WeekendBeforeSixGetOnCountMonthlyAvg 의 조건 
             //              (IsWeekend == 1 && TimetableId == 1 && IsOnBoard == 1)

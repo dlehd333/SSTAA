@@ -8,6 +8,8 @@ namespace SSTAA.Data.UEF.Entities
 {
     public class EvaluationPointCalculatingModel
     {
+        public double MonthlyEvaluationPoint { get; set; }
+        public double AnnualEvaluationPoint { get; set; }
         public double MonthlyLocationPoint { get; set; }
         public double AnnualLocationPoint { get; set; }
         public double IndustryPoint { get; set; }
