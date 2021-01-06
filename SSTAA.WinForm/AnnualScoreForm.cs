@@ -1,4 +1,6 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,5 +70,26 @@ namespace SSTAA.WinForm
             }*/
         }
         #endregion
+
+        private void grdScore_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+
+            GridView view = (GridView)grdScore.GetViewAt(e.Location);
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Location);
+
+            //if (hitInfo.InRow && hitInfo.RowHandle >= 0)
+            if (!hitInfo.InRow || hitInfo.RowHandle < 0)
+                return;
+
+            //Model score = view.GetFocusedRow() as Model;
+
+            //if (score == null)
+            //    return;
+
+            //StationScoreForm form = new StationScoreForm(score.stationId);
+            //form.ShowDialog();
+        }
     }
 }

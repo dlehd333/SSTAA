@@ -38,12 +38,12 @@ namespace SSTAA.WinForm
             this.lblViewCategory = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.grdScore = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +64,7 @@ namespace SSTAA.WinForm
             this.tablePanel1.Controls.Add(this.lblViewCategory);
             this.tablePanel1.Controls.Add(this.labelControl1);
             this.tablePanel1.Controls.Add(this.chartControl1);
-            this.tablePanel1.Controls.Add(this.gridControl1);
+            this.tablePanel1.Controls.Add(this.grdScore);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
             this.tablePanel1.Name = "tablePanel1";
@@ -202,24 +202,25 @@ namespace SSTAA.WinForm
             this.chartControl1.Size = new System.Drawing.Size(351, 476);
             this.chartControl1.TabIndex = 1;
             // 
-            // gridControl1
+            // grdScore
             // 
-            this.tablePanel1.SetColumn(this.gridControl1, 0);
-            this.tablePanel1.SetColumnSpan(this.gridControl1, 2);
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(3, 107);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.tablePanel1.SetRow(this.gridControl1, 2);
-            this.tablePanel1.SetRowSpan(this.gridControl1, 2);
-            this.gridControl1.Size = new System.Drawing.Size(504, 476);
-            this.gridControl1.TabIndex = 0;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.tablePanel1.SetColumn(this.grdScore, 0);
+            this.tablePanel1.SetColumnSpan(this.grdScore, 2);
+            this.grdScore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdScore.Location = new System.Drawing.Point(3, 107);
+            this.grdScore.MainView = this.gridView1;
+            this.grdScore.Name = "grdScore";
+            this.tablePanel1.SetRow(this.grdScore, 2);
+            this.tablePanel1.SetRowSpan(this.grdScore, 2);
+            this.grdScore.Size = new System.Drawing.Size(504, 476);
+            this.grdScore.TabIndex = 0;
+            this.grdScore.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.grdScore.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.grdScore_MouseDoubleClick);
             // 
             // gridView1
             // 
-            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.GridControl = this.grdScore;
             this.gridView1.Name = "gridView1";
             // 
             // AnnualScoreForm
@@ -236,7 +237,7 @@ namespace SSTAA.WinForm
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -253,7 +254,7 @@ namespace SSTAA.WinForm
         private DevExpress.XtraEditors.LabelControl lblViewCategory;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraCharts.ChartControl chartControl1;
-        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.GridControl grdScore;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
     }
 }
