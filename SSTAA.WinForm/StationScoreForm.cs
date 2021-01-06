@@ -17,5 +17,10 @@ namespace SSTAA.WinForm
         {
             InitializeComponent();
         }
+
+        public StationScoreForm(int stationId) : base()
+        {
+
+        }
     }
 }
