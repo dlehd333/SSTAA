@@ -67,6 +67,7 @@ namespace SSTAA.WinForm
             this.tablePanel1.Controls.Add(this.grdScore);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
+            this.tablePanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 0.75F),
@@ -74,7 +75,7 @@ namespace SSTAA.WinForm
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 1F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 6F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 1.5F)});
-            this.tablePanel1.Size = new System.Drawing.Size(1020, 688);
+            this.tablePanel1.Size = new System.Drawing.Size(1020, 680);
             this.tablePanel1.TabIndex = 0;
             // 
             // simpleButton2
@@ -148,10 +149,11 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetColumn(this.labelControl3, 3);
             this.tablePanel1.SetColumnSpan(this.labelControl3, 3);
             this.labelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl3.Location = new System.Drawing.Point(870, 107);
+            this.labelControl3.Location = new System.Drawing.Point(870, 106);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl3.Name = "labelControl3";
             this.tablePanel1.SetRow(this.labelControl3, 2);
-            this.labelControl3.Size = new System.Drawing.Size(147, 63);
+            this.labelControl3.Size = new System.Drawing.Size(147, 60);
             this.labelControl3.TabIndex = 4;
             this.labelControl3.Text = "추천 역세권";
             // 
@@ -227,10 +229,11 @@ namespace SSTAA.WinForm
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 688);
+            this.ClientSize = new System.Drawing.Size(1020, 680);
             this.Controls.Add(this.tablePanel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AnnualScoreForm";
             this.Text = "AnnualScoreForm";
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
