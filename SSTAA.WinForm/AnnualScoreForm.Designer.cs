@@ -218,6 +218,7 @@ namespace SSTAA.WinForm
             // 
             // chartControl1
             // 
+            this.chartControl1.AnimationStartMode = DevExpress.XtraCharts.ChartAnimationMode.OnDataChanged;
             this.chartControl1.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
             this.tablePanel1.SetColumn(this.chartControl1, 2);
             this.chartControl1.DataSource = this.annualEvaluationScoreModelBindingSource;

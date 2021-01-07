@@ -16,6 +16,8 @@ namespace SSTAA.WinForm
     {
         public int StationId { get; set; }
         public int FieldId { get; set; }
+        public AnnualEvaluationScoreModel Model { get; set; }
+        public LoadingForm LoadingForm { get; set; } = new LoadingForm();
         public StationScoreForm()
         {
             InitializeComponent();
@@ -25,18 +27,42 @@ namespace SSTAA.WinForm
         {
             StationId = stationId;
             FieldId = fieldId;
+            Model = model;
+        }
 
-            lblRank.Text = $"{model.Rank}위";
-            lblScore.Text = $"{model.FirstEvaluationScore:0.00}";
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
 
-            monthlyEvaluationScoreModelBindingSource.DataSource = Dao.EvaluationScore.GetMonthlyEvaluationScoreModels(StationId, FieldId);
+            if (DesignMode)
+                return;
 
-            labelControl1.Text = $"{model.StationName}" + Environment.NewLine + "기대점수";
+            bgwDataSource.RunWorkerAsync();
+            LoadingForm.ShowDialog();
+            WriteRecommendLable();
+        }
+
+        private void WriteRecommendLable()
+        {
+            lblRank.Text = $"{Model.Rank}위";
+            lblScore.Text = $"{Model.FirstEvaluationScore:0.00}";
+
+            labelControl1.Text = $"{Model.StationName}" + Environment.NewLine + "기대점수";
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void bgwDataSource_DoWork(object sender, DoWorkEventArgs e)
+        {
+            monthlyEvaluationScoreModelBindingSource.DataSource = Dao.EvaluationScore.GetMonthlyEvaluationScoreModels(StationId, FieldId);
+        }
+
+        private void bgwDataSource_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            LoadingForm.Close();
         }
     }
 }

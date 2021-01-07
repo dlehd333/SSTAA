@@ -20,7 +20,13 @@ namespace SSTAA.Data
         {
             using(var context = DbContextCreator.Create())
             {
-                return context.FootTraffics.Where(x => x.StationId == stationId).ToList();
+                var query = context.FootTraffics.Where(x => x.StationId == stationId);
+
+                if (query.FirstOrDefault() == null)
+                    return null;
+
+                else 
+                    return query.ToList();
             }
         }
     }

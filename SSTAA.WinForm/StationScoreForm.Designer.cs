@@ -30,19 +30,19 @@ namespace SSTAA.WinForm
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraCharts.XYDiagram xyDiagram3 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series6 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.LineSeriesView lineSeriesView5 = new DevExpress.XtraCharts.LineSeriesView();
-            DevExpress.XtraCharts.Series series7 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.LineSeriesView lineSeriesView6 = new DevExpress.XtraCharts.LineSeriesView();
-            DevExpress.XtraCharts.Series series8 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.LineSeriesView lineSeriesView7 = new DevExpress.XtraCharts.LineSeriesView();
-            DevExpress.XtraCharts.Series series9 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.LineSeriesView lineSeriesView8 = new DevExpress.XtraCharts.LineSeriesView();
-            DevExpress.XtraCharts.XYDiagram xyDiagram4 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series10 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedAreaSeriesView stackedAreaSeriesView2 = new DevExpress.XtraCharts.StackedAreaSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle2 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.LineSeriesView lineSeriesView1 = new DevExpress.XtraCharts.LineSeriesView();
+            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.LineSeriesView lineSeriesView2 = new DevExpress.XtraCharts.LineSeriesView();
+            DevExpress.XtraCharts.Series series3 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.LineSeriesView lineSeriesView3 = new DevExpress.XtraCharts.LineSeriesView();
+            DevExpress.XtraCharts.Series series4 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.LineSeriesView lineSeriesView4 = new DevExpress.XtraCharts.LineSeriesView();
+            DevExpress.XtraCharts.XYDiagram xyDiagram2 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series5 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedAreaSeriesView stackedAreaSeriesView1 = new DevExpress.XtraCharts.StackedAreaSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle1 = new DevExpress.XtraCharts.ChartTitle();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.chartControl2 = new DevExpress.XtraCharts.ChartControl();
             this.monthlyEvaluationScoreModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -59,23 +59,24 @@ namespace SSTAA.WinForm
             this.btnReturn = new DevExpress.XtraEditors.SimpleButton();
             this.lblScore = new DevExpress.XtraEditors.LabelControl();
             this.lblRank = new DevExpress.XtraEditors.LabelControl();
+            this.bgwDataSource = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.monthlyEvaluationScoreModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedAreaSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedAreaSeriesView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
@@ -128,12 +129,13 @@ namespace SSTAA.WinForm
             // 
             // chartControl2
             // 
+            this.chartControl2.AnimationStartMode = DevExpress.XtraCharts.ChartAnimationMode.OnDataChanged;
             this.tablePanel1.SetColumn(this.chartControl2, 5);
             this.tablePanel1.SetColumnSpan(this.chartControl2, 5);
             this.chartControl2.DataSource = this.monthlyEvaluationScoreModelBindingSource;
-            xyDiagram3.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram3.AxisY.VisibleInPanesSerializable = "-1";
-            this.chartControl2.Diagram = xyDiagram3;
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl2.Diagram = xyDiagram1;
             this.chartControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl2.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Center;
             this.chartControl2.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.TopOutside;
@@ -147,27 +149,27 @@ namespace SSTAA.WinForm
             this.chartControl2.Name = "chartControl2";
             this.tablePanel1.SetRow(this.chartControl2, 6);
             this.tablePanel1.SetRowSpan(this.chartControl2, 4);
-            series6.ArgumentDataMember = "Date";
-            series6.Name = "07~08승차";
-            series6.ValueDataMembersSerializable = "FloationPopulationBySevenToEightOnBoard";
-            series6.View = lineSeriesView5;
-            series7.ArgumentDataMember = "Date";
-            series7.Name = "07~08하차";
-            series7.ValueDataMembersSerializable = "FloationPopulationBySevenToEightOffBoard";
-            series7.View = lineSeriesView6;
-            series8.ArgumentDataMember = "Date";
-            series8.Name = "18~19승차";
-            series8.ValueDataMembersSerializable = "FloationPopulationByEighteenToNineteenOnBoard";
-            series8.View = lineSeriesView7;
-            series9.ArgumentDataMember = "Date";
-            series9.Name = "18~19하차";
-            series9.ValueDataMembersSerializable = "FloationPopulationByEighteenToNineteenOffBoard";
-            series9.View = lineSeriesView8;
+            series1.ArgumentDataMember = "Date";
+            series1.Name = "07~08승차";
+            series1.ValueDataMembersSerializable = "FloationPopulationBySevenToEightOnBoard";
+            series1.View = lineSeriesView1;
+            series2.ArgumentDataMember = "Date";
+            series2.Name = "07~08하차";
+            series2.ValueDataMembersSerializable = "FloationPopulationBySevenToEightOffBoard";
+            series2.View = lineSeriesView2;
+            series3.ArgumentDataMember = "Date";
+            series3.Name = "18~19승차";
+            series3.ValueDataMembersSerializable = "FloationPopulationByEighteenToNineteenOnBoard";
+            series3.View = lineSeriesView3;
+            series4.ArgumentDataMember = "Date";
+            series4.Name = "18~19하차";
+            series4.ValueDataMembersSerializable = "FloationPopulationByEighteenToNineteenOffBoard";
+            series4.View = lineSeriesView4;
             this.chartControl2.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series6,
-        series7,
-        series8,
-        series9};
+        series1,
+        series2,
+        series3,
+        series4};
             this.chartControl2.Size = new System.Drawing.Size(420, 276);
             this.chartControl2.TabIndex = 8;
             // 
@@ -198,14 +200,15 @@ namespace SSTAA.WinForm
             // 
             // chartControl1
             // 
+            this.chartControl1.AnimationStartMode = DevExpress.XtraCharts.ChartAnimationMode.OnDataChanged;
             this.tablePanel1.SetColumn(this.chartControl1, 5);
             this.tablePanel1.SetColumnSpan(this.chartControl1, 5);
             this.chartControl1.DataSource = this.monthlyEvaluationScoreModelBindingSource;
-            xyDiagram4.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram4.AxisX.WholeRange.EndSideMargin = 0D;
-            xyDiagram4.AxisX.WholeRange.StartSideMargin = 0D;
-            xyDiagram4.AxisY.VisibleInPanesSerializable = "-1";
-            this.chartControl1.Diagram = xyDiagram4;
+            xyDiagram2.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram2.AxisX.WholeRange.EndSideMargin = 0D;
+            xyDiagram2.AxisX.WholeRange.StartSideMargin = 0D;
+            xyDiagram2.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl1.Diagram = xyDiagram2;
             this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl1.Legend.Name = "Default Legend";
             this.chartControl1.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
@@ -214,17 +217,17 @@ namespace SSTAA.WinForm
             this.chartControl1.Name = "chartControl1";
             this.tablePanel1.SetRow(this.chartControl1, 2);
             this.tablePanel1.SetRowSpan(this.chartControl1, 4);
-            series10.ArgumentDataMember = "Date";
-            series10.Name = "평가점수";
-            series10.ValueDataMembersSerializable = "MonthlyEvaluationScore";
-            series10.View = stackedAreaSeriesView2;
+            series5.ArgumentDataMember = "Date";
+            series5.Name = "평가점수";
+            series5.ValueDataMembersSerializable = "MonthlyEvaluationScore";
+            series5.View = stackedAreaSeriesView1;
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series10};
+        series5};
             this.chartControl1.Size = new System.Drawing.Size(420, 276);
             this.chartControl1.TabIndex = 6;
-            chartTitle2.Text = "평가점수(월별)";
+            chartTitle1.Text = "평가점수(월별)";
             this.chartControl1.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle2});
+            chartTitle1});
             // 
             // gridControl1
             // 
@@ -409,6 +412,11 @@ namespace SSTAA.WinForm
             this.lblRank.TabIndex = 0;
             this.lblRank.Text = "5위";
             // 
+            // bgwDataSource
+            // 
+            this.bgwDataSource.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwDataSource_DoWork);
+            this.bgwDataSource.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwDataSource_RunWorkerCompleted);
+            // 
             // StationScoreForm
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
@@ -423,20 +431,20 @@ namespace SSTAA.WinForm
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.monthlyEvaluationScoreModelBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedAreaSeriesView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedAreaSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
@@ -462,5 +470,6 @@ namespace SSTAA.WinForm
         private DevExpress.XtraGrid.Columns.GridColumn colFloatingPopulation;
         private DevExpress.XtraGrid.Columns.GridColumn colMonthlyLandPriceIndex;
         private DevExpress.XtraGrid.Columns.GridColumn colMonthlyEvaluationScore;
+        private System.ComponentModel.BackgroundWorker bgwDataSource;
     }
 }

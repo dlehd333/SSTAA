@@ -33,7 +33,7 @@ namespace SSTAA.WinForm
 
         protected override void OnClosed(EventArgs e)
         {
-            Utility.Mbox("안내", $"경과시간 : {DateTime.Now - LoadingTime}");
+            //Utility.Mbox("안내", $"경과시간 : {DateTime.Now - LoadingTime}");
 
             base.OnClosed(e);
         }
