@@ -29,6 +29,7 @@ namespace SSTAA.WinForm
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -40,11 +41,18 @@ namespace SSTAA.WinForm
             this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
             this.grdScore = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.annualEvaluationScoreModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.colStationName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFirstEvaluationScore = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSecondEvaluationScore = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colThirdEvaluationScore = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFourthEvaluationScore = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.annualEvaluationScoreModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tablePanel1
@@ -67,7 +75,6 @@ namespace SSTAA.WinForm
             this.tablePanel1.Controls.Add(this.grdScore);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
-            this.tablePanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 0.75F),
@@ -75,17 +82,18 @@ namespace SSTAA.WinForm
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 1F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 6F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 1.5F)});
-            this.tablePanel1.Size = new System.Drawing.Size(1020, 680);
+            this.tablePanel1.Size = new System.Drawing.Size(892, 529);
             this.tablePanel1.TabIndex = 0;
             // 
             // simpleButton2
             // 
             this.tablePanel1.SetColumn(this.simpleButton2, 3);
             this.tablePanel1.SetColumnSpan(this.simpleButton2, 2);
-            this.simpleButton2.Location = new System.Drawing.Point(870, 625);
+            this.simpleButton2.Location = new System.Drawing.Point(761, 480);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton2.Name = "simpleButton2";
             this.tablePanel1.SetRow(this.simpleButton2, 4);
-            this.simpleButton2.Size = new System.Drawing.Size(96, 23);
+            this.simpleButton2.Size = new System.Drawing.Size(84, 18);
             this.simpleButton2.TabIndex = 8;
             this.simpleButton2.Text = "돌아가기";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
@@ -93,10 +101,11 @@ namespace SSTAA.WinForm
             // simpleButton1
             // 
             this.tablePanel1.SetColumn(this.simpleButton1, 5);
-            this.simpleButton1.Location = new System.Drawing.Point(972, 14);
+            this.simpleButton1.Location = new System.Drawing.Point(850, 11);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton1.Name = "simpleButton1";
             this.tablePanel1.SetRow(this.simpleButton1, 0);
-            this.simpleButton1.Size = new System.Drawing.Size(45, 23);
+            this.simpleButton1.Size = new System.Drawing.Size(39, 18);
             this.simpleButton1.TabIndex = 7;
             this.simpleButton1.Text = "안내";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -110,10 +119,11 @@ namespace SSTAA.WinForm
             this.labelControl5.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.labelControl5, 0);
             this.labelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl5.Location = new System.Drawing.Point(3, 55);
+            this.labelControl5.Location = new System.Drawing.Point(3, 42);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl5.Name = "labelControl5";
             this.tablePanel1.SetRow(this.labelControl5, 1);
-            this.labelControl5.Size = new System.Drawing.Size(249, 46);
+            this.labelControl5.Size = new System.Drawing.Size(217, 36);
             this.labelControl5.TabIndex = 6;
             this.labelControl5.Text = "추천 역세권";
             // 
@@ -129,12 +139,12 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetColumn(this.lblViewRank, 3);
             this.tablePanel1.SetColumnSpan(this.lblViewRank, 3);
             this.lblViewRank.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblViewRank.Location = new System.Drawing.Point(872, 178);
-            this.lblViewRank.Margin = new System.Windows.Forms.Padding(5);
+            this.lblViewRank.Location = new System.Drawing.Point(762, 137);
+            this.lblViewRank.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblViewRank.Name = "lblViewRank";
-            this.lblViewRank.Padding = new System.Windows.Forms.Padding(5);
+            this.lblViewRank.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tablePanel1.SetRow(this.lblViewRank, 3);
-            this.lblViewRank.Size = new System.Drawing.Size(143, 403);
+            this.lblViewRank.Size = new System.Drawing.Size(126, 309);
             this.lblViewRank.TabIndex = 5;
             this.lblViewRank.Text = "lblViewRank";
             // 
@@ -149,11 +159,10 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetColumn(this.labelControl3, 3);
             this.tablePanel1.SetColumnSpan(this.labelControl3, 3);
             this.labelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl3.Location = new System.Drawing.Point(870, 106);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.labelControl3.Location = new System.Drawing.Point(761, 83);
             this.labelControl3.Name = "labelControl3";
             this.tablePanel1.SetRow(this.labelControl3, 2);
-            this.labelControl3.Size = new System.Drawing.Size(147, 60);
+            this.labelControl3.Size = new System.Drawing.Size(128, 47);
             this.labelControl3.TabIndex = 4;
             this.labelControl3.Text = "추천 역세권";
             // 
@@ -167,10 +176,11 @@ namespace SSTAA.WinForm
             this.lblViewCategory.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.lblViewCategory, 1);
             this.lblViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblViewCategory.Location = new System.Drawing.Point(258, 55);
+            this.lblViewCategory.Location = new System.Drawing.Point(226, 42);
+            this.lblViewCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblViewCategory.Name = "lblViewCategory";
             this.tablePanel1.SetRow(this.lblViewCategory, 1);
-            this.lblViewCategory.Size = new System.Drawing.Size(249, 46);
+            this.lblViewCategory.Size = new System.Drawing.Size(217, 36);
             this.lblViewCategory.TabIndex = 3;
             this.lblViewCategory.Text = "lblViewCategory";
             // 
@@ -183,10 +193,11 @@ namespace SSTAA.WinForm
             this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.labelControl1, 0);
             this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl1.Location = new System.Drawing.Point(3, 3);
+            this.labelControl1.Location = new System.Drawing.Point(3, 2);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl1.Name = "labelControl1";
             this.tablePanel1.SetRow(this.labelControl1, 0);
-            this.labelControl1.Size = new System.Drawing.Size(249, 46);
+            this.labelControl1.Size = new System.Drawing.Size(217, 36);
             this.labelControl1.TabIndex = 2;
             this.labelControl1.Text = "연도별 평가점수 기준";
             // 
@@ -196,25 +207,29 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetColumn(this.chartControl1, 2);
             this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl1.Legend.Name = "Default Legend";
-            this.chartControl1.Location = new System.Drawing.Point(513, 107);
+            this.chartControl1.Location = new System.Drawing.Point(449, 82);
+            this.chartControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartControl1.Name = "chartControl1";
             this.tablePanel1.SetRow(this.chartControl1, 2);
             this.tablePanel1.SetRowSpan(this.chartControl1, 2);
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartControl1.Size = new System.Drawing.Size(351, 476);
+            this.chartControl1.Size = new System.Drawing.Size(306, 366);
             this.chartControl1.TabIndex = 1;
             // 
             // grdScore
             // 
             this.tablePanel1.SetColumn(this.grdScore, 0);
             this.tablePanel1.SetColumnSpan(this.grdScore, 2);
+            this.grdScore.DataSource = this.annualEvaluationScoreModelBindingSource;
             this.grdScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdScore.Location = new System.Drawing.Point(3, 107);
+            this.grdScore.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grdScore.Location = new System.Drawing.Point(3, 82);
             this.grdScore.MainView = this.gridView1;
+            this.grdScore.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdScore.Name = "grdScore";
             this.tablePanel1.SetRow(this.grdScore, 2);
             this.tablePanel1.SetRowSpan(this.grdScore, 2);
-            this.grdScore.Size = new System.Drawing.Size(504, 476);
+            this.grdScore.Size = new System.Drawing.Size(440, 366);
             this.grdScore.TabIndex = 0;
             this.grdScore.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -222,18 +237,69 @@ namespace SSTAA.WinForm
             // 
             // gridView1
             // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colStationName,
+            this.colFirstEvaluationScore,
+            this.colSecondEvaluationScore,
+            this.colThirdEvaluationScore,
+            this.colFourthEvaluationScore});
+            this.gridView1.DetailHeight = 272;
             this.gridView1.GridControl = this.grdScore;
             this.gridView1.Name = "gridView1";
+            // 
+            // annualEvaluationScoreModelBindingSource
+            // 
+            this.annualEvaluationScoreModelBindingSource.DataSource = typeof(SSTAA.Data.AnnualEvaluationScoreModel);
+            // 
+            // colStationName
+            // 
+            this.colStationName.Caption = "역명";
+            this.colStationName.FieldName = "StationName";
+            this.colStationName.Name = "colStationName";
+            this.colStationName.Visible = true;
+            this.colStationName.VisibleIndex = 0;
+            this.colStationName.Width = 66;
+            // 
+            // colFirstEvaluationScore
+            // 
+            this.colFirstEvaluationScore.FieldName = "FirstEvaluationScore";
+            this.colFirstEvaluationScore.Name = "colFirstEvaluationScore";
+            this.colFirstEvaluationScore.Visible = true;
+            this.colFirstEvaluationScore.VisibleIndex = 1;
+            this.colFirstEvaluationScore.Width = 66;
+            // 
+            // colSecondEvaluationScore
+            // 
+            this.colSecondEvaluationScore.FieldName = "SecondEvaluationScore";
+            this.colSecondEvaluationScore.Name = "colSecondEvaluationScore";
+            this.colSecondEvaluationScore.Visible = true;
+            this.colSecondEvaluationScore.VisibleIndex = 2;
+            this.colSecondEvaluationScore.Width = 66;
+            // 
+            // colThirdEvaluationScore
+            // 
+            this.colThirdEvaluationScore.FieldName = "ThirdEvaluationScore";
+            this.colThirdEvaluationScore.Name = "colThirdEvaluationScore";
+            this.colThirdEvaluationScore.Visible = true;
+            this.colThirdEvaluationScore.VisibleIndex = 3;
+            this.colThirdEvaluationScore.Width = 66;
+            // 
+            // colFourthEvaluationScore
+            // 
+            this.colFourthEvaluationScore.FieldName = "FourthEvaluationScore";
+            this.colFourthEvaluationScore.Name = "colFourthEvaluationScore";
+            this.colFourthEvaluationScore.Visible = true;
+            this.colFourthEvaluationScore.VisibleIndex = 4;
+            this.colFourthEvaluationScore.Width = 66;
             // 
             // AnnualScoreForm
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 680);
+            this.ClientSize = new System.Drawing.Size(892, 529);
             this.Controls.Add(this.tablePanel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AnnualScoreForm";
             this.Text = "AnnualScoreForm";
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
@@ -242,6 +308,7 @@ namespace SSTAA.WinForm
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.annualEvaluationScoreModelBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -259,5 +326,11 @@ namespace SSTAA.WinForm
         private DevExpress.XtraCharts.ChartControl chartControl1;
         private DevExpress.XtraGrid.GridControl grdScore;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private System.Windows.Forms.BindingSource annualEvaluationScoreModelBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colStationName;
+        private DevExpress.XtraGrid.Columns.GridColumn colFirstEvaluationScore;
+        private DevExpress.XtraGrid.Columns.GridColumn colSecondEvaluationScore;
+        private DevExpress.XtraGrid.Columns.GridColumn colThirdEvaluationScore;
+        private DevExpress.XtraGrid.Columns.GridColumn colFourthEvaluationScore;
     }
 }

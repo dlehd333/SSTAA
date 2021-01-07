@@ -10,14 +10,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SSTAA.Data;
 
 namespace SSTAA.WinForm
 {
     public partial class AnnualScoreForm : XtraForm
     {
+        public int UpperLocationId { get; set; }
+        public int FieldId { get; set; }
         public AnnualScoreForm()
         {
             InitializeComponent();
+        }
+
+        public AnnualScoreForm(int upperLocationId, int fieldId) : this()
+        {
+            UpperLocationId = upperLocationId;
+            FieldId = fieldId;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            if (DesignMode)
+                return;
+
+            annualEvaluationScoreModelBindingSource.DataSource = Dao.EvaluationScore.GetAnnualEvaluationScoreModels(UpperLocationId, FieldId);
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)

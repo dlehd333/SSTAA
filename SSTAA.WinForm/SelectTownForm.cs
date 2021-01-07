@@ -50,7 +50,7 @@ namespace SSTAA.WinForm
 
             //AnnualScoreForm(SelectedGu) 오픈
 
-            OnClickResultButton();
+            //OnClickResultButton();
         }
 
         private void cbxField_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,9 +72,9 @@ namespace SSTAA.WinForm
                 ClickResultButton(this, e);
         }
 
-        private ClickResultButtonEventArgs OnClickResultButton()
+        private ClickResultButtonEventArgs OnClickResultButton(int upperLocationId, int fieldId)
         {
-            ClickResultButtonEventArgs args = new ClickResultButtonEventArgs();
+            ClickResultButtonEventArgs args = new ClickResultButtonEventArgs(upperLocationId, fieldId);
             OnClickResultButton(args);
 
             return args;
@@ -82,7 +82,20 @@ namespace SSTAA.WinForm
 
         public class ClickResultButtonEventArgs : EventArgs
         {
+            public ClickResultButtonEventArgs() { }
+            public ClickResultButtonEventArgs(int upperLocationId, int fieldId)
+            {
+                UpperLocationId = upperLocationId;
+                FieldId = fieldId;
+            }
+            public int UpperLocationId { get; set; }
+            public int FieldId { get; set; }
         }
         #endregion
+
+        private void btnResult_Click(object sender, EventArgs e)
+        {
+            OnClickResultButton((cbxGu.SelectedIndex + 1) * 100, cbxField.SelectedIndex + 1);
+        }
     }
 }

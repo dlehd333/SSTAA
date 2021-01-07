@@ -9,5 +9,6 @@
         public static LocationDao Location { get; set; } = new LocationDao();
         public static StationDao Station { get; set; } = new StationDao();
         public static TimetableDao Timetable { get; set; } = new TimetableDao();
+        public static EvaluationScoreDao EvaluationScore { get; set; } = new EvaluationScoreDao();
     }
 }

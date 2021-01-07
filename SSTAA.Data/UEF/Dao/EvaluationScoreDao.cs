@@ -1,4 +1,4 @@
-﻿using SSTAA.Data.UEF.Entities;
+﻿using SSTAA.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +16,59 @@ namespace SSTAA.Data
         public double 평가점수;
     }
 
-    class EvaluationPointDao
+    public class EvaluationScoreDao
     {
+        public List<AnnualEvaluationScoreModel> GetAnnualEvaluationScoreModels(int upperLocationId, int fieldId)
+        {
+            List<Station> stations = Dao.Station.GetByUpperLocation(upperLocationId);
+            List<AnnualEvaluationScoreModel> models = new List<AnnualEvaluationScoreModel>();
+
+            foreach(var station in stations)
+            {
+                AnnualEvaluationScoreModel model = new AnnualEvaluationScoreModel();
+                model.StationId = station.StationId;
+                model.StationName = station.Name;
+                model.FirstEvaluationScore = Dao.EvaluationScore.GetEvaluationScoreByYear(model.StationId, fieldId, station.LocationId, 2017);
+                //model.SecondEvaluationScore = Dao.EvaluationScore.GetEvaluationScoreByYear(model.StationId, fieldId, station.LocationId, 2018);
+                //model.ThirdEvaluationScore = Dao.EvaluationScore.GetEvaluationScoreByYear(model.StationId, fieldId, station.LocationId, 2019);
+                //model.FourthEvaluationScore = Dao.EvaluationScore.GetEvaluationScoreByYear(model.StationId, fieldId, station.LocationId, 2020);
+                models.Add(model);
+            }
+
+            return models;
+        }
+
+        private double GetEvaluationScoreByYear(int stationId, int fieldId, int locationId, int year)
+        {
+            double evaluationScore = 0.0d;
+
+            for(int i = 1;i <= 12;++i)
+            {
+                evaluationScore += GetEvaluationScoreByMonth(stationId, fieldId, locationId, year, i);
+            }
+
+            return evaluationScore / 12.0d;
+        }
+
+        private double GetEvaluationScoreByMonth(int stationId, int fieldId, int locationId, int year, int month)
+        {
+            using (var context = DbContextCreator.Create())
+            {
+                if (context.FootTraffics.Where(x => x.StationId == stationId && x.Date.Year == year && x.Date.Month == month).FirstOrDefault() == null)
+                    return 0.0d;
+
+                double landPriceIndex = (double)context.LandPriceIndexes.Where(x => x.LocationId == locationId && x.Month.Year == year && x.Month.Month == month).Select(x => x.Index).FirstOrDefault();
+                int monthlyTransfer = context.FootTraffics.Where(x => x.StationId == stationId && x.Date.Year == year && x.Date.Month == month).Sum(x => x.Count);
+
+                return (
+                    GetLocationPoint(stationId, new DateTime(year, month, 1)) *
+                    GetIndustryPoint(fieldId, locationId) *
+                    (landPriceIndex / 100.0d) *
+                    (monthlyTransfer * 1.0 / DateTime.DaysInMonth(year, month))
+                    ) / 10000.0d;
+            }
+        }
+
         public void GetStationScore(int stationId, int locationId, int fieldId)
         {
             using(SSTAAEntities context = DbContextCreator.Create())

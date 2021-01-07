@@ -45,7 +45,7 @@ namespace SSTAA.WinForm
 
         private void SelectTownForm_ClickResultButton(object sender, SelectTownForm.ClickResultButtonEventArgs e)
         {
-            AnnualScoreForm annualScoreForm = new AnnualScoreForm();
+            AnnualScoreForm annualScoreForm = new AnnualScoreForm(e.UpperLocationId, e.FieldId);
             // 이벤트 추가
             ShowChildForm(annualScoreForm);
         }

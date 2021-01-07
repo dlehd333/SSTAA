@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SSTAA.Data
@@ -31,5 +32,16 @@ namespace SSTAA.Data
 
         }
 
+        internal List<Station> GetByUpperLocation(int upperLocationId)
+        {
+            using (var context = DbContextCreator.Create())
+            {
+                var query = from x in context.Stations
+                            where (x.LocationId / 100) == (upperLocationId / 100)
+                            select x;
+
+                return query.ToList();
+            }
+        }
     }
 }
