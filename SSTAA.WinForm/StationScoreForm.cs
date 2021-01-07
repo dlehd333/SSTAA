@@ -44,6 +44,8 @@ namespace SSTAA.WinForm
 
         private void WriteRecommendLable()
         {
+            labelControl2.Text = $"{Model.StationName}" + Environment.NewLine + "평가 상세정보(월별)";
+
             lblRank.Text = $"{Model.Rank}위";
             lblScore.Text = $"{Model.FirstEvaluationScore:0.00}";
 

@@ -84,6 +84,7 @@ namespace SSTAA.WinForm
         private void pictureEdit1_Click(object sender, EventArgs e)
         {
             InitializeButtonColor();
+            OnButtonClicked(-1);
         }
     }
 }

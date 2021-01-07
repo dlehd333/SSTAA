@@ -32,9 +32,8 @@ namespace SSTAA.WinForm
 
             //cbxGu.SelectedIndexChanged += cbxGu_SelectedIndexChanged;
             seoulMapControl1.ButtonClicked += SeoulMapControl1_ButtonClicked;
-            OnClickResultButton();
         }
-        public int districtNumber { get; set; }
+        public int districtNumber { get; set; } = -1;
         private void SeoulMapControl1_ButtonClicked(object sender, SeoulMapControl.ButtonClickedEventArgs e)
         {
             districtNumber = e.DistrictNumber;
@@ -45,6 +44,12 @@ namespace SSTAA.WinForm
 
         private void ResumeGu()
         {
+            if (districtNumber == -1)
+            {
+                lblDisplayStation.Text = "";
+                return;
+            }
+
             List<string> stations = Dao.Station.GetStationNameByGu(districtNumber);
             lblDisplayStation.Text = "해당구 역 현황\n" + Environment.NewLine;
             
@@ -106,13 +111,13 @@ namespace SSTAA.WinForm
 
         private void btnResult_Click(object sender, EventArgs e)
         {
-            if (cbxField.SelectedIndex == -1 || cbxGu.SelectedIndex == -1)
+            if (cbxField.SelectedIndex == -1 || districtNumber == -1)
             {
                 Utility.Mbox("오류", "항목을 선택해 주세요");
                 return;
             }
 
-            OnClickResultButton((cbxGu.SelectedIndex + 1) * 100, cbxField.SelectedIndex + 1);
+            OnClickResultButton(districtNumber, cbxField.SelectedIndex + 1);
         }
     }
 }

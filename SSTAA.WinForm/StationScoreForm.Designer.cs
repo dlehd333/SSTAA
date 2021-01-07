@@ -60,6 +60,7 @@ namespace SSTAA.WinForm
             this.lblScore = new DevExpress.XtraEditors.LabelControl();
             this.lblRank = new DevExpress.XtraEditors.LabelControl();
             this.bgwDataSource = new System.ComponentModel.BackgroundWorker();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).BeginInit();
@@ -98,6 +99,7 @@ namespace SSTAA.WinForm
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 4F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 3F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 2F)});
+            this.tablePanel1.Controls.Add(this.labelControl2);
             this.tablePanel1.Controls.Add(this.chartControl2);
             this.tablePanel1.Controls.Add(this.labelControl1);
             this.tablePanel1.Controls.Add(this.chartControl1);
@@ -148,7 +150,7 @@ namespace SSTAA.WinForm
             this.chartControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartControl2.Name = "chartControl2";
             this.tablePanel1.SetRow(this.chartControl2, 6);
-            this.tablePanel1.SetRowSpan(this.chartControl2, 4);
+            this.tablePanel1.SetRowSpan(this.chartControl2, 5);
             series1.ArgumentDataMember = "Date";
             series1.Name = "07~08승차";
             series1.ValueDataMembersSerializable = "FloationPopulationBySevenToEightOnBoard";
@@ -170,7 +172,7 @@ namespace SSTAA.WinForm
         series2,
         series3,
         series4};
-            this.chartControl2.Size = new System.Drawing.Size(420, 276);
+            this.chartControl2.Size = new System.Drawing.Size(420, 346);
             this.chartControl2.TabIndex = 8;
             // 
             // monthlyEvaluationScoreModelBindingSource
@@ -241,8 +243,8 @@ namespace SSTAA.WinForm
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gridControl1.Name = "gridControl1";
             this.tablePanel1.SetRow(this.gridControl1, 2);
-            this.tablePanel1.SetRowSpan(this.gridControl1, 8);
-            this.gridControl1.Size = new System.Drawing.Size(420, 556);
+            this.tablePanel1.SetRowSpan(this.gridControl1, 9);
+            this.gridControl1.Size = new System.Drawing.Size(420, 626);
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -417,6 +419,24 @@ namespace SSTAA.WinForm
             this.bgwDataSource.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwDataSource_DoWork);
             this.bgwDataSource.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwDataSource_RunWorkerCompleted);
             // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("맑은 고딕", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Appearance.Options.UseTextOptions = true;
+            this.labelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.labelControl2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
+            this.labelControl2.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.tablePanel1.SetColumn(this.labelControl2, 1);
+            this.tablePanel1.SetColumnSpan(this.labelControl2, 4);
+            this.labelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl2.Location = new System.Drawing.Point(27, 17);
+            this.labelControl2.Name = "labelControl2";
+            this.tablePanel1.SetRow(this.labelControl2, 1);
+            this.labelControl2.Size = new System.Drawing.Size(420, 64);
+            this.labelControl2.TabIndex = 9;
+            this.labelControl2.Text = "labelControl2";
+            // 
             // StationScoreForm
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
@@ -471,5 +491,6 @@ namespace SSTAA.WinForm
         private DevExpress.XtraGrid.Columns.GridColumn colMonthlyLandPriceIndex;
         private DevExpress.XtraGrid.Columns.GridColumn colMonthlyEvaluationScore;
         private System.ComponentModel.BackgroundWorker bgwDataSource;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
     }
 }
