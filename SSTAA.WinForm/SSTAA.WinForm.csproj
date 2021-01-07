@@ -161,6 +161,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\SSTAA.Data.AnnualEvaluationScoreModel.datasource" />
+    <None Include="Properties\DataSources\SSTAA.Data.MonthlyEvaluationScoreModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

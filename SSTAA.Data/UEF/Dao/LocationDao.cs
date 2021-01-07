@@ -19,5 +19,13 @@ namespace SSTAA.Data
                 return query.ToList();
             }
         }
+
+        public string GetName(int locationId)
+        {
+            using (var context = DbContextCreator.Create())
+            {
+                return (from x in context.Locations where x.LocationId == locationId select x.Name).FirstOrDefault();
+            }
+        }
     }
 }

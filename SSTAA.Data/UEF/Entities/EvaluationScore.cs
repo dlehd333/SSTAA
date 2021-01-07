@@ -8,6 +8,7 @@ namespace SSTAA.Data
 {
     public class AnnualEvaluationScoreModel
     {
+        public int Rank { get; set; }
         public int StationId { get; set; }
         public string StationName { get; set; }
         public double FirstEvaluationScore { get; set; }
@@ -17,9 +18,9 @@ namespace SSTAA.Data
     }
     public class MonthlyEvaluationScoreModel
     {
-        public DateTime Date { get; }
+        public DateTime Date { get; set; }
         public int FloatingPopulation { get; set; }
-        public double MonthlyLandPriceIndex { get; }
+        public double MonthlyLandPriceIndex { get; set; }
         public double MonthlyEvaluationScore { get; set; }
     }
 }

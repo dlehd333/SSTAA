@@ -18,6 +18,7 @@ namespace SSTAA.WinForm
     {
         public int UpperLocationId { get; set; }
         public int FieldId { get; set; }
+        public LoadingForm LoadingForm { get; set; } = new LoadingForm();
         public AnnualScoreForm()
         {
             InitializeComponent();
@@ -27,6 +28,8 @@ namespace SSTAA.WinForm
         {
             UpperLocationId = upperLocationId;
             FieldId = fieldId;
+            lblViewCategory.Text = "지역구 : " + Dao.Location.GetName(upperLocationId) + Environment.NewLine +
+                "업종 : " + Dao.Field.GetName(fieldId);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -36,7 +39,17 @@ namespace SSTAA.WinForm
             if (DesignMode)
                 return;
 
-            annualEvaluationScoreModelBindingSource.DataSource = Dao.EvaluationScore.GetAnnualEvaluationScoreModels(UpperLocationId, FieldId);
+            bgwDataSource.RunWorkerAsync();
+            LoadingForm.ShowDialog();
+            WriteRecommendLable();
+        }
+
+        private void WriteRecommendLable()
+        {
+            lblViewRank.Text = "";
+            List<AnnualEvaluationScoreModel> models = annualEvaluationScoreModelBindingSource.DataSource as List<AnnualEvaluationScoreModel>;
+            for(int i =0;i < (models.Count >= 5 ? 5 : models.Count); i++)
+                lblViewRank.Text += $"{i + 1}위" + Environment.NewLine + $"{models[i].StationName}" + Environment.NewLine + Environment.NewLine;
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -102,13 +115,23 @@ namespace SSTAA.WinForm
             if (!hitInfo.InRow || hitInfo.RowHandle < 0)
                 return;
 
-            //Model score = view.GetFocusedRow() as Model;
+            AnnualEvaluationScoreModel score = view.GetFocusedRow() as AnnualEvaluationScoreModel;
 
-            //if (score == null)
-            //    return;
+            if (score == null)
+                return;
 
-            //StationScoreForm form = new StationScoreForm(score.stationId);
-            //form.ShowDialog();
+            StationScoreForm form = new StationScoreForm(score.StationId, FieldId, score);
+            form.ShowDialog();
+        }
+
+        private void bgwDataSource_DoWork(object sender, DoWorkEventArgs e)
+        {
+            annualEvaluationScoreModelBindingSource.DataSource = Dao.EvaluationScore.GetAnnualEvaluationScoreModels(UpperLocationId, FieldId);
+        }
+
+        private void bgwDataSource_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            LoadingForm.Close();
         }
     }
 }

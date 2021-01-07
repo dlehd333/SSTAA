@@ -30,8 +30,6 @@ namespace SSTAA.WinForm
             cbxGu.Properties.Items.AddRange(Dao.Location.GetGuName());
 
             cbxGu.SelectedIndexChanged += cbxGu_SelectedIndexChanged;
-
-            //OnClickResultButton();
         }
 
         private void ResumeGu()
@@ -47,10 +45,6 @@ namespace SSTAA.WinForm
             {
                 lblDisplayStation.Text += x + Environment.NewLine;
             }
-
-            //AnnualScoreForm(SelectedGu) 오픈
-
-            //OnClickResultButton();
         }
 
         private void cbxField_SelectedIndexChanged(object sender, EventArgs e)
@@ -95,6 +89,12 @@ namespace SSTAA.WinForm
 
         private void btnResult_Click(object sender, EventArgs e)
         {
+            if (cbxField.SelectedIndex == -1 || cbxGu.SelectedIndex == -1)
+            {
+                Utility.Mbox("오류", "항목을 선택해 주세요");
+                return;
+            }
+
             OnClickResultButton((cbxGu.SelectedIndex + 1) * 100, cbxField.SelectedIndex + 1);
         }
     }
