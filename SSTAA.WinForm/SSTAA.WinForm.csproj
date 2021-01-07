@@ -112,6 +112,12 @@
     <Compile Include="SelectTownForm.Designer.cs">
       <DependentUpon>SelectTownForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SeoulMapControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SeoulMapControl.Designer.cs">
+      <DependentUpon>SeoulMapControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="StationScoreForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +156,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SeoulMapControl.resx">
+      <DependentUpon>SeoulMapControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StationScoreForm.resx">
       <DependentUpon>StationScoreForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,13 +201,16 @@
     <None Include="Resources\동종업 점포비율.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\동종업계점수.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\지역점수조건.JPG" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\평가점수.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\동종업계점수.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\서울시 구별 지도.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
