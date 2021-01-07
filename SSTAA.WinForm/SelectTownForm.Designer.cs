@@ -29,19 +29,17 @@ namespace SSTAA.WinForm
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraMap.GeoMapCoordinateSystem geoMapCoordinateSystem1 = new DevExpress.XtraMap.GeoMapCoordinateSystem();
             this.lblDisplayStation = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.cbxGu = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cbxField = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnResult = new DevExpress.XtraEditors.SimpleButton();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+
+            this.seoulMapControl1 = new SSTAA.WinForm.SeoulMapControl();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.TempMapControl = new DevExpress.XtraMap.MapControl();
-            this.imageLayer1 = new DevExpress.XtraMap.ImageLayer();
-            this.bingMapDataProvider1 = new DevExpress.XtraMap.BingMapDataProvider();
-            ((System.ComponentModel.ISupportInitialize)(this.cbxGu.Properties)).BeginInit();
+
+            
             ((System.ComponentModel.ISupportInitialize)(this.cbxField.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
@@ -57,12 +55,13 @@ namespace SSTAA.WinForm
             this.lblDisplayStation.Appearance.Options.UseFont = true;
             this.lblDisplayStation.Appearance.Options.UseTextOptions = true;
             this.lblDisplayStation.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-            this.tablePanel1.SetColumn(this.lblDisplayStation, 9);
-            this.tablePanel1.SetColumnSpan(this.lblDisplayStation, 3);
             this.lblDisplayStation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblDisplayStation.Location = new System.Drawing.Point(665, 67);
             this.lblDisplayStation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblDisplayStation.Name = "lblDisplayStation";
+
+       
+
             this.tablePanel1.SetRow(this.lblDisplayStation, 2);
             this.tablePanel1.SetRowSpan(this.lblDisplayStation, 7);
             this.lblDisplayStation.Size = new System.Drawing.Size(209, 374);
@@ -78,14 +77,12 @@ namespace SSTAA.WinForm
             this.labelControl2.Appearance.Options.UseTextOptions = true;
             this.labelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelControl2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.tablePanel1.SetColumn(this.labelControl2, 3);
-            this.tablePanel1.SetColumnSpan(this.labelControl2, 4);
             this.labelControl2.ImageOptions.Alignment = System.Drawing.ContentAlignment.BottomLeft;
             this.labelControl2.Location = new System.Drawing.Point(192, 17);
             this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl2.Name = "labelControl2";
-            this.tablePanel1.SetRow(this.labelControl2, 1);
-            this.labelControl2.Size = new System.Drawing.Size(236, 33);
+
+            this.labelControl2.Size = new System.Drawing.Size(300, 40);
             this.labelControl2.TabIndex = 3;
             this.labelControl2.Text = "원하는 구를 선택하세요";
             // 
@@ -102,19 +99,6 @@ namespace SSTAA.WinForm
             this.labelControl3.TabIndex = 4;
             this.labelControl3.Text = "업종 : ";
             // 
-            // cbxGu
-            // 
-            this.tablePanel1.SetColumn(this.cbxGu, 7);
-            this.cbxGu.Location = new System.Drawing.Point(536, 28);
-            this.cbxGu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbxGu.Name = "cbxGu";
-            this.cbxGu.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbxGu.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.tablePanel1.SetRow(this.cbxGu, 1);
-            this.cbxGu.Size = new System.Drawing.Size(80, 20);
-            this.cbxGu.TabIndex = 5;
-            // 
             // cbxField
             // 
             this.tablePanel1.SetColumn(this.cbxField, 10);
@@ -127,7 +111,6 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetRow(this.cbxField, 9);
             this.cbxField.Size = new System.Drawing.Size(80, 20);
             this.cbxField.TabIndex = 6;
-            this.cbxField.SelectedIndexChanged += new System.EventHandler(this.cbxField_SelectedIndexChanged);
             // 
             // btnResult
             // 
@@ -159,11 +142,10 @@ namespace SSTAA.WinForm
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 10F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 10F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 2F)});
+            this.tablePanel1.Controls.Add(this.seoulMapControl1);
             this.tablePanel1.Controls.Add(this.textEdit1);
-            this.tablePanel1.Controls.Add(this.TempMapControl);
             this.tablePanel1.Controls.Add(this.btnResult);
             this.tablePanel1.Controls.Add(this.cbxField);
-            this.tablePanel1.Controls.Add(this.cbxGu);
             this.tablePanel1.Controls.Add(this.labelControl3);
             this.tablePanel1.Controls.Add(this.labelControl2);
             this.tablePanel1.Controls.Add(this.lblDisplayStation);
@@ -187,36 +169,25 @@ namespace SSTAA.WinForm
             this.tablePanel1.Size = new System.Drawing.Size(894, 560);
             this.tablePanel1.TabIndex = 0;
             // 
+
+            // seoulMapControl1
+            // 
+            this.tablePanel1.SetColumn(this.seoulMapControl1, 1);
+            this.tablePanel1.SetColumnSpan(this.seoulMapControl1, 7);
+            this.seoulMapControl1.Location = new System.Drawing.Point(23, 86);
+            this.seoulMapControl1.Name = "seoulMapControl1";
+            this.tablePanel1.SetRow(this.seoulMapControl1, 2);
+            this.tablePanel1.SetRowSpan(this.seoulMapControl1, 8);
+            this.seoulMapControl1.Size = new System.Drawing.Size(681, 546);
+            this.seoulMapControl1.TabIndex = 10;
+            // 
             // textEdit1
             // 
-            this.tablePanel1.SetColumn(this.textEdit1, 10);
-            this.textEdit1.Location = new System.Drawing.Point(708, 28);
-            this.textEdit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textEdit1.Location = new System.Drawing.Point(809, 36);
             this.textEdit1.Name = "textEdit1";
-            this.tablePanel1.SetRow(this.textEdit1, 1);
-            this.textEdit1.Size = new System.Drawing.Size(80, 20);
+            this.textEdit1.Size = new System.Drawing.Size(92, 24);
             this.textEdit1.TabIndex = 9;
-            // 
-            // TempMapControl
-            // 
-            this.TempMapControl.CenterPoint = new DevExpress.XtraMap.GeoPoint(37.5D, 127D);
-            this.tablePanel1.SetColumn(this.TempMapControl, 1);
-            this.tablePanel1.SetColumnSpan(this.TempMapControl, 7);
-            geoMapCoordinateSystem1.CircularScrollingMode = DevExpress.XtraMap.CircularScrollingMode.TilesAndVectorItems;
-            this.TempMapControl.CoordinateSystem = geoMapCoordinateSystem1;
-            this.TempMapControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TempMapControl.Layers.Add(this.imageLayer1);
-            this.TempMapControl.Location = new System.Drawing.Point(20, 67);
-            this.TempMapControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.TempMapControl.Name = "TempMapControl";
-            this.tablePanel1.SetRow(this.TempMapControl, 2);
-            this.tablePanel1.SetRowSpan(this.TempMapControl, 8);
-            this.TempMapControl.Size = new System.Drawing.Size(596, 428);
-            this.TempMapControl.TabIndex = 8;
-            this.TempMapControl.ZoomLevel = 11D;
-            this.imageLayer1.DataProvider = this.bingMapDataProvider1;
-            this.bingMapDataProvider1.BingKey = "AldT8DQXZMZIN37VvXh-4jIb4GaOdsG1ui_Y6S8dAdueZ4s94BmJwkarIOg8R17K";
-            // 
+            //
             // SelectTownForm
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
@@ -229,7 +200,6 @@ namespace SSTAA.WinForm
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SelectTownForm";
             this.Text = "SelectTownForm";
-            ((System.ComponentModel.ISupportInitialize)(this.cbxGu.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxField.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
@@ -245,14 +215,11 @@ namespace SSTAA.WinForm
 
         private DevExpress.XtraEditors.LabelControl lblDisplayStation;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
-        private DevExpress.XtraMap.MapControl TempMapControl;
         private DevExpress.XtraEditors.SimpleButton btnResult;
         private DevExpress.XtraEditors.ComboBoxEdit cbxField;
-        private DevExpress.XtraEditors.ComboBoxEdit cbxGu;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraMap.ImageLayer imageLayer1;
-        private DevExpress.XtraMap.BingMapDataProvider bingMapDataProvider1;
         private DevExpress.XtraEditors.TextEdit textEdit1;
+        private SeoulMapControl seoulMapControl1;
     }
 }

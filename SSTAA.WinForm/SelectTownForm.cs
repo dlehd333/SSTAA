@@ -27,14 +27,25 @@ namespace SSTAA.WinForm
                 return;
 
             cbxField.Properties.Items.AddRange(Dao.Field.GetFieldName());
-            cbxGu.Properties.Items.AddRange(Dao.Location.GetGuName());
+            //cbxGu.Properties.Items.AddRange(Dao.Location.GetGuName());
 
-            cbxGu.SelectedIndexChanged += cbxGu_SelectedIndexChanged;
+
+            //cbxGu.SelectedIndexChanged += cbxGu_SelectedIndexChanged;
+            seoulMapControl1.ButtonClicked += SeoulMapControl1_ButtonClicked;
+            OnClickResultButton();
+        }
+        public int districtNumber { get; set; }
+        private void SeoulMapControl1_ButtonClicked(object sender, SeoulMapControl.ButtonClickedEventArgs e)
+        {
+            districtNumber = e.DistrictNumber;
+            ResumeGu();
+            //MessageBox.Show($"{districtNumber}");
+
         }
 
         private void ResumeGu()
         {
-            List<string> stations = Dao.Station.GetStationNameByGu((cbxGu.SelectedIndex + 1) * 100);
+            List<string> stations = Dao.Station.GetStationNameByGu(districtNumber);
             lblDisplayStation.Text = "해당구 역 현황\n" + Environment.NewLine;
             
             stations.Sort();
@@ -45,17 +56,23 @@ namespace SSTAA.WinForm
             {
                 lblDisplayStation.Text += x + Environment.NewLine;
             }
+
+
+            //AnnualScoreForm(SelectedGu) 오픈
+
+            //OnClickResultButton();
+
         }
 
-        private void cbxField_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Utility.Mbox("알림", $"바뀐 번호는 {cbxField.SelectedIndex + 1}이다");
-        }
-        private void cbxGu_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Utility.Mbox("알림", $"바뀐 번호는 {(cbxGu.SelectedIndex + 1) * 100}이다");
-            ResumeGu();
-        }
+        //private void cbxField_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    Utility.Mbox("알림", $"바뀐 번호는 {cbxField.SelectedIndex + 1}이다");
+        //}
+        //private void cbxGu_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    Utility.Mbox("알림", $"바뀐 번호는 {(cbxGu.SelectedIndex + 1) * 100}이다");
+        //    ResumeGu();
+        //}
 
         #region ClickResultButton event things for C# 3.0
         public event EventHandler<ClickResultButtonEventArgs> ClickResultButton;
