@@ -29,6 +29,7 @@ namespace SSTAA.WinForm
             cbxField.Properties.Items.AddRange(Dao.Field.GetFieldName());
             //cbxGu.Properties.Items.AddRange(Dao.Location.GetGuName());
 
+
             //cbxGu.SelectedIndexChanged += cbxGu_SelectedIndexChanged;
             seoulMapControl1.ButtonClicked += SeoulMapControl1_ButtonClicked;
             OnClickResultButton();
@@ -39,6 +40,7 @@ namespace SSTAA.WinForm
             districtNumber = e.DistrictNumber;
             ResumeGu();
             //MessageBox.Show($"{districtNumber}");
+
         }
 
         private void ResumeGu()
@@ -55,9 +57,11 @@ namespace SSTAA.WinForm
                 lblDisplayStation.Text += x + Environment.NewLine;
             }
 
+
             //AnnualScoreForm(SelectedGu) 오픈
 
             //OnClickResultButton();
+
         }
 
         //private void cbxField_SelectedIndexChanged(object sender, EventArgs e)
@@ -79,9 +83,9 @@ namespace SSTAA.WinForm
                 ClickResultButton(this, e);
         }
 
-        private ClickResultButtonEventArgs OnClickResultButton()
+        private ClickResultButtonEventArgs OnClickResultButton(int upperLocationId, int fieldId)
         {
-            ClickResultButtonEventArgs args = new ClickResultButtonEventArgs();
+            ClickResultButtonEventArgs args = new ClickResultButtonEventArgs(upperLocationId, fieldId);
             OnClickResultButton(args);
 
             return args;
@@ -89,7 +93,26 @@ namespace SSTAA.WinForm
 
         public class ClickResultButtonEventArgs : EventArgs
         {
+            public ClickResultButtonEventArgs() { }
+            public ClickResultButtonEventArgs(int upperLocationId, int fieldId)
+            {
+                UpperLocationId = upperLocationId;
+                FieldId = fieldId;
+            }
+            public int UpperLocationId { get; set; }
+            public int FieldId { get; set; }
         }
         #endregion
+
+        private void btnResult_Click(object sender, EventArgs e)
+        {
+            if (cbxField.SelectedIndex == -1 || cbxGu.SelectedIndex == -1)
+            {
+                Utility.Mbox("오류", "항목을 선택해 주세요");
+                return;
+            }
+
+            OnClickResultButton((cbxGu.SelectedIndex + 1) * 100, cbxField.SelectedIndex + 1);
+        }
     }
 }

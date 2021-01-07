@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SSTAA.Data
@@ -16,6 +17,14 @@ namespace SSTAA.Data
                             select x.Name;
 
                 return query.ToList();
+            }
+        }
+
+        public string GetName(int fieldId)
+        {
+            using(var context = DbContextCreator.Create())
+            {
+                return (from x in context.Fields where x.FieldId == fieldId select x.Name).FirstOrDefault();
             }
         }
     }

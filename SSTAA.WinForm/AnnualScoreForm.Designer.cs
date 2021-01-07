@@ -29,6 +29,14 @@ namespace SSTAA.WinForm
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel1 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
+            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.Series series3 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.Series series4 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.ChartTitle chartTitle1 = new DevExpress.XtraCharts.ChartTitle();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -38,11 +46,26 @@ namespace SSTAA.WinForm
             this.lblViewCategory = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
+            this.annualEvaluationScoreModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.grdScore = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStationName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFirstEvaluationScore = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSecondEvaluationScore = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colThirdEvaluationScore = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colFourthEvaluationScore = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bgwDataSource = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.annualEvaluationScoreModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdScore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
@@ -67,7 +90,6 @@ namespace SSTAA.WinForm
             this.tablePanel1.Controls.Add(this.grdScore);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
-            this.tablePanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 0.75F),
@@ -75,17 +97,18 @@ namespace SSTAA.WinForm
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 1F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 6F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 1.5F)});
-            this.tablePanel1.Size = new System.Drawing.Size(1020, 680);
+            this.tablePanel1.Size = new System.Drawing.Size(892, 529);
             this.tablePanel1.TabIndex = 0;
             // 
             // simpleButton2
             // 
             this.tablePanel1.SetColumn(this.simpleButton2, 3);
             this.tablePanel1.SetColumnSpan(this.simpleButton2, 2);
-            this.simpleButton2.Location = new System.Drawing.Point(870, 625);
+            this.simpleButton2.Location = new System.Drawing.Point(761, 480);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton2.Name = "simpleButton2";
             this.tablePanel1.SetRow(this.simpleButton2, 4);
-            this.simpleButton2.Size = new System.Drawing.Size(96, 23);
+            this.simpleButton2.Size = new System.Drawing.Size(84, 18);
             this.simpleButton2.TabIndex = 8;
             this.simpleButton2.Text = "돌아가기";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
@@ -93,10 +116,11 @@ namespace SSTAA.WinForm
             // simpleButton1
             // 
             this.tablePanel1.SetColumn(this.simpleButton1, 5);
-            this.simpleButton1.Location = new System.Drawing.Point(972, 14);
+            this.simpleButton1.Location = new System.Drawing.Point(850, 11);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.simpleButton1.Name = "simpleButton1";
             this.tablePanel1.SetRow(this.simpleButton1, 0);
-            this.simpleButton1.Size = new System.Drawing.Size(45, 23);
+            this.simpleButton1.Size = new System.Drawing.Size(39, 18);
             this.simpleButton1.TabIndex = 7;
             this.simpleButton1.Text = "안내";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -110,10 +134,11 @@ namespace SSTAA.WinForm
             this.labelControl5.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.labelControl5, 0);
             this.labelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl5.Location = new System.Drawing.Point(3, 55);
+            this.labelControl5.Location = new System.Drawing.Point(3, 42);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl5.Name = "labelControl5";
             this.tablePanel1.SetRow(this.labelControl5, 1);
-            this.labelControl5.Size = new System.Drawing.Size(249, 46);
+            this.labelControl5.Size = new System.Drawing.Size(217, 36);
             this.labelControl5.TabIndex = 6;
             this.labelControl5.Text = "추천 역세권";
             // 
@@ -129,12 +154,12 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetColumn(this.lblViewRank, 3);
             this.tablePanel1.SetColumnSpan(this.lblViewRank, 3);
             this.lblViewRank.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblViewRank.Location = new System.Drawing.Point(872, 178);
-            this.lblViewRank.Margin = new System.Windows.Forms.Padding(5);
+            this.lblViewRank.Location = new System.Drawing.Point(762, 137);
+            this.lblViewRank.Margin = new System.Windows.Forms.Padding(4);
             this.lblViewRank.Name = "lblViewRank";
-            this.lblViewRank.Padding = new System.Windows.Forms.Padding(5);
+            this.lblViewRank.Padding = new System.Windows.Forms.Padding(10);
             this.tablePanel1.SetRow(this.lblViewRank, 3);
-            this.lblViewRank.Size = new System.Drawing.Size(143, 403);
+            this.lblViewRank.Size = new System.Drawing.Size(126, 309);
             this.lblViewRank.TabIndex = 5;
             this.lblViewRank.Text = "lblViewRank";
             // 
@@ -149,11 +174,10 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetColumn(this.labelControl3, 3);
             this.tablePanel1.SetColumnSpan(this.labelControl3, 3);
             this.labelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl3.Location = new System.Drawing.Point(870, 106);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.labelControl3.Location = new System.Drawing.Point(761, 83);
             this.labelControl3.Name = "labelControl3";
             this.tablePanel1.SetRow(this.labelControl3, 2);
-            this.labelControl3.Size = new System.Drawing.Size(147, 60);
+            this.labelControl3.Size = new System.Drawing.Size(128, 47);
             this.labelControl3.TabIndex = 4;
             this.labelControl3.Text = "추천 역세권";
             // 
@@ -167,10 +191,11 @@ namespace SSTAA.WinForm
             this.lblViewCategory.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.lblViewCategory, 1);
             this.lblViewCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblViewCategory.Location = new System.Drawing.Point(258, 55);
+            this.lblViewCategory.Location = new System.Drawing.Point(226, 42);
+            this.lblViewCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblViewCategory.Name = "lblViewCategory";
             this.tablePanel1.SetRow(this.lblViewCategory, 1);
-            this.lblViewCategory.Size = new System.Drawing.Size(249, 46);
+            this.lblViewCategory.Size = new System.Drawing.Size(217, 36);
             this.lblViewCategory.TabIndex = 3;
             this.lblViewCategory.Text = "lblViewCategory";
             // 
@@ -183,10 +208,11 @@ namespace SSTAA.WinForm
             this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.labelControl1, 0);
             this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl1.Location = new System.Drawing.Point(3, 3);
+            this.labelControl1.Location = new System.Drawing.Point(3, 2);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl1.Name = "labelControl1";
             this.tablePanel1.SetRow(this.labelControl1, 0);
-            this.labelControl1.Size = new System.Drawing.Size(249, 46);
+            this.labelControl1.Size = new System.Drawing.Size(217, 36);
             this.labelControl1.TabIndex = 2;
             this.labelControl1.Text = "연도별 평가점수 기준";
             // 
@@ -194,27 +220,74 @@ namespace SSTAA.WinForm
             // 
             this.chartControl1.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
             this.tablePanel1.SetColumn(this.chartControl1, 2);
+            this.chartControl1.DataSource = this.annualEvaluationScoreModelBindingSource;
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl1.Diagram = xyDiagram1;
             this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartControl1.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Center;
+            this.chartControl1.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.TopOutside;
+            this.chartControl1.Legend.Border.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            this.chartControl1.Legend.Direction = DevExpress.XtraCharts.LegendDirection.LeftToRight;
             this.chartControl1.Legend.Name = "Default Legend";
-            this.chartControl1.Location = new System.Drawing.Point(513, 107);
+            this.chartControl1.Location = new System.Drawing.Point(449, 82);
+            this.chartControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartControl1.Name = "chartControl1";
             this.tablePanel1.SetRow(this.chartControl1, 2);
             this.tablePanel1.SetRowSpan(this.chartControl1, 2);
-            this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartControl1.Size = new System.Drawing.Size(351, 476);
+            series1.ArgumentDataMember = "StationName";
+            series1.CrosshairLabelPattern = "{S}:{V:0.00}";
+            series1.FilterString = "[Rank] <= 5";
+            sideBySideBarSeriesLabel1.TextPattern = "{A}:{V:0.00}";
+            series1.Label = sideBySideBarSeriesLabel1;
+            series1.Name = "2017";
+            series1.ValueDataMembersSerializable = "FirstEvaluationScore";
+            series2.ArgumentDataMember = "StationName";
+            series2.CrosshairLabelPattern = "{S}:{V:0.00}";
+            series2.FilterString = "[Rank] <= 5";
+            series2.Name = "2018";
+            series2.ValueDataMembersSerializable = "SecondEvaluationScore";
+            series3.ArgumentDataMember = "StationName";
+            series3.CrosshairLabelPattern = "{S}:{V:0.00}";
+            series3.FilterString = "[Rank] <= 5";
+            series3.Name = "2019";
+            series3.ValueDataMembersSerializable = "ThirdEvaluationScore";
+            series4.ArgumentDataMember = "StationName";
+            series4.CrosshairLabelPattern = "{S}:{V:0.00}";
+            series4.FilterString = "[Rank] <= 5";
+            series4.Name = "2020";
+            series4.ValueDataMembersSerializable = "FourthEvaluationScore";
+            this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
+        series1,
+        series2,
+        series3,
+        series4};
+            this.chartControl1.Size = new System.Drawing.Size(306, 366);
             this.chartControl1.TabIndex = 1;
+            chartTitle1.Alignment = System.Drawing.StringAlignment.Near;
+            chartTitle1.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            chartTitle1.Text = "연도별 평가점수(3년) 및 기대점수";
+            this.chartControl1.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle1});
+            // 
+            // annualEvaluationScoreModelBindingSource
+            // 
+            this.annualEvaluationScoreModelBindingSource.DataSource = typeof(SSTAA.Data.AnnualEvaluationScoreModel);
             // 
             // grdScore
             // 
             this.tablePanel1.SetColumn(this.grdScore, 0);
             this.tablePanel1.SetColumnSpan(this.grdScore, 2);
+            this.grdScore.DataSource = this.annualEvaluationScoreModelBindingSource;
             this.grdScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdScore.Location = new System.Drawing.Point(3, 107);
+            this.grdScore.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grdScore.Location = new System.Drawing.Point(3, 82);
             this.grdScore.MainView = this.gridView1;
+            this.grdScore.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdScore.Name = "grdScore";
             this.tablePanel1.SetRow(this.grdScore, 2);
             this.tablePanel1.SetRowSpan(this.grdScore, 2);
-            this.grdScore.Size = new System.Drawing.Size(504, 476);
+            this.grdScore.Size = new System.Drawing.Size(440, 366);
             this.grdScore.TabIndex = 0;
             this.grdScore.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -222,24 +295,114 @@ namespace SSTAA.WinForm
             // 
             // gridView1
             // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.colStationName,
+            this.colFirstEvaluationScore,
+            this.colSecondEvaluationScore,
+            this.colThirdEvaluationScore,
+            this.colFourthEvaluationScore});
+            this.gridView1.DetailHeight = 272;
             this.gridView1.GridControl = this.grdScore;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.ReadOnly = true;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "순위";
+            this.gridColumn1.FieldName = "Rank";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.AllowEdit = false;
+            this.gridColumn1.OptionsColumn.AllowMove = false;
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // colStationName
+            // 
+            this.colStationName.Caption = "역명";
+            this.colStationName.FieldName = "StationName";
+            this.colStationName.Name = "colStationName";
+            this.colStationName.OptionsColumn.AllowEdit = false;
+            this.colStationName.OptionsColumn.AllowMove = false;
+            this.colStationName.Visible = true;
+            this.colStationName.VisibleIndex = 1;
+            this.colStationName.Width = 66;
+            // 
+            // colFirstEvaluationScore
+            // 
+            this.colFirstEvaluationScore.DisplayFormat.FormatString = "0.00";
+            this.colFirstEvaluationScore.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.colFirstEvaluationScore.FieldName = "FirstEvaluationScore";
+            this.colFirstEvaluationScore.Name = "colFirstEvaluationScore";
+            this.colFirstEvaluationScore.OptionsColumn.AllowEdit = false;
+            this.colFirstEvaluationScore.OptionsColumn.AllowMove = false;
+            this.colFirstEvaluationScore.Visible = true;
+            this.colFirstEvaluationScore.VisibleIndex = 2;
+            this.colFirstEvaluationScore.Width = 66;
+            // 
+            // colSecondEvaluationScore
+            // 
+            this.colSecondEvaluationScore.DisplayFormat.FormatString = "0.00";
+            this.colSecondEvaluationScore.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.colSecondEvaluationScore.FieldName = "SecondEvaluationScore";
+            this.colSecondEvaluationScore.Name = "colSecondEvaluationScore";
+            this.colSecondEvaluationScore.OptionsColumn.AllowEdit = false;
+            this.colSecondEvaluationScore.OptionsColumn.AllowMove = false;
+            this.colSecondEvaluationScore.Visible = true;
+            this.colSecondEvaluationScore.VisibleIndex = 3;
+            this.colSecondEvaluationScore.Width = 66;
+            // 
+            // colThirdEvaluationScore
+            // 
+            this.colThirdEvaluationScore.DisplayFormat.FormatString = "0.00";
+            this.colThirdEvaluationScore.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.colThirdEvaluationScore.FieldName = "ThirdEvaluationScore";
+            this.colThirdEvaluationScore.Name = "colThirdEvaluationScore";
+            this.colThirdEvaluationScore.OptionsColumn.AllowEdit = false;
+            this.colThirdEvaluationScore.OptionsColumn.AllowMove = false;
+            this.colThirdEvaluationScore.Visible = true;
+            this.colThirdEvaluationScore.VisibleIndex = 4;
+            this.colThirdEvaluationScore.Width = 66;
+            // 
+            // colFourthEvaluationScore
+            // 
+            this.colFourthEvaluationScore.DisplayFormat.FormatString = "0.00";
+            this.colFourthEvaluationScore.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.colFourthEvaluationScore.FieldName = "FourthEvaluationScore";
+            this.colFourthEvaluationScore.Name = "colFourthEvaluationScore";
+            this.colFourthEvaluationScore.OptionsColumn.AllowEdit = false;
+            this.colFourthEvaluationScore.OptionsColumn.AllowMove = false;
+            this.colFourthEvaluationScore.Visible = true;
+            this.colFourthEvaluationScore.VisibleIndex = 5;
+            this.colFourthEvaluationScore.Width = 66;
+            // 
+            // bgwDataSource
+            // 
+            this.bgwDataSource.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwDataSource_DoWork);
+            this.bgwDataSource.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwDataSource_RunWorkerCompleted);
             // 
             // AnnualScoreForm
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 680);
+            this.ClientSize = new System.Drawing.Size(892, 529);
             this.Controls.Add(this.tablePanel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AnnualScoreForm";
             this.Text = "AnnualScoreForm";
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.annualEvaluationScoreModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdScore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
@@ -259,5 +422,13 @@ namespace SSTAA.WinForm
         private DevExpress.XtraCharts.ChartControl chartControl1;
         private DevExpress.XtraGrid.GridControl grdScore;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private System.Windows.Forms.BindingSource annualEvaluationScoreModelBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colStationName;
+        private DevExpress.XtraGrid.Columns.GridColumn colFirstEvaluationScore;
+        private DevExpress.XtraGrid.Columns.GridColumn colSecondEvaluationScore;
+        private DevExpress.XtraGrid.Columns.GridColumn colThirdEvaluationScore;
+        private DevExpress.XtraGrid.Columns.GridColumn colFourthEvaluationScore;
+        private System.ComponentModel.BackgroundWorker bgwDataSource;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

@@ -8,11 +8,19 @@ namespace SSTAA.Data
     {
         internal FootTrafficDao() { }
 
-        internal List<FootTraffic> GetByStationAndMonth(int stationId, DateTime month)
+        public List<FootTraffic> GetByStationAndMonth(int stationId, DateTime month)
         {
             using(SSTAAEntities context = DbContextCreator.Create())
             {
                 return context.FootTraffics.Where(x => x.StationId == stationId && x.Date.Year == month.Year && x.Date.Month == month.Month).ToList();
+            }
+        }
+
+        public List<FootTraffic> GetByStation(int stationId)
+        {
+            using(var context = DbContextCreator.Create())
+            {
+                return context.FootTraffics.Where(x => x.StationId == stationId).ToList();
             }
         }
     }
