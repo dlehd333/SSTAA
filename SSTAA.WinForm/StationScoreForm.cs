@@ -30,6 +30,13 @@ namespace SSTAA.WinForm
             lblScore.Text = $"{model.FirstEvaluationScore:0.00}";
 
             monthlyEvaluationScoreModelBindingSource.DataSource = Dao.EvaluationScore.GetMonthlyEvaluationScoreModels(StationId, FieldId);
+
+            labelControl1.Text = $"{model.StationName}" + Environment.NewLine + "기대점수";
+        }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

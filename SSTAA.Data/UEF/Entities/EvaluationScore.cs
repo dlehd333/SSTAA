@@ -20,6 +20,10 @@ namespace SSTAA.Data
     {
         public DateTime Date { get; set; }
         public int FloatingPopulation { get; set; }
+        public int FloationPopulationBySevenToEightOnBoard { get; set; }
+        public int FloationPopulationBySevenToEightOffBoard { get; set; }
+        public int FloationPopulationByEighteenToNineteenOnBoard { get; set; }
+        public int FloationPopulationByEighteenToNineteenOffBoard { get; set; }
         public double MonthlyLandPriceIndex { get; set; }
         public double MonthlyEvaluationScore { get; set; }
     }

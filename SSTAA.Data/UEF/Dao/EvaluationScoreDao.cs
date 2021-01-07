@@ -279,8 +279,6 @@ namespace SSTAA.Data
             //                  IndustryScore = 1
             //    -----------------------------------------------------------------------------------------------------------------------------------------
             #endregion
-            
-            return null;
         }
 
         public List<MonthlyEvaluationScoreModel> GetMonthlyEvaluationScoreModels(int stationId, int fieldId)
@@ -295,9 +293,21 @@ namespace SSTAA.Data
             {
                 MonthlyEvaluationScoreModel model = new MonthlyEvaluationScoreModel();
                 model.Date = month[i];
-                model.FloatingPopulation = footTraffics.Where(x => x.StationId == stationId && x.Date.Year == month[i].Year && x.Date.Month == month[i].Month).Sum(x => x.Count);
+                model.FloatingPopulation = footTraffics.Where(x => x.Date.Year == month[i].Year && x.Date.Month == month[i].Month).Sum(x => x.Count);
+
+                model.FloationPopulationBySevenToEightOnBoard = footTraffics.Where(x => x.Date.Year == month[i].Year && x.Date.Month == month[i].Month && x.TimetableId == 3 && x.IsOnBoard).Sum(x => x.Count);
+                model.FloationPopulationBySevenToEightOffBoard = footTraffics.Where(x => x.Date.Year == month[i].Year && x.Date.Month == month[i].Month && x.TimetableId == 3 && !x.IsOnBoard).Sum(x => x.Count);
+                model.FloationPopulationByEighteenToNineteenOnBoard = footTraffics.Where(x => x.Date.Year == month[i].Year && x.Date.Month == month[i].Month && x.TimetableId == 14 && x.IsOnBoard).Sum(x => x.Count);
+                model.FloationPopulationByEighteenToNineteenOffBoard = footTraffics.Where(x => x.Date.Year == month[i].Year && x.Date.Month == month[i].Month && x.TimetableId == 14 && !x.IsOnBoard).Sum(x => x.Count);
+
                 model.MonthlyLandPriceIndex = (double)landPriceIndices.Where(x => x.Month.Year == month[i].Year && x.Month.Month == month[i].Month).Select(x => x.Index).FirstOrDefault();
-                model.MonthlyEvaluationScore = (GetLocationPoint2(footTraffics, stationId, month[i]) * GetIndustryPoint(fieldId, station.LocationId) * model.MonthlyLandPriceIndex * (model.FloatingPopulation * 1.0 / DateTime.DaysInMonth(month[i].Year, month[i].Month))) / 10000.0d;
+                model.MonthlyEvaluationScore = (
+                    GetLocationPoint(stationId, new DateTime(month[i].Year, month[i].Month, 1)) *
+                    GetIndustryPoint(fieldId, station.LocationId) *
+                    (model.MonthlyLandPriceIndex / 100.0d) *
+                    (model.FloatingPopulation * 1.0 / DateTime.DaysInMonth(month[i].Year, month[i].Month))
+                    ) / 10000.0d;
+
                 models.Add(model);
             }
 
