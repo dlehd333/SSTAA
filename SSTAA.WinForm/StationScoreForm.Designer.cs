@@ -128,6 +128,7 @@ namespace SSTAA.WinForm
             // 
             // labelControl2
             // 
+
             this.labelControl2.Appearance.Font = new System.Drawing.Font("맑은 고딕", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseTextOptions = true;
@@ -260,6 +261,7 @@ namespace SSTAA.WinForm
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gridControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gridControl1_MouseMove);
             // 
             // gridView1
             // 
