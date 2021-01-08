@@ -40,7 +40,7 @@ namespace SSTAA.WinForm
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(311, 273);
+            this.labelControl1.Location = new System.Drawing.Point(311, 303);
             this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(433, 120);
@@ -52,7 +52,7 @@ namespace SSTAA.WinForm
             this.labelControl2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Georgia", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(320, 405);
+            this.labelControl2.Location = new System.Drawing.Point(320, 435);
             this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(414, 30);
@@ -66,7 +66,7 @@ namespace SSTAA.WinForm
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1022, 720);
+            this.ClientSize = new System.Drawing.Size(1022, 780);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

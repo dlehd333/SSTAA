@@ -49,6 +49,7 @@ namespace SSTAA.WinForm
             lblRank.Text = $"{Model.Rank}위";
             lblScore.Text = $"{Model.FirstEvaluationScore:0.00}";
 
+            //lblStationExp.Text = $"{Model.StationName}";
             labelControl1.Text = $"{Model.StationName}" + Environment.NewLine + "기대점수";
         }
 
