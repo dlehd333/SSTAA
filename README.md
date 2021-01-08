@@ -14,7 +14,7 @@
 
 # 주요 기능
 
-## 출력 기능
+## 출력 기능(SSTAA.WinForm)
 
 ### 추천상권을 보고싶은 구 선택(서울시)
 
@@ -54,7 +54,7 @@
 
 - 지하철역 더블클릭시 해당역 세부내역 출력
 
-## 평가점수 계산식
+### 평가점수 계산식
  
 <div>
 <a href="./Document/screen/수식안내.png" target="_blank">
@@ -64,15 +64,15 @@
 
 - 해당내용 [Issue #7](https://github.com/dlehd333/SSTAA/issues/7) 참고
 
-## 입력 기능
+## 입력 기능(SSTAA.Import)
 
-- Excel(.xls).csv 파일 DB 저장 기능
-
-<a href="./Document/주요기능/파일임포터.jpg" target="_blank">
-<img src="./Document/주요기능/파일임포터.jpg" width="32%">
+<a href="./Document/screen/파일임포터.png" target="_blank">
+<img src="./Document/screen/파일임포터.png" width="32%">
 </a>
 
-- 해당 형식의 파일 선택 후 서버(DB)에 저장 가능
+- csv 파일을 DB에 저장하는 기능 구현
+- Entity에 맞는 형식의 파일 선택 기능, 서버(DB)에 저장하는 기능으로 나뉜다
+- 작업을 위해서만 사용(범용으로 사용하기 어려움)
 
 # 사용 기술
 
@@ -101,29 +101,32 @@
 - Microsoft SQL Server Management Studio v18.6
 
 # 데이터베이스 스키마
-![D B스키마](Document/DBSchema.png)
+
+![DB스키마](./Document/DBSchema.png)
 
 - 모든 항목이 제 3 정규화까지 완료됐다
 
 # 유저 케이스 다이어그램
-![유저다이어그램](Document/유저다이어그램.png)
+
+![유저다이어그램](./Document/유저다이어그램.png)
 
 
 # 플로우차트
-![플로우차트](Document/플로우차트.png)
+
+![플로우차트](./Document/플로우차트.png)
 
 
 # 클래스 다이어그램
 
 ## DAO(Data Access Object)
 
-
+![클래스다이어그램](./Documnet/클래스다이어그램.png)
 
 # 시퀸스 다이어그램
 
-## 여객 수입 시퀸스
+## 평가점수 계산 시퀸스
 
-
+![시퀸스다이어그램](./Document/시퀸스다이어그램.png)
 
 # Point of Interest
 
