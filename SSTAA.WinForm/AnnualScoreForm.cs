@@ -1,4 +1,7 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Utils;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using System;
@@ -11,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SSTAA.Data;
+
 
 namespace SSTAA.WinForm
 {
@@ -42,6 +46,7 @@ namespace SSTAA.WinForm
             bgwDataSource.RunWorkerAsync();
             LoadingForm.ShowDialog();
             WriteRecommendLable();
+
         }
 
         private void WriteRecommendLable()
@@ -132,6 +137,82 @@ namespace SSTAA.WinForm
         private void bgwDataSource_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             LoadingForm.Close();
+        }
+
+        
+        //퉅팁 테스트 구간
+        private string[] columnToolTipArray = new string[]
+        {
+            "순위",
+            "",
+            "first evaluation score",
+            "second evaluation score",
+            "",
+            "fourth evaluation score"
+        };
+
+        //셀 툴팁
+        private string GetCellToolTip (GridView gridView, int rowHandle, GridColumn sourceColumn)
+        {
+            string toolTip = gridView.GetRowCellDisplayText(rowHandle, sourceColumn);
+
+            foreach (GridColumn column in gridView.Columns)
+            {
+                if (column.VisibleIndex < 0)
+                {
+                    toolTip += string.Format
+                    (
+                        "\r\n {0}: {1}",
+                        column.GetTextCaption(),
+                        gridView.GetRowCellDisplayText(rowHandle, sourceColumn)
+                    );
+                }
+            }
+            return toolTip;
+        }
+
+        //컬럼 툴팁
+        private string GetColumnToolTip(GridView gridView, GridColumn sourceColumn)
+        {
+            string toolTip = this.columnToolTipArray[gridView.Columns.IndexOf(sourceColumn)];
+
+            if (toolTip == "")
+                toolTip = sourceColumn.GetTextCaption();
+
+            return toolTip;
+        }
+
+        //툴팁 이벤트
+        private void toolTipController1_GetActiveObjectInfo(object sender,
+ToolTipControllerGetActiveObjectInfoEventArgs e)
+        {
+            if (e.SelectedControl != grdScore) return;
+
+            ToolTipControlInfo toolTipInfo = null;
+
+            try
+            {
+                GridView gridView = grdScore.GetViewAt(e.ControlMousePosition) as GridView;
+
+                if (gridView == null)
+                    return;
+
+                GridHitInfo gridHitInfo = gridView.CalcHitInfo(e.ControlMousePosition);
+
+                if (gridHitInfo.InRowCell)
+                {
+                    toolTipInfo = new ToolTipControlInfo
+                    (
+                        new CellToolTipInfo(gridHitInfo.RowHandle, gridHitInfo.Column, "셀"), GetCellToolTip(gridView, gridHitInfo.RowHandle, gridHitInfo.Column)
+                    );
+                    return;
+                }
+            }
+            
+            finally
+            {
+                e.Info = toolTipInfo;
+            }
         }
     }
 }
