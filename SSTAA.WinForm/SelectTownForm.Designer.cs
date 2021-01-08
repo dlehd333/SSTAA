@@ -193,7 +193,7 @@ namespace SSTAA.WinForm
             this.imageLayer1.DataProvider = this.bingMapDataProvider1;
             this.bingMapDataProvider1.BingKey = "Ajpgpwdlqkf9o_r7GaID0kgX3FEOrhBQYLBVC62hdzkfP0Ekn-Mv8NrNJW8q9bzC";
             this.vectorItemsLayer1.Data = this.shapefileDataAdapter1;
-            this.shapefileDataAdapter1.FileUri = new System.Uri("C:\\leedonghee\\SSTAA\\ActualResources\\TL_SCCO_SIG_W_SHP\\TL_SCCO_SIG_W.shp", System.UriKind.Absolute);
+            //this.shapefileDataAdapter1.FileUri = new System.Uri("C:\\leedonghee\\SSTAA\\ActualResources\\TL_SCCO_SIG_W_SHP\\TL_SCCO_SIG_W.shp", System.UriKind.Absolute);
             // 
             // SelectTownForm
             // 
