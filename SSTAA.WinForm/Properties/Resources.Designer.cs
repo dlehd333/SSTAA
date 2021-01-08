@@ -71,6 +71,46 @@ namespace SSTAA.WinForm.Properties {
         }
         
         /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] TL_SCCO_SIG_W {
+            get {
+                object obj = ResourceManager.GetObject("TL_SCCO_SIG_W", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] TL_SCCO_SIG_W1 {
+            get {
+                object obj = ResourceManager.GetObject("TL_SCCO_SIG_W1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] TL_SCCO_SIG_W2 {
+            get {
+                object obj = ResourceManager.GetObject("TL_SCCO_SIG_W2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] TL_SCCO_SIG_W3 {
+            get {
+                object obj = ResourceManager.GetObject("TL_SCCO_SIG_W3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static System.Drawing.Bitmap 동종업_점포비율 {

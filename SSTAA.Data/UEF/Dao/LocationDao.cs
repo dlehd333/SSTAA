@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SSTAA.Data
@@ -25,6 +26,14 @@ namespace SSTAA.Data
             using (var context = DbContextCreator.Create())
             {
                 return (from x in context.Locations where x.LocationId == locationId select x.Name).FirstOrDefault();
+            }
+        }
+
+        public List<Location> GetByGu()
+        {
+            using (var context = DbContextCreator.Create())
+            {
+                return context.Locations.Where(x => x.UpperId == null).ToList();
             }
         }
     }

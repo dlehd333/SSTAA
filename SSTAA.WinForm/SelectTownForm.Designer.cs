@@ -35,10 +35,15 @@ namespace SSTAA.WinForm
             this.cbxField = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnResult = new DevExpress.XtraEditors.SimpleButton();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.seoulMapControl1 = new SSTAA.WinForm.SeoulMapControl();
+            this.mapControl1 = new DevExpress.XtraMap.MapControl();
+            this.imageLayer1 = new DevExpress.XtraMap.ImageLayer();
+            this.bingMapDataProvider1 = new DevExpress.XtraMap.BingMapDataProvider();
+            this.vectorItemsLayer1 = new DevExpress.XtraMap.VectorItemsLayer();
+            this.shapefileDataAdapter1 = new DevExpress.XtraMap.ShapefileDataAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.cbxField.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mapControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblDisplayStation
@@ -53,12 +58,13 @@ namespace SSTAA.WinForm
             this.tablePanel1.SetColumn(this.lblDisplayStation, 9);
             this.tablePanel1.SetColumnSpan(this.lblDisplayStation, 3);
             this.lblDisplayStation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDisplayStation.Location = new System.Drawing.Point(730, 93);
+            this.lblDisplayStation.Location = new System.Drawing.Point(639, 72);
+            this.lblDisplayStation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblDisplayStation.Name = "lblDisplayStation";
-            this.lblDisplayStation.Padding = new System.Windows.Forms.Padding(11, 13, 11, 13);
+            this.lblDisplayStation.Padding = new System.Windows.Forms.Padding(10);
             this.tablePanel1.SetRow(this.lblDisplayStation, 2);
             this.tablePanel1.SetRowSpan(this.lblDisplayStation, 7);
-            this.lblDisplayStation.Size = new System.Drawing.Size(269, 519);
+            this.lblDisplayStation.Size = new System.Drawing.Size(235, 402);
             this.lblDisplayStation.TabIndex = 1;
             // 
             // labelControl2
@@ -71,9 +77,10 @@ namespace SSTAA.WinForm
             this.labelControl2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelControl2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.labelControl2.ImageOptions.Alignment = System.Drawing.ContentAlignment.BottomLeft;
-            this.labelControl2.Location = new System.Drawing.Point(219, 22);
+            this.labelControl2.Location = new System.Drawing.Point(192, 17);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(343, 51);
+            this.labelControl2.Size = new System.Drawing.Size(300, 40);
             this.labelControl2.TabIndex = 3;
             this.labelControl2.Text = "원하는 구를 선택하세요";
             // 
@@ -85,23 +92,25 @@ namespace SSTAA.WinForm
             this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.tablePanel1.SetColumn(this.labelControl3, 9);
-            this.labelControl3.Location = new System.Drawing.Point(730, 628);
+            this.labelControl3.Location = new System.Drawing.Point(639, 487);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl3.Name = "labelControl3";
             this.tablePanel1.SetRow(this.labelControl3, 9);
-            this.labelControl3.Size = new System.Drawing.Size(62, 41);
+            this.labelControl3.Size = new System.Drawing.Size(54, 32);
             this.labelControl3.TabIndex = 4;
             this.labelControl3.Text = "업종 : ";
             // 
             // cbxField
             // 
             this.tablePanel1.SetColumn(this.cbxField, 10);
-            this.cbxField.Location = new System.Drawing.Point(809, 640);
+            this.cbxField.Location = new System.Drawing.Point(708, 495);
+            this.cbxField.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxField.Name = "cbxField";
             this.cbxField.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbxField.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.tablePanel1.SetRow(this.cbxField, 9);
-            this.cbxField.Size = new System.Drawing.Size(92, 24);
+            this.cbxField.Size = new System.Drawing.Size(80, 20);
             this.cbxField.TabIndex = 6;
             // 
             // btnResult
@@ -109,10 +118,11 @@ namespace SSTAA.WinForm
             this.btnResult.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnResult.Appearance.Options.UseFont = true;
             this.tablePanel1.SetColumn(this.btnResult, 11);
-            this.btnResult.Location = new System.Drawing.Point(907, 637);
+            this.btnResult.Location = new System.Drawing.Point(794, 493);
+            this.btnResult.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnResult.Name = "btnResult";
             this.tablePanel1.SetRow(this.btnResult, 9);
-            this.btnResult.Size = new System.Drawing.Size(92, 30);
+            this.btnResult.Size = new System.Drawing.Size(80, 23);
             this.btnResult.TabIndex = 7;
             this.btnResult.Text = "결과보기";
             this.btnResult.Click += new System.EventHandler(this.btnResult_Click);
@@ -135,7 +145,7 @@ namespace SSTAA.WinForm
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 10F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 10F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 2F)});
-            this.tablePanel1.Controls.Add(this.seoulMapControl1);
+            this.tablePanel1.Controls.Add(this.mapControl1);
             this.tablePanel1.Controls.Add(this.btnResult);
             this.tablePanel1.Controls.Add(this.cbxField);
             this.tablePanel1.Controls.Add(this.labelControl3);
@@ -143,6 +153,7 @@ namespace SSTAA.WinForm
             this.tablePanel1.Controls.Add(this.lblDisplayStation);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePanel1.Location = new System.Drawing.Point(0, 0);
+            this.tablePanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 2F),
@@ -157,35 +168,50 @@ namespace SSTAA.WinForm
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 10F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 10F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 2F)});
-            this.tablePanel1.Size = new System.Drawing.Size(1022, 780);
+            this.tablePanel1.Size = new System.Drawing.Size(894, 607);
             this.tablePanel1.TabIndex = 0;
             // 
-            // seoulMapControl1
+            // mapControl1
             // 
-            this.tablePanel1.SetColumn(this.seoulMapControl1, 1);
-            this.tablePanel1.SetColumnSpan(this.seoulMapControl1, 7);
-            this.seoulMapControl1.Location = new System.Drawing.Point(23, 115);
-            this.seoulMapControl1.Name = "seoulMapControl1";
-            this.tablePanel1.SetRow(this.seoulMapControl1, 2);
-            this.tablePanel1.SetRowSpan(this.seoulMapControl1, 8);
-            this.seoulMapControl1.Size = new System.Drawing.Size(681, 550);
-            this.seoulMapControl1.TabIndex = 10;
+            this.tablePanel1.SetColumn(this.mapControl1, 1);
+            this.tablePanel1.SetColumnSpan(this.mapControl1, 7);
+            this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mapControl1.EnableRotation = false;
+            this.mapControl1.EnableScrolling = false;
+            this.mapControl1.EnableZooming = false;
+            this.mapControl1.Layers.Add(this.imageLayer1);
+            this.mapControl1.Layers.Add(this.vectorItemsLayer1);
+            this.mapControl1.Location = new System.Drawing.Point(20, 73);
+            this.mapControl1.Name = "mapControl1";
+            this.mapControl1.NavigationPanelOptions.Visible = false;
+            this.tablePanel1.SetRow(this.mapControl1, 2);
+            this.tablePanel1.SetRowSpan(this.mapControl1, 8);
+            this.mapControl1.Size = new System.Drawing.Size(596, 458);
+            this.mapControl1.TabIndex = 8;
+            this.mapControl1.SelectionChanged += new DevExpress.XtraMap.MapSelectionChangedEventHandler(this.mapControl1_SelectionChanged);
+            this.mapControl1.MapItemClick += new DevExpress.XtraMap.MapItemClickEventHandler(this.mapControl1_MapItemClick);
+            this.imageLayer1.DataProvider = this.bingMapDataProvider1;
+            this.bingMapDataProvider1.BingKey = "Ajpgpwdlqkf9o_r7GaID0kgX3FEOrhBQYLBVC62hdzkfP0Ekn-Mv8NrNJW8q9bzC";
+            this.vectorItemsLayer1.Data = this.shapefileDataAdapter1;
+            this.shapefileDataAdapter1.FileUri = new System.Uri("C:\\leedonghee\\SSTAA\\ActualResources\\TL_SCCO_SIG_W_SHP\\TL_SCCO_SIG_W.shp", System.UriKind.Absolute);
             // 
             // SelectTownForm
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1022, 780);
+            this.ClientSize = new System.Drawing.Size(894, 607);
             this.Controls.Add(this.tablePanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SelectTownForm";
             this.Text = "SelectTownForm";
             ((System.ComponentModel.ISupportInitialize)(this.cbxField.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mapControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,6 +225,10 @@ namespace SSTAA.WinForm
         private DevExpress.XtraEditors.ComboBoxEdit cbxField;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private SeoulMapControl seoulMapControl1;
+        private DevExpress.XtraMap.MapControl mapControl1;
+        private DevExpress.XtraMap.ImageLayer imageLayer1;
+        private DevExpress.XtraMap.BingMapDataProvider bingMapDataProvider1;
+        private DevExpress.XtraMap.VectorItemsLayer vectorItemsLayer1;
+        private DevExpress.XtraMap.ShapefileDataAdapter shapefileDataAdapter1;
     }
 }

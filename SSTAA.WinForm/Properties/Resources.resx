@@ -121,6 +121,18 @@
   <data name="loading" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loading.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TL_SCCO_SIG_W" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TL_SCCO_SIG_W.shp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TL_SCCO_SIG_W1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TL_SCCO_SIG_W.dbf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TL_SCCO_SIG_W2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TL_SCCO_SIG_W.prj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TL_SCCO_SIG_W3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TL_SCCO_SIG_W.shx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="동종업_점포비율" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\동종업 점포비율.JPG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
