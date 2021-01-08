@@ -81,7 +81,7 @@ namespace SSTAA.WinForm
             this.xtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(778, 450);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(778, 580);
             this.xtraScrollableControl1.TabIndex = 3;
             // 
             // label11
@@ -276,7 +276,7 @@ namespace SSTAA.WinForm
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 450);
+            this.ClientSize = new System.Drawing.Size(778, 580);
             this.Controls.Add(this.xtraScrollableControl1);
             this.MaximumSize = new System.Drawing.Size(780, 1000);
             this.MinimumSize = new System.Drawing.Size(780, 490);
