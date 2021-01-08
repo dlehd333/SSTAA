@@ -1,4 +1,4 @@
-# SSTAA : Subway Station Trading
+# SSTAA : Subway Station Trading Area Analysis
 # 개요
 
 - C# .NET Framework와 EntityFramework 및 DevExpress를 이용해 서울시 내 각 구별 상권분석용 프로그램을 개발하였다.
@@ -31,7 +31,7 @@
 </div>
 
 - 해당구 선택, 업종 선택
-- 해당구 선택 기능은 DevExpress Mapcontrol로 구현
+- 해당구 선택 기능은 DevExpress MapControl로 구현
 
 
 ### 해당구 연도별 평가점수
@@ -62,7 +62,7 @@
 </a>
 </div>
 
-- 해당내용 이슈 #7 참고
+- 해당내용 [Issue #7](https://github.com/dlehd333/SSTAA/issues/7) 참고
 
 ## 입력 기능
 
