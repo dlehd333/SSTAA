@@ -196,7 +196,6 @@ namespace SSTAA.WinForm
             this.vectorItemsLayer1.ItemStyle.TextColor = System.Drawing.Color.Black;
             this.vectorItemsLayer1.ShapeTitlesPattern = "{SIG_KOR_NM}";
             this.vectorItemsLayer1.ToolTipPattern = "{SIG_KOR_NM}";
-            this.shapefileDataAdapter1.FileUri = new System.Uri("C:\\leedonghee\\SSTAA\\ActualResources\\TL_SCCO_SIG_W_SHP\\TL_SCCO_SIG_W.shp", System.UriKind.Absolute);
             // 
             // SelectTownForm
             // 
