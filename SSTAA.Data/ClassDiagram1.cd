@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SSTAA.Data.BaseDao&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>UEF\BaseDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SSTAA.Data.CompetitorDao" Collapsed="true">
+    <Position X="5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UEF\Dao\CompetitorDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SSTAA.Data.FieldDao" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>UEF\Dao\FieldDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SSTAA.Data.FootTrafficDao" Collapsed="true">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>UEF\Dao\FootTrafficDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SSTAA.Data.LandPriceIndexDao" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UEF\Dao\LandPriceIndexDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SSTAA.Data.LocationDao" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAABABAA=</HashCode>
+      <FileName>UEF\Dao\LocationDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SSTAA.Data.StationDao" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>UEF\Dao\StationDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SSTAA.Data.TimetableDao" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UEF\Dao\TimetableDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SSTAA.Data.SingleKeyDao&lt;T, K&gt;" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>UEF\SingleKeyDao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
