@@ -153,20 +153,25 @@
 ```c#
 public List<AnnualEvaluationScoreModel> GetAnnualEvaluationScoreModels(int upperLocationId, int fieldId)
 {
-  // 미리 DB에 접근하여 필요한 만큼 데이터를 가져오는 부분
-  List<Station> stations = Dao.Station.GetByUpperLocation(upperLocationId);
-  List<LandPriceIndex> landPriceIndices = Dao.LandPriceIndex.GetByLocation(upperLocationId);
-  List<Competitor> competitors = Dao.Competitor.GetByField(fieldId);
-  // 계산을 진행하여 모델을 생성하는 부분. DB에 접근할 일이 없이 컬렉션의 데이터로 계산을 진행한다
-  List<AnnualEvaluationScoreModel> models = new List<AnnualEvaluationScoreModel>();
-  foreach(var station in stations)
-  {
+    // 미리 DB에 접근하여 필요한 만큼 데이터를 가져오는 부분
+    List<Station> stations = Dao.Station.GetByUpperLocation(upperLocationId);
+    List<LandPriceIndex> landPriceIndices = Dao.LandPriceIndex.GetByLocation(upperLocationId);
+    List<Competitor> competitors = Dao.Competitor.GetByField(fieldId);
+    
+    // 계산을 진행하여 모델을 생성하는 부분. DB에 접근할 경우를 최소화하여 컬렉션의 데이터로 계산을 진행한다
+    List<AnnualEvaluationScoreModel> models = new List<AnnualEvaluationScoreModel>();
+    foreach(var station in stations)
+    {
+        List<FootTraffic> footTraffics = Dao.FootTraffic.GetByStation(station.StationId);
+        // ...
+    }
+    
     // ...
-  }
-  // ...
-  return models;
+    
+    return models;
 }
 ```
+
 ---
 
 # SHP 파일을 이용한 MapControl의 내부 정보를 읽어오는 문제 [#41](https://github.com/dlehd333/SSTAA/issues/41)
@@ -187,20 +192,20 @@ public List<AnnualEvaluationScoreModel> GetAnnualEvaluationScoreModels(int upper
 - 해당 값들은 MapItem.Data.Attributes로 접근할 수 있었으며, 벡터형식(binary reading)으로 저장되어 있었기에 인코딩이 필요했다.
 - shapeFileAdapter를 이용해 vectorItemsLayer에 해당 데이터를 load할 때 필요한 형식으로 인코딩을 한 후, 이후 불러온 데이터를 string으로 캐스팅하여 필요한 곳에 사용하였다.
 
-##참고할 코드나 스크린샷
+## 참고할 코드나 스크린샷
 
 ![맵컨트롤](Document/screen/맵컨트롤.png)
 
 ```c#
 shapefileDataAdapter1.DefaultEncoding = Encoding.GetEncoding(51949);
-            shapefileDataAdapter1.FileUri = new Uri(_path[0], UriKind.Absolute);
+shapefileDataAdapter1.FileUri = new Uri(_path[0], UriKind.Absolute);
 
-            mapControl1.CenterPoint = new GeoPoint(37.5656754986042d, 126.98202985079d);
-            mapControl1.ZoomLevel = 10.8d;
+mapControl1.CenterPoint = new GeoPoint(37.5656754986042d, 126.98202985079d);
+mapControl1.ZoomLevel = 10.8d;
 
-            vectorItemsLayer1.ItemStyle.Fill = Color.FromArgb(90, Color.White);
-            vectorItemsLayer1.ItemStyle.Stroke = Color.White;
-            vectorItemsLayer1.SelectedItemStyle.Fill = Color.FromArgb(120, Color.Blue);
+vectorItemsLayer1.ItemStyle.Fill = Color.FromArgb(90, Color.White);
+vectorItemsLayer1.ItemStyle.Stroke = Color.White;
+vectorItemsLayer1.SelectedItemStyle.Fill = Color.FromArgb(120, Color.Blue);
 ```
 
 ---
@@ -228,27 +233,28 @@ shapefileDataAdapter1.DefaultEncoding = Encoding.GetEncoding(51949);
 // before
 for(int i = 0;i < rows.Count;i++)
 {
-  // ...
+    // ...
 }
 // for문으로 파일의 내용을 전부 읽어들인 다음 DB에 입력
 using (var context = DbContextCreator.Create())
 {
-  context.FootTraffics.AddRange(footTraffics);
-  context.SaveChanges();
+    context.FootTraffics.AddRange(footTraffics);
+    context.SaveChanges();
 }
 // -----------------------------------------------------------------
 // after
 for(int i = 0;i < rows.Count;i++)
 {
-  // ...
-  // 한 줄을 읽은 다음 DB에 입력
-  using (var context = DbContextCreator.Create())
-  {
-    context.FootTraffics.AddRange(footTraffics);
-    context.SaveChanges();
-  }
+    // ...
+    // 한 줄을 읽은 다음 DB에 입력
+    using (var context = DbContextCreator.Create())
+    {
+        context.FootTraffics.AddRange(footTraffics);
+        context.SaveChanges();
+    }
 }
 ```
+
 ![실행결과](Document/screen/실행결과.png)
 
 ---
@@ -272,4 +278,5 @@ for(int i = 0;i < rows.Count;i++)
 - 유저 컨트롤을 투명하게 만들어 다른 컨트롤이 비치지만 도달하지 못하는 형태를 구현하기 원했지만, 유저 컨트롤도 컨트롤이기 때문에 기본적으로 자신보다 아래에 있는 컨트롤을 가린다는 사실을 알게 되었다.
 
 ## 참고할 코드나 스크린샷
+
 ![로딩문제](Document/screen/로딩문제.png)
