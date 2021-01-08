@@ -102,7 +102,7 @@
 
 # 데이터베이스 스키마
 
-![DB스키마](./Document/DBSchema.png)
+![이미지](./Document/DBSchema.png)
 
 - 모든 항목이 제 3 정규화까지 완료됐다
 
@@ -120,7 +120,7 @@
 
 ## DAO(Data Access Object)
 
-![클래스다이어그램](./Documnet/클래스다이어그램.png)
+![클래스다이어그램](./Document/클래스다이어그램.png)
 
 # 시퀸스 다이어그램
 
