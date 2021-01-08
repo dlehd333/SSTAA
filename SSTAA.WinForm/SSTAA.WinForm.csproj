@@ -200,12 +200,10 @@
     <None Include="Resources\Image1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\TL_SCCO_SIG_W.shp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\TL_SCCO_SIG_W.dbf" />
-    <Resource Include="Resources\TL_SCCO_SIG_W.prj" />
-    <Resource Include="Resources\TL_SCCO_SIG_W.shx" />
+    <None Include="Resources\TL_SCCO_SIG_W.shp" />
+    <None Include="Resources\TL_SCCO_SIG_W.dbf" />
+    <None Include="Resources\TL_SCCO_SIG_W.prj" />
+    <None Include="Resources\TL_SCCO_SIG_W.shx" />
     <None Include="Resources\동종업 점포비율.JPG" />
   </ItemGroup>
   <ItemGroup>
