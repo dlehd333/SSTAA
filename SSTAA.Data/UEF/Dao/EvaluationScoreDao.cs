@@ -70,6 +70,8 @@ namespace SSTAA.Data
                 double landPriceIndex = (double)landPriceIndices.Find(x => x.Month.Year == year && x.Month.Month == month).Index;
                 int monthlyTransfer = footTraffics.FindAll(x => x.StationId == station.StationId && x.Date.Year == year && x.Date.Month == month).Sum(x => x.Count);
 
+                
+
                 return 
                     (
                         GetLocationPoint(footTraffics, station.StationId, new DateTime(year, month, 1)) *
@@ -139,7 +141,7 @@ namespace SSTAA.Data
             List<Competitor> competitors = Dao.Competitor.GetByField(fieldId);
 
             List<MonthlyEvaluationScoreModel> models = new List<MonthlyEvaluationScoreModel>();
-
+            
             for (int i =0; i < month.Count; i++)
             {
                 MonthlyEvaluationScoreModel model = new MonthlyEvaluationScoreModel();
@@ -159,7 +161,8 @@ namespace SSTAA.Data
                         (model.MonthlyLandPriceIndex / 100.0d) *
                         (model.FloatingPopulation * 1.0 / DateTime.DaysInMonth(month[i].Year, month[i].Month))
                     ) / 10000.0d;
-
+                model.IndustryRatio = GetIndustryPoint(competitors, station.LocationId);
+                model.LoationPoint = GetLocationPoint(footTraffics, station.StationId, new DateTime(month[i].Year, month[i].Month, 1));
                 models.Add(model);
             }
 

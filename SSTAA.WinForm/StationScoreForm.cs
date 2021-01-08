@@ -66,5 +66,10 @@ namespace SSTAA.WinForm
         {
             LoadingForm.Close();
         }
+
+        private void gridControl1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // DevExpress.XtraGrid.Views.Grid.GridOptionsHint
+        }
     }
 }
