@@ -35,10 +35,35 @@ namespace SSTAA.WinForm
             _path.Add(Path.Combine(Directory.GetCurrentDirectory(), "TL_SCCO_SIG_W.dbf"));
             _path.Add(Path.Combine(Directory.GetCurrentDirectory(), "TL_SCCO_SIG_W.prj"));
             _path.Add(Path.Combine(Directory.GetCurrentDirectory(), "TL_SCCO_SIG_W.shx"));
-            File.WriteAllBytes(_path[0], Properties.Resources.TL_SCCO_SIG_W);
-            File.WriteAllBytes(_path[1], Properties.Resources.TL_SCCO_SIG_W1);
-            File.WriteAllBytes(_path[2], Properties.Resources.TL_SCCO_SIG_W2);
-            File.WriteAllBytes(_path[3], Properties.Resources.TL_SCCO_SIG_W3);
+
+            using(FileStream fs = new FileStream(_path[0], FileMode.CreateNew, FileAccess.Write))
+            {
+                BinaryWriter bw = new BinaryWriter(fs);
+                bw.Write(Properties.Resources.TL_SCCO_SIG_W);
+                bw.Close();
+            }
+            using (FileStream fs = new FileStream(_path[1], FileMode.CreateNew, FileAccess.Write))
+            {
+                BinaryWriter bw = new BinaryWriter(fs);
+                bw.Write(Properties.Resources.TL_SCCO_SIG_W1);
+                bw.Close();
+            }
+            using (FileStream fs = new FileStream(_path[2], FileMode.CreateNew, FileAccess.Write))
+            {
+                BinaryWriter bw = new BinaryWriter(fs);
+                bw.Write(Properties.Resources.TL_SCCO_SIG_W2);
+                bw.Close();
+            }
+            using (FileStream fs = new FileStream(_path[3], FileMode.CreateNew, FileAccess.Write))
+            {
+                BinaryWriter bw = new BinaryWriter(fs);
+                bw.Write(Properties.Resources.TL_SCCO_SIG_W3);
+                bw.Close();
+            }
+            //File.WriteAllBytes(_path[0], Properties.Resources.TL_SCCO_SIG_W);
+            //File.WriteAllBytes(_path[1], Properties.Resources.TL_SCCO_SIG_W1);
+            //File.WriteAllBytes(_path[2], Properties.Resources.TL_SCCO_SIG_W2);
+            //File.WriteAllBytes(_path[3], Properties.Resources.TL_SCCO_SIG_W3);
 
             shapefileDataAdapter1.DefaultEncoding = Encoding.GetEncoding(51949);
             shapefileDataAdapter1.FileUri = new Uri(_path[0], UriKind.Absolute);
@@ -55,12 +80,36 @@ namespace SSTAA.WinForm
             ResumeGu();
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        protected override void OnClosed(EventArgs e)
         {
-            foreach (var path in _path)
-                File.Delete(path);
+            base.OnClosed(e);
 
-            base.OnClosing(e);
+            foreach (var path in _path)
+                FileDelete(path);
+
+            Application.ExitThread();
+            Environment.Exit(0);
+        }
+
+        public static bool FileDelete(string path)
+        {
+            FileInfo file = new FileInfo(path);
+            try
+            {
+                if (file.Exists)
+                {
+                    file.Delete();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         private void ResumeGu()
