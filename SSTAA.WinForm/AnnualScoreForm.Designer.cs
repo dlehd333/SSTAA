@@ -268,10 +268,10 @@ namespace SSTAA.WinForm
             series8.Name = "2020";
             series8.ValueDataMembersSerializable = "FourthEvaluationScore";
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series1,
-        series2,
-        series3,
-        series4};
+        series5,
+        series6,
+        series7,
+        series8};
             this.chartControl1.Size = new System.Drawing.Size(295, 436);
             this.chartControl1.TabIndex = 1;
             chartTitle2.Alignment = System.Drawing.StringAlignment.Near;
