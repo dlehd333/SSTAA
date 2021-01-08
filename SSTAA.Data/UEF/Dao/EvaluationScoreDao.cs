@@ -28,12 +28,12 @@ namespace SSTAA.Data
                 model.StationName = station.Name;
                 model.FirstEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2017);
                 model.SecondEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2018);
-                //model.ThirdEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2019);
+                model.ThirdEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2019);
                 //model.FourthEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2020);
                 models.Add(model);
             }
 
-            //models = models.OrderByDescending(x => x.FourthEvaluationScore).ToList();
+            models = models.OrderByDescending(x => x.FourthEvaluationScore).ToList();
 
             int rankCount = 1;
 
@@ -136,8 +136,8 @@ namespace SSTAA.Data
             List<FootTraffic> footTraffics = Dao.FootTraffic.GetByStation(stationId);
             Station station = Dao.Station.GetByPK(stationId);
             List<LandPriceIndex> landPriceIndices = Dao.LandPriceIndex.GetByLocation(station.LocationId / 100 * 100);
-            List<DateTime> month = footTraffics.Where(x => x.Date < new DateTime(2019, 1, 1)).Select(x => new DateTime(x.Date.Year, x.Date.Month, 1)).Distinct().ToList();
-            // List<DateTime> month = footTraffics.Select(x => new DateTime(x.Date.Year, x.Date.Month, 1)).Distinct().ToList();
+            //List<DateTime> month = footTraffics.Where(x => x.Date < new DateTime(2020, 12, 1)).Select(x => new DateTime(x.Date.Year, x.Date.Month, 1)).Distinct().ToList();
+            List<DateTime> month = footTraffics.Select(x => new DateTime(x.Date.Year, x.Date.Month, 1)).Distinct().ToList();
             List<Competitor> competitors = Dao.Competitor.GetByField(fieldId);
 
             List<MonthlyEvaluationScoreModel> models = new List<MonthlyEvaluationScoreModel>();

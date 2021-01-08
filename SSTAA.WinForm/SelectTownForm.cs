@@ -55,12 +55,12 @@ namespace SSTAA.WinForm
             ResumeGu();
         }
 
-        protected override void OnClosed(EventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            foreach(var path in _path)
+            foreach (var path in _path)
                 File.Delete(path);
 
-            base.OnClosed(e);
+            base.OnClosing(e);
         }
 
         private void ResumeGu()
