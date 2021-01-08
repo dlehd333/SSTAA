@@ -102,7 +102,7 @@
 
 # 데이터베이스 스키마
 
-![이미지](./Document/DBSchema.png)
+![이미지](./Document/DBSchema.PNG)
 
 - 모든 항목이 제 3 정규화까지 완료됐다
 
