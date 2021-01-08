@@ -29,7 +29,6 @@ namespace SSTAA.WinForm
             cbxField.Properties.Items.AddRange(Dao.Field.GetFieldName());
             //cbxGu.Properties.Items.AddRange(Dao.Location.GetGuName());
 
-
             //cbxGu.SelectedIndexChanged += cbxGu_SelectedIndexChanged;
             seoulMapControl1.ButtonClicked += SeoulMapControl1_ButtonClicked;
         }
@@ -46,7 +45,7 @@ namespace SSTAA.WinForm
         {
             if (districtNumber == -1)
             {
-                lblDisplayStation.Text = "";
+                lblDisplayStation.Text = "해당구 역 현황\n";
                 return;
             }
 
