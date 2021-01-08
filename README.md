@@ -101,7 +101,7 @@
 - Microsoft SQL Server Management Studio v18.6
 
 # 데이터베이스 스키마
-![DB스키마](Document/DBSchema.png)
+![D B스키마](Document/DBSchema.png)
 
 - 모든 항목이 제 3 정규화까지 완료됐다
 
