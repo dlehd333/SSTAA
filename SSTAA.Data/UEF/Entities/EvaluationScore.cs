@@ -18,6 +18,8 @@ namespace SSTAA.Data
     }
     public class MonthlyEvaluationScoreModel
     {
+        public double LoationPoint { get; set; }
+        public double IndustryRatio { get; set; }
         public DateTime Date { get; set; }
         public int FloatingPopulation { get; set; }
         public int FloationPopulationBySevenToEightOnBoard { get; set; }

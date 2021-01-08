@@ -9,11 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SSTAA.Data;
+using DevExpress.XtraMap;
+using System.IO;
 
 namespace SSTAA.WinForm
 {
     public partial class SelectTownForm : XtraForm
     {
+        List<string> _path = new List<string>();
+        public int districtNumber { get; set; } = -1;
+        public List<Location> locations { get; set; } = Dao.Location.GetByGu();
         public SelectTownForm()
         {
             InitializeComponent();
@@ -26,19 +31,36 @@ namespace SSTAA.WinForm
             if (DesignMode)
                 return;
 
+            _path.Add(Path.Combine(Directory.GetCurrentDirectory(), "TL_SCCO_SIG_W.shp"));
+            _path.Add(Path.Combine(Directory.GetCurrentDirectory(), "TL_SCCO_SIG_W.dbf"));
+            _path.Add(Path.Combine(Directory.GetCurrentDirectory(), "TL_SCCO_SIG_W.prj"));
+            _path.Add(Path.Combine(Directory.GetCurrentDirectory(), "TL_SCCO_SIG_W.shx"));
+            File.WriteAllBytes(_path[0], Properties.Resources.TL_SCCO_SIG_W);
+            File.WriteAllBytes(_path[1], Properties.Resources.TL_SCCO_SIG_W1);
+            File.WriteAllBytes(_path[2], Properties.Resources.TL_SCCO_SIG_W2);
+            File.WriteAllBytes(_path[3], Properties.Resources.TL_SCCO_SIG_W3);
+
+            shapefileDataAdapter1.DefaultEncoding = Encoding.GetEncoding(51949);
+            shapefileDataAdapter1.FileUri = new Uri(_path[0], UriKind.Absolute);
+
+            mapControl1.CenterPoint = new GeoPoint(37.5656754986042d, 126.98202985079d);
+            mapControl1.ZoomLevel = 10.8d;
+
+            vectorItemsLayer1.ItemStyle.Fill = Color.FromArgb(90, Color.White);
+            vectorItemsLayer1.ItemStyle.Stroke = Color.White;
+            vectorItemsLayer1.SelectedItemStyle.Fill = Color.FromArgb(120, Color.Blue);
+
             cbxField.Properties.Items.AddRange(Dao.Field.GetFieldName());
-            //cbxGu.Properties.Items.AddRange(Dao.Location.GetGuName());
 
-            //cbxGu.SelectedIndexChanged += cbxGu_SelectedIndexChanged;
-            seoulMapControl1.ButtonClicked += SeoulMapControl1_ButtonClicked;
-        }
-        public int districtNumber { get; set; } = -1;
-        private void SeoulMapControl1_ButtonClicked(object sender, SeoulMapControl.ButtonClickedEventArgs e)
-        {
-            districtNumber = e.DistrictNumber;
             ResumeGu();
-            //MessageBox.Show($"{districtNumber}");
+        }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            foreach (var path in _path)
+                File.Delete(path);
+
+            base.OnClosing(e);
         }
 
         private void ResumeGu()
@@ -50,33 +72,16 @@ namespace SSTAA.WinForm
             }
 
             List<string> stations = Dao.Station.GetStationNameByGu(districtNumber);
-            lblDisplayStation.Text = "해당구 역 현황\n" + Environment.NewLine;
+            lblDisplayStation.Text = $"{locations.Find(x => x.LocationId == districtNumber).Name} 역 현황\n" + Environment.NewLine;
             
             stations.Sort();
             stations = stations.Distinct().ToList();
-            //stations.RemoveAt(0);
 
             foreach (string x in stations)
             {
                 lblDisplayStation.Text += x + Environment.NewLine;
             }
-
-
-            //AnnualScoreForm(SelectedGu) 오픈
-
-            //OnClickResultButton();
-
         }
-
-        //private void cbxField_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    Utility.Mbox("알림", $"바뀐 번호는 {cbxField.SelectedIndex + 1}이다");
-        //}
-        //private void cbxGu_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    Utility.Mbox("알림", $"바뀐 번호는 {(cbxGu.SelectedIndex + 1) * 100}이다");
-        //    ResumeGu();
-        //}
 
         #region ClickResultButton event things for C# 3.0
         public event EventHandler<ClickResultButtonEventArgs> ClickResultButton;
@@ -117,6 +122,19 @@ namespace SSTAA.WinForm
             }
 
             OnClickResultButton(districtNumber, cbxField.SelectedIndex + 1);
+        }
+
+        private void mapControl1_MapItemClick(object sender, MapItemClickEventArgs e)
+        {
+            districtNumber = locations.Find(x => x.Name == (string)e.Item.Attributes[1].Value).LocationId;
+            ResumeGu();
+        }
+
+        private void mapControl1_SelectionChanged(object sender, MapSelectionChangedEventArgs e)
+        {
+            if (e.Selection.Count == 0)
+                districtNumber = -1;
+            ResumeGu();
         }
     }
 }
