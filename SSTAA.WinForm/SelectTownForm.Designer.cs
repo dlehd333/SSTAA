@@ -206,9 +206,11 @@ namespace SSTAA.WinForm
             this.ClientSize = new System.Drawing.Size(894, 607);
             this.Controls.Add(this.tablePanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.HelpButton = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SelectTownForm";
             this.Text = "SelectTownForm";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.cbxField.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);

@@ -11,12 +11,13 @@ using System.Windows.Forms;
 using SSTAA.Data;
 using DevExpress.XtraMap;
 using System.IO;
+using System.Threading;
 
 namespace SSTAA.WinForm
 {
     public partial class SelectTownForm : XtraForm
     {
-        List<string> _path = new List<string>();
+        private List<string> _path = new List<string>();
         public int districtNumber { get; set; } = -1;
         public List<Location> locations { get; set; } = Dao.Location.GetByGu();
         public SelectTownForm()
@@ -36,30 +37,31 @@ namespace SSTAA.WinForm
             _path.Add(Path.Combine(Directory.GetCurrentDirectory(), "TL_SCCO_SIG_W.prj"));
             _path.Add(Path.Combine(Directory.GetCurrentDirectory(), "TL_SCCO_SIG_W.shx"));
 
-            using(FileStream fs = new FileStream(_path[0], FileMode.CreateNew, FileAccess.Write))
+            using(FileStream fs = new FileStream(_path[0], FileMode.Create, FileAccess.Write))
             {
                 BinaryWriter bw = new BinaryWriter(fs);
                 bw.Write(Properties.Resources.TL_SCCO_SIG_W);
                 bw.Close();
             }
-            using (FileStream fs = new FileStream(_path[1], FileMode.CreateNew, FileAccess.Write))
+            using (FileStream fs = new FileStream(_path[1], FileMode.Create, FileAccess.Write))
             {
                 BinaryWriter bw = new BinaryWriter(fs);
                 bw.Write(Properties.Resources.TL_SCCO_SIG_W1);
                 bw.Close();
             }
-            using (FileStream fs = new FileStream(_path[2], FileMode.CreateNew, FileAccess.Write))
+            using (FileStream fs = new FileStream(_path[2], FileMode.Create, FileAccess.Write))
             {
                 BinaryWriter bw = new BinaryWriter(fs);
                 bw.Write(Properties.Resources.TL_SCCO_SIG_W2);
                 bw.Close();
             }
-            using (FileStream fs = new FileStream(_path[3], FileMode.CreateNew, FileAccess.Write))
+            using (FileStream fs = new FileStream(_path[3], FileMode.Create, FileAccess.Write))
             {
                 BinaryWriter bw = new BinaryWriter(fs);
                 bw.Write(Properties.Resources.TL_SCCO_SIG_W3);
                 bw.Close();
             }
+
             //File.WriteAllBytes(_path[0], Properties.Resources.TL_SCCO_SIG_W);
             //File.WriteAllBytes(_path[1], Properties.Resources.TL_SCCO_SIG_W1);
             //File.WriteAllBytes(_path[2], Properties.Resources.TL_SCCO_SIG_W2);
@@ -80,12 +82,21 @@ namespace SSTAA.WinForm
             ResumeGu();
         }
 
-        protected override void OnClosed(EventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            base.OnClosed(e);
-
             foreach (var path in _path)
                 FileDelete(path);
+
+            Utility.Mbox("", "클로징");
+
+            base.OnClosing(e);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            Utility.Mbox("", "클로즈드");
+
+            base.OnClosed(e);
 
             Application.ExitThread();
             Environment.Exit(0);

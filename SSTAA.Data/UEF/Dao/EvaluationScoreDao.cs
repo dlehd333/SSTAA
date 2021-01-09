@@ -29,7 +29,7 @@ namespace SSTAA.Data
                 model.FirstEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2017);
                 model.SecondEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2018);
                 model.ThirdEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2019);
-                //model.FourthEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2020);
+                model.FourthEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2020);
                 models.Add(model);
             }
 
@@ -54,12 +54,14 @@ namespace SSTAA.Data
         {
             double evaluationScore = 0.0d;
 
-            for (int i = 1; i <= 12; ++i)
+            int monthCount = (year < 2020 ? 12 : 8);
+
+            for (int i = 1; i <= monthCount; ++i)
             {
                 evaluationScore += GetEvaluationScoreByMonth(footTraffics, station, landPriceIndices, competitors, year, i);
             }
 
-            return evaluationScore / 12.0d;
+            return evaluationScore / (monthCount * 1.0d);
         }
         private double GetEvaluationScoreByMonth
             (List<FootTraffic> footTraffics,
@@ -67,18 +69,21 @@ namespace SSTAA.Data
             List<LandPriceIndex> landPriceIndices,
             List<Competitor> competitors, int year, int month)
         {
-                double landPriceIndex = (double)landPriceIndices.Find(x => x.Month.Year == year && x.Month.Month == month).Index;
-                int monthlyTransfer = footTraffics.FindAll(x => x.StationId == station.StationId && x.Date.Year == year && x.Date.Month == month).Sum(x => x.Count);
 
-                
+            if (landPriceIndices.Find(x => x.Month.Year == year && x.Month.Month == month) == null ||
+                footTraffics.Find(x => x.Date.Year == year && x.Date.Month == month) == null)
+                return 0.0d;
 
-                return 
-                    (
-                        GetLocationPoint(footTraffics, station.StationId, new DateTime(year, month, 1)) *
-                        GetIndustryPoint(competitors, station.LocationId) *
-                        (landPriceIndex / 100.0d) *
-                        (monthlyTransfer * 1.0 / DateTime.DaysInMonth(year, month))
-                    ) / 10000.0d;
+            double landPriceIndex = (double)landPriceIndices.Find(x => x.Month.Year == year && x.Month.Month == month).Index;
+            int monthlyTransfer = footTraffics.FindAll(x => x.StationId == station.StationId && x.Date.Year == year && x.Date.Month == month).Sum(x => x.Count);
+
+            return 
+                (
+                    GetLocationPoint(footTraffics, station.StationId, new DateTime(year, month, 1)) *
+                    GetIndustryPoint(competitors, station.LocationId) *
+                    (landPriceIndex / 100.0d) *
+                    (monthlyTransfer * 1.0 / DateTime.DaysInMonth(year, month))
+                ) / 10000.0d;
         }
 
         private double GetIndustryPoint(List<Competitor> competitors, int locationId)
@@ -136,7 +141,6 @@ namespace SSTAA.Data
             List<FootTraffic> footTraffics = Dao.FootTraffic.GetByStation(stationId);
             Station station = Dao.Station.GetByPK(stationId);
             List<LandPriceIndex> landPriceIndices = Dao.LandPriceIndex.GetByLocation(station.LocationId / 100 * 100);
-            //List<DateTime> month = footTraffics.Where(x => x.Date < new DateTime(2020, 12, 1)).Select(x => new DateTime(x.Date.Year, x.Date.Month, 1)).Distinct().ToList();
             List<DateTime> month = footTraffics.Select(x => new DateTime(x.Date.Year, x.Date.Month, 1)).Distinct().ToList();
             List<Competitor> competitors = Dao.Competitor.GetByField(fieldId);
 
