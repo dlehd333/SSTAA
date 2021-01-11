@@ -141,7 +141,7 @@ namespace SSTAA.Data
             List<FootTraffic> footTraffics = Dao.FootTraffic.GetByStation(stationId);
             Station station = Dao.Station.GetByPK(stationId);
             List<LandPriceIndex> landPriceIndices = Dao.LandPriceIndex.GetByLocation(station.LocationId / 100 * 100);
-            List<DateTime> month = footTraffics.Select(x => new DateTime(x.Date.Year, x.Date.Month, 1)).Distinct().ToList();
+            List<DateTime> month = footTraffics.Where(x => x.Date < new DateTime(2020, 9, 1)).Select(x => new DateTime(x.Date.Year, x.Date.Month, 1)).Distinct().ToList();
             List<Competitor> competitors = Dao.Competitor.GetByField(fieldId);
 
             List<MonthlyEvaluationScoreModel> models = new List<MonthlyEvaluationScoreModel>();

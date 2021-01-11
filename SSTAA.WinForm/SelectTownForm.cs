@@ -84,19 +84,15 @@ namespace SSTAA.WinForm
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            foreach (var path in _path)
-                FileDelete(path);
-
-            Utility.Mbox("", "클로징");
-
             base.OnClosing(e);
         }
 
         protected override void OnClosed(EventArgs e)
         {
-            Utility.Mbox("", "클로즈드");
-
             base.OnClosed(e);
+
+            foreach (var path in _path)
+                FileDelete(path);
 
             Application.ExitThread();
             Environment.Exit(0);
