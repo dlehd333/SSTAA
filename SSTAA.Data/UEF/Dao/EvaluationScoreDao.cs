@@ -30,7 +30,17 @@ namespace SSTAA.Data
                 model.SecondEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2018);
                 model.ThirdEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2019);
                 model.FourthEvaluationScore = GetEvaluationScoreByYear(footTraffics, station, landPriceIndices, competitors, 2020);
-                models.Add(model);
+
+                if(models.Find(x => x.StationName == model.StationName) != null)
+                {
+                    AnnualEvaluationScoreModel before = models.Find(x => x.StationName == model.StationName);
+                    before.FirstEvaluationScore = (before.FirstEvaluationScore + model.FirstEvaluationScore) / 2.0d;
+                    before.SecondEvaluationScore = (before.SecondEvaluationScore + model.SecondEvaluationScore) / 2.0d;
+                    before.ThirdEvaluationScore = (before.ThirdEvaluationScore + model.ThirdEvaluationScore) / 2.0d;
+                    before.FourthEvaluationScore = (before.FourthEvaluationScore + model.FourthEvaluationScore) / 2.0d;
+                }
+                else
+                    models.Add(model);
             }
 
             models = models.OrderByDescending(x => x.FourthEvaluationScore).ToList();
