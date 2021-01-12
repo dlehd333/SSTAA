@@ -170,7 +170,7 @@ namespace SSTAA.Data
                 models.Add(model);
             }
 
-            return models;
+            return models.OrderBy(x => x.Date).ToList();
         }
     }
 }
